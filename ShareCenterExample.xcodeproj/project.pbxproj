@@ -1,0 +1,283 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8748B720150F6E0C00A2DE88 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8748B71F150F6E0C00A2DE88 /* UIKit.framework */; };
+		8748B722150F6E0C00A2DE88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8748B721150F6E0C00A2DE88 /* Foundation.framework */; };
+		8748B724150F6E0C00A2DE88 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8748B723150F6E0C00A2DE88 /* CoreGraphics.framework */; };
+		8748B72A150F6E0C00A2DE88 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8748B728150F6E0C00A2DE88 /* InfoPlist.strings */; };
+		8748B72C150F6E0C00A2DE88 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8748B72B150F6E0C00A2DE88 /* main.m */; };
+		8748B730150F6E0D00A2DE88 /* CUAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8748B72F150F6E0D00A2DE88 /* CUAppDelegate.m */; };
+		8748B733150F6E0D00A2DE88 /* CUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8748B732150F6E0D00A2DE88 /* CUViewController.m */; };
+		8748B736150F6E0D00A2DE88 /* CUViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8748B734150F6E0D00A2DE88 /* CUViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8748B71B150F6E0C00A2DE88 /* ShareCenterExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareCenterExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8748B71F150F6E0C00A2DE88 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8748B721150F6E0C00A2DE88 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8748B723150F6E0C00A2DE88 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8748B727150F6E0C00A2DE88 /* ShareCenterExample-Info.plist */ = {isa = PBXFileReference; path = "ShareCenterExample-Info.plist"; sourceTree = "<group>"; };
+		8748B729150F6E0C00A2DE88 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8748B72B150F6E0C00A2DE88 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8748B72D150F6E0C00A2DE88 /* ShareCenterExample-Prefix.pch */ = {isa = PBXFileReference; path = "ShareCenterExample-Prefix.pch"; sourceTree = "<group>"; };
+		8748B72E150F6E0D00A2DE88 /* CUAppDelegate.h */ = {isa = PBXFileReference; path = CUAppDelegate.h; sourceTree = "<group>"; };
+		8748B72F150F6E0D00A2DE88 /* CUAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CUAppDelegate.m; sourceTree = "<group>"; };
+		8748B731150F6E0D00A2DE88 /* CUViewController.h */ = {isa = PBXFileReference; path = CUViewController.h; sourceTree = "<group>"; };
+		8748B732150F6E0D00A2DE88 /* CUViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CUViewController.m; sourceTree = "<group>"; };
+		8748B735150F6E0D00A2DE88 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CUViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8748B718150F6E0C00A2DE88 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8748B720150F6E0C00A2DE88 /* UIKit.framework in Frameworks */,
+				8748B722150F6E0C00A2DE88 /* Foundation.framework in Frameworks */,
+				8748B724150F6E0C00A2DE88 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8748B710150F6E0C00A2DE88 = {
+			isa = PBXGroup;
+			children = (
+				8748B725150F6E0C00A2DE88 /* ShareCenterExample */,
+				8748B71E150F6E0C00A2DE88 /* Frameworks */,
+				8748B71C150F6E0C00A2DE88 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8748B71C150F6E0C00A2DE88 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8748B71B150F6E0C00A2DE88 /* ShareCenterExample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8748B71E150F6E0C00A2DE88 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8748B71F150F6E0C00A2DE88 /* UIKit.framework */,
+				8748B721150F6E0C00A2DE88 /* Foundation.framework */,
+				8748B723150F6E0C00A2DE88 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8748B725150F6E0C00A2DE88 /* ShareCenterExample */ = {
+			isa = PBXGroup;
+			children = (
+				8748B72E150F6E0D00A2DE88 /* CUAppDelegate.h */,
+				8748B72F150F6E0D00A2DE88 /* CUAppDelegate.m */,
+				8748B731150F6E0D00A2DE88 /* CUViewController.h */,
+				8748B732150F6E0D00A2DE88 /* CUViewController.m */,
+				8748B734150F6E0D00A2DE88 /* CUViewController.xib */,
+				8748B726150F6E0C00A2DE88 /* Supporting Files */,
+			);
+			path = ShareCenterExample;
+			sourceTree = "<group>";
+		};
+		8748B726150F6E0C00A2DE88 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8748B727150F6E0C00A2DE88 /* ShareCenterExample-Info.plist */,
+				8748B728150F6E0C00A2DE88 /* InfoPlist.strings */,
+				8748B72B150F6E0C00A2DE88 /* main.m */,
+				8748B72D150F6E0C00A2DE88 /* ShareCenterExample-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8748B71A150F6E0C00A2DE88 /* ShareCenterExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8748B739150F6E0D00A2DE88 /* Build configuration list for PBXNativeTarget "ShareCenterExample" */;
+			buildPhases = (
+				8748B717150F6E0C00A2DE88 /* Sources */,
+				8748B718150F6E0C00A2DE88 /* Frameworks */,
+				8748B719150F6E0C00A2DE88 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShareCenterExample;
+			productName = ShareCenterExample;
+			productReference = 8748B71B150F6E0C00A2DE88 /* ShareCenterExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8748B712150F6E0C00A2DE88 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = CU;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = zhubu;
+			};
+			buildConfigurationList = 8748B715150F6E0C00A2DE88 /* Build configuration list for PBXProject "ShareCenterExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8748B710150F6E0C00A2DE88;
+			productRefGroup = 8748B71C150F6E0C00A2DE88 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8748B71A150F6E0C00A2DE88 /* ShareCenterExample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8748B719150F6E0C00A2DE88 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8748B72A150F6E0C00A2DE88 /* InfoPlist.strings in Resources */,
+				8748B736150F6E0D00A2DE88 /* CUViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8748B717150F6E0C00A2DE88 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8748B72C150F6E0C00A2DE88 /* main.m in Sources */,
+				8748B730150F6E0D00A2DE88 /* CUAppDelegate.m in Sources */,
+				8748B733150F6E0D00A2DE88 /* CUViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8748B728150F6E0C00A2DE88 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8748B729150F6E0C00A2DE88 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		8748B734150F6E0D00A2DE88 /* CUViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8748B735150F6E0D00A2DE88 /* en */,
+			);
+			name = CUViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8748B737150F6E0D00A2DE88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		8748B738150F6E0D00A2DE88 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8748B73A150F6E0D00A2DE88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ShareCenterExample/ShareCenterExample-Prefix.pch";
+				INFOPLIST_FILE = "ShareCenterExample/ShareCenterExample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		8748B73B150F6E0D00A2DE88 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ShareCenterExample/ShareCenterExample-Prefix.pch";
+				INFOPLIST_FILE = "ShareCenterExample/ShareCenterExample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8748B715150F6E0C00A2DE88 /* Build configuration list for PBXProject "ShareCenterExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8748B737150F6E0D00A2DE88 /* Debug */,
+				8748B738150F6E0D00A2DE88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8748B739150F6E0D00A2DE88 /* Build configuration list for PBXNativeTarget "ShareCenterExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8748B73A150F6E0D00A2DE88 /* Debug */,
+				8748B73B150F6E0D00A2DE88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8748B712150F6E0C00A2DE88 /* Project object */;
+}
