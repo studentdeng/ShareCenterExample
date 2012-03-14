@@ -30,7 +30,7 @@
     sinaClient.delegate = self;
     
     [CUShareCenter setupClient:sinaClient withType:SINACLIENT];
-    [CUShareCenter setupContainer:sinaClient withType:SINACLIENT];
+    [CUShareCenter setupContainer:self withType:SINACLIENT];
 }    
 
 - (void)viewDidUnload

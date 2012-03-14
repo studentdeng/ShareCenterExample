@@ -62,14 +62,17 @@ static CUShareCenter *s_instance3 = nil;
         case SINACLIENT:
             
             center = [CUShareCenter sharedInstance:s_instance1];
+            s_instance1 = center;
             
             break;
         case QQZONECLIENT:
             center = [CUShareCenter sharedInstance:s_instance2];
+            s_instance1 = center;
             
             break;    
         case RENRENCLIENT:
             center = [CUShareCenter sharedInstance:s_instance3];
+            s_instance1 = center;
             
             break;
             
@@ -118,7 +121,7 @@ static CUShareCenter *s_instance3 = nil;
 
 - (void)showWithText:(NSString *)text andImage:(UIImage *)image
 {
-    if ([self isBind]) {
+    if (![self isBind]) {
         [shareClient CUOpenAuthViewInViewController:clientContainerVC];
     }
     else {
