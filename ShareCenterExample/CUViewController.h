@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CUSinaShareClient.h"
 
-@interface CUViewController : UIViewController
+@interface CUViewController : UIViewController <CUShareClientDelegate>
+
+- (IBAction)shareSina:(id)sender;
+- (IBAction)logoutSina:(id)sender;
 
 @end
