@@ -109,13 +109,6 @@ static CUShareCenter *s_instance3 = nil;
 
 - (void)showWithText:(NSString *)text
 {
-    /*
-    if ([self isBind]) {
-        [shareClient CUOpenAuthViewInViewController:clientContainerVC];
-    }
-    else {
-        [shareClient CUShowWithText:text];
-    }*/
     return [self showWithText:text andImage:nil];
 }
 
@@ -126,6 +119,16 @@ static CUShareCenter *s_instance3 = nil;
     }
     else {
         [shareClient CUShowWithText:text andImage:image];
+    }
+}
+
+- (void)showWithText:(NSString *)text andImageURLString:(NSString *)imageURLString
+{
+    if (![self isBind]) {
+        [shareClient CUOpenAuthViewInViewController:clientContainerVC];
+    }
+    else {
+        [shareClient CUShowWithText:text andImageURLString:imageURLString];
     }
 }
 

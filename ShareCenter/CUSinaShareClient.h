@@ -36,6 +36,7 @@
 
 - (void)CUShowWithText:(NSString *)text;
 - (void)CUShowWithText:(NSString *)text andImage:(UIImage *)image;
+- (void)CUShowWithText:(NSString *)text andImageURLString:(NSString *)imageURLString;
 
 - (NSURLRequest *)CULoginURLRequest;
 - (UIViewController *)CUGetAuthViewController;

@@ -29,6 +29,7 @@
 
 - (void)showWithText:(NSString *)text;
 - (void)showWithText:(NSString *)text andImage:(UIImage *)image;
+- (void)showWithText:(NSString *)text andImageURLString:(NSString *)imageURLString;
 
 - (BOOL)isBind;
 - (void)unBind;

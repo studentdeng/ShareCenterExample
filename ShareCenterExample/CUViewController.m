@@ -53,6 +53,9 @@
 
 - (IBAction)shareSina:(id)sender
 {
+    /*
+    [[CUShareCenter sharedInstanceWithType:SINACLIENT] showWithText:@"123" 
+                                                  andImageURLString:@"http://www.imiknow.com/iks/res/NDM4ODUwM2UxZTVjZmNiZjMyODllMTk2YTY2YzBjMDc/aW1hZ2UvanBlZw/a3410670-ede8-49ab-b5e6-6cbb3c8d3f77.jpeg"];*/
     UIImage *image = [UIImage imageNamed:@"test.jpg"];
     [[CUShareCenter sharedInstanceWithType:SINACLIENT] showWithText:@"test" andImage:image];
 }
@@ -64,8 +67,8 @@
 
 - (IBAction)shareRenren:(id)sender
 {
-    UIImage *image = [UIImage imageNamed:@"test.jpg"];
-    [[CUShareCenter sharedInstanceWithType:RENRENCLIENT] showWithText:@"test" andImage:image];
+    //UIImage *image = [UIImage imageNamed:@"test.jpg"];
+    //[[CUShareCenter sharedInstanceWithType:RENRENCLIENT] showWithText:@"test" andImage:image];
 }
 
 - (IBAction)logoutRenren:(id)sender

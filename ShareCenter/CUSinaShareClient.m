@@ -124,6 +124,12 @@
     return [self post:text andImage:image];
 }
 
+//需要告急授权
+- (void)CUShowWithText:(NSString *)text andImageURLString:(NSString *)imageURLString
+{
+    return [self post:text andImageURLString:imageURLString];
+}
+
 - (UIViewController *)CUGetAuthViewController
 {
     return self;
@@ -147,6 +153,43 @@
                                         timeoutInterval:60.0];
 
     return request;
+}
+
+#pragma mark common method
+
+- (void)post:(NSString *)text andImage:(UIImage *)image
+{
+    [engine sendWeiBoWithText:text image:image];
+}
+
+- (void)post:(NSString *)text andImageURLString:(NSString *)imageURLString
+{
+    if ([text length] == 0 && [imageURLString length] == 0) {
+        return;
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    
+	[params setObject:([text length] ? text : @"") forKey:@"status"];
+	
+    if ([imageURLString length] != 0)
+    {
+		[params setObject:imageURLString forKey:@"url"];
+        
+        [engine loadRequestWithMethodName:@"statuses/upload_url_text.json"
+                               httpMethod:@"POST"
+                                   params:params
+                             postDataType:kWBRequestPostDataTypeMultipart
+                         httpHeaderFields:nil];
+    }
+    else
+    {
+        [engine loadRequestWithMethodName:@"statuses/upload_url_text.json"
+                               httpMethod:@"POST"
+                                   params:params
+                             postDataType:kWBRequestPostDataTypeMultipart
+                         httpHeaderFields:nil];
+    }
 }
 
 #pragma mark - UIWebViewDelegate Methods
@@ -234,13 +277,6 @@
 
 - (void)engine:(WBEngine *)engine requestDidSucceedWithResult:(id)result
 {
-}
-
-#pragma mark common method
-
-- (void)post:(NSString *)text andImage:(UIImage *)image
-{
-    [engine sendWeiBoWithText:text image:image];
 }
 
 @end
