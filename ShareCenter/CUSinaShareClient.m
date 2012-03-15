@@ -131,6 +131,7 @@
 
 #pragma mark CUShareClient
 
+
 - (NSURLRequest *)CULoginURLRequest
 {
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:engine.appKey, @"client_id",

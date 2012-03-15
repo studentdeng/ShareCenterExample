@@ -13,8 +13,6 @@
 <CUShareClientData, RenrenDelegate>
 {
     Renren *renren;
-    NSMutableDictionary *sendParams;
-    NSString *_serverURL;
     
     BOOL bAuth;
     

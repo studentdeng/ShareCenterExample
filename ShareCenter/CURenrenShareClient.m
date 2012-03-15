@@ -91,6 +91,11 @@
     return [self post:text andImage:image];
 }
 
+- (void)CUShowWithText:(NSString *)text andImageURLString:(NSString *)imageURLString
+{
+    return [self post:text andImageURLString:imageURLString];
+}
+
 - (UIViewController *)CUGetAuthViewController
 {
     return self;
@@ -100,53 +105,69 @@
 
 - (NSURLRequest *)CULoginURLRequest
 {
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
+    NSString *serverURL = nil;
+    
     if (![self isCUAuth]) {
-        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-        [parameters setValue:renren.appKey forKey:@"client_id"];
-        [parameters setValue:kRRSuccessURL forKey:@"redirect_uri"];
-        [parameters setValue:@"token" forKey:@"response_type"];
-        [parameters setValue:@"touch" forKey:@"display"];
+        serverURL = kAuthBaseURL;
         
-        NSURL *url = [ROUtility generateURL:kAuthBaseURL params:parameters];
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        request.HTTPMethod = @"POST";
+        NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+        NSArray* graphCookies = [cookies cookiesForURL:
+                                 [NSURL URLWithString:@"http://graph.renren.com"]];
         
-        return request;
+        for (NSHTTPCookie* cookie in graphCookies) {
+            [cookies deleteCookie:cookie];
+        }
+        NSArray* widgetCookies = [cookies cookiesForURL:[NSURL URLWithString:@"http://widget.renren.com"]];
+        
+        for (NSHTTPCookie* cookie in widgetCookies) {
+            [cookies deleteCookie:cookie];
+        }
+        if (![renren isSessionValid]) {
+            renren.renrenDelegate = self;
+            renren.permissions = [NSArray arrayWithObject:@"publish_feed"];
+            
+            [parameters setValue:renren.appKey forKey:@"client_id"];
+            [parameters setValue:kRRSuccessURL forKey:@"redirect_uri"];
+            [parameters setValue:@"token" forKey:@"response_type"];
+            [parameters setValue:@"touch" forKey:@"display"];
+            if (nil != renren.permissions) {
+                NSString *permissionScope = [renren.permissions componentsJoinedByString:@","];
+                [parameters setValue:permissionScope forKey:@"scope"];
+            }
+            
+            [parameters setObject:kWidgetDialogUA forKey:@"ua"];
+        }
     }
     else {
-        NSString *dialogURL = [kDialogBaseURL stringByAppendingString:@"feed"];
+        //share
+        serverURL = [kDialogBaseURL stringByAppendingString:@"feed"];
+        [parameters setObject:renren.appKey forKey:@"app_id"];
+        [parameters setObject:@"touch" forKey:@"display"];
         
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                       @"www.baidu.com", @"url",
-                                       @"www.baidu.com", @"name",
-                                       @"iKnow英语", @"action_name",
-                                       @"http://www.imiknow.com/", @"action_link",
-                                       @"www.baidu.com", @"description",
-                                       @"www.baidu.com", @"caption",
-                                       @"www.baidu.com", @"image",
-                                       nil];
-        
-        //NSString *dialogURL = [kDialogBaseURL stringByAppendingString:action];
-        [params setObject:renren.appId forKey:@"app_id"];
-        [params setObject:@"touch" forKey:@"display"];
-        
-        if ([params objectForKey:@"redirect_uri"] == nil) {
-            [params setObject:kRRSuccessURL forKey:@"redirect_uri"];
+        if ([parameters objectForKey:@"redirect_uri"] == nil) {
+            [parameters setObject:kRRSuccessURL forKey:@"redirect_uri"];
         }
         
         if ([renren isSessionValid]) {
-            [params setValue:[renren.accessToken stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] forKey:@"access_token"];
+            [parameters setValue:[renren.accessToken stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] 
+                          forKey:@"access_token"];
         }
-        
-        [params setObject:kWidgetDialogUA forKey:@"ua"];
-        
-        NSURL *url = [ROUtility generateURL:dialogURL params:params];
-        NSLog(@"start load URL: %@", url);
-        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
-        request.HTTPMethod = @"POST";
-        
-        return request;
     }
+    
+    if ([serverURL length] == 0) {
+        return nil;
+    }
+    
+    NSURL *url = [ROUtility generateURL:serverURL params:parameters];
+    NSLog(@"start load URL: %@", url);
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
+    
+    request.HTTPMethod = @"POST";
+    
+    return request;
 }
 
 #pragma mark - UIWebViewDelegate Method
@@ -160,6 +181,8 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSURL *url = request.URL;
+    NSLog(@"%@", url);
+    
     NSString *query = [url fragment]; // url中＃字符后面的部分。
     if (!query) {
         query = [url query];
@@ -216,7 +239,7 @@
 
 - (BOOL)isAuthDialog
 {
-    return [_serverURL isEqualToString:kAuthBaseURL];
+    return YES;//[_serverURL isEqualToString:kAuthBaseURL];
 }
 
 - (void)dialogDidSucceed:(NSURL *)url {
@@ -226,8 +249,8 @@
         NSString *token = [ROUtility getValueStringFromUrl:q forParam:@"access_token"];
         NSString *expTime = [ROUtility getValueStringFromUrl:q forParam:@"expires_in"];
         NSDate   *expirationDate = [ROUtility getDateFromString:expTime];
-        NSDictionary *responseDic = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:token,expirationDate,nil]
-                                                                forKeys:[NSArray arrayWithObjects:@"token",@"expirationDate",nil]];
+        //NSDictionary *responseDic = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:token,expirationDate,nil]
+                                                                //forKeys:[NSArray arrayWithObjects:@"token",@"expirationDate",nil]];
         
         renren.accessToken = token;
         renren.expirationDate = expirationDate;
@@ -240,12 +263,14 @@
         } 
         else 
         {
+            //TODO:save userinfo
+            [renren saveUserSessionInfo];	
+            [renren getLoggedInUserId];
+
             [self CUNotifyAuthSucceed:self];
         }
         
-        //TODO:save userinfo
-        [renren saveUserSessionInfo];	
-        [renren getLoggedInUserId];
+        return;
     }
     else 
     {
@@ -264,75 +289,48 @@
     //should not be here
     return [self CUNotifyShareCancel:self];
 }
-/*
-- (void)dismissWithError:(NSError*)error animated:(BOOL)animated {
-    
-    self.response = [ROResponse responseWithError:[ROError errorWithNSError:error]];
-    if ([self isAuthDialog]) {
-        if ([self.delegate respondsToSelector:@selector(authDialog:withOperateType:)]){
-            [self.delegate authDialog:self withOperateType:RODialogOperateFailure];
-        }
-    }else {
-        if ([self.delegate respondsToSelector:@selector(widgetDialog:withOperateType:)]) {
-            
-            [self.delegate widgetDialog:self withOperateType:RODialogOperateFailure];
-        }
-    }
-}*/
 
 - (void)dialogDidCancel:(NSURL *)url {
-    /*
-    if ([self isAuthDialog]) {
-        if ([self.delegate respondsToSelector:@selector(authDialog:withOperateType:)]){
-            [self.delegate authDialog:self withOperateType:RODialogOperateCancel];
-        }
-    }else {
-        if ([self.delegate respondsToSelector:@selector(widgetDialog:withOperateType:)]){
-            [self.delegate widgetDialog:self withOperateType:RODialogOperateCancel];
-        }
-    }*/
     [self CUNotifyShareCancel:self];
 }
 
 - (void)post:(NSString *)text andImage:(UIImage *)image
 {
-    /*
-    NSString *shareUrl    = [iKnowAPI getShareArticlePath:article.Id];
-    NSString *articleName = article.Name ? article.Name : @"";
-    NSString *description = nil;
-    NSString *caption     = [NSString stringWithFormat:article.UserName];      
+    NSAssert(0,@"not implement");
+    return;
+}   
+
+- (void)post:(NSString *)text andImageURLString:(NSString *)imageURLString
+{
+    if ([text length] == 0) {
+        return [self CUNotifyShareFailed:self withError:nil];
+    } 
     
-    if ( [article.Description length] == 0 ) 
-    {
-        description = [article.Name length] == 0 ? [NSString stringWithString:article.Name] : @"";
+    NSMutableDictionary* params = [NSMutableDictionary 
+                                   dictionaryWithObjectsAndKeys:
+                                   @"feed.publishFeed",@"method",//api参数表中的参数
+                                   nil];
+    [params setObject:@" " forKey:@"name"]; // 狗屎的连接，这里我们用这个绕过去
+    [params setObject:@"http://www.imiknow.com/" forKey:@"url"];
+    [params setObject:text forKey:@"description"];
+    
+    if ([imageURLString length]) {
+        [params setObject:imageURLString forKey:@"image"];
+    }
         
-    }
-    else 
-    {  
-        description = [StringUtils trimString:article.Description toCharCount:100]; 
-    }
-    
-    NSString *imagePath = article.SourceImageUrl ? [NSString stringWithString:article.SourceImageUrl] : @""; 
-    NSString *articleShort = [StringUtils trimString:articleName toCharCount:25];
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   shareUrl, @"url",
-                                   articleShort, @"name",
-                                   @"iKnow英语", @"action_name",
-                                   @"http://www.imiknow.com/", @"action_link",
-                                   description, @"description",
-                                   caption, @"caption",
-                                   imagePath, @"image",
-                                   nil];*/
-    
-    
-    [delegate presentModalViewController:self animated:YES];
+    [renren requestWithParams:params andDelegate:self];
 }   
 
 #pragma mark RenrenDelegate
 
+/**
+ * 接口请求成功，第三方开发者实现这个方法
+ * @param renren 传回代理服务器接口请求的Renren类型对象。
+ * @param response 传回接口请求的响应。
+ */
 - (void)renren:(Renren *)renren requestDidReturnResponse:(ROResponse*)response
 {
-    
+    [self CUNotifyShareSucceed:self];
 }
 
 /**
@@ -342,7 +340,7 @@
  */
 - (void)renren:(Renren *)renren requestFailWithError:(ROError*)error
 {
-    
+    [self CUNotifyShareFailed:self withError:nil];
 }
 
 @end
