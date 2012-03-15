@@ -22,8 +22,8 @@
 #define kSinaPostPath @"http://api.t.sina.com.cn/statuses/update.json"
 
 //project key
-#define kOAuthConsumerKey				@"2832649083"
-#define kOAuthConsumerSecret			@"191a6c08a5d3f783a5bd0de5accd180b"
+#define kOAuthConsumerKey				@""
+#define kOAuthConsumerSecret			@""
 
 //view
 

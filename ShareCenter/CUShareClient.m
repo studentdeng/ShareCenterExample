@@ -9,8 +9,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "CUShareClient.h"
 
-//#define kActiveIndicatorTag 10
-
 int kActiveIndicatorTag = 10;
 
 CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
@@ -21,6 +19,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 		bounds.size.width = bounds.size.height;
 		bounds.size.height = width;
 	}
+    
 	bounds.origin.x = 0;
 	return bounds;
 }
@@ -65,9 +64,9 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
     CGRect rc = ApplicationFrame(self.orientation);
     
     self.view = [[[UIView alloc] initWithFrame: rc] autorelease];
-	_navBar = [[[UINavigationBar alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 44)] autorelease];
+	navBar = [[[UINavigationBar alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 44)] autorelease];
 	
-	_navBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+	navBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	
 	CGRect frame = ApplicationFrame(self.orientation);
@@ -75,22 +74,20 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 	frame.size.height -= 44;
     
 	self.webView = [[UIWebView alloc] initWithFrame:frame];
-	//self.webView.alpha = 0.0;
 	self.webView.delegate = self;
-	//_webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	if ([self.webView respondsToSelector: @selector(setDetectsPhoneNumbers:)]) [(id) self.webView setDetectsPhoneNumbers: NO];
-	if ([self.webView respondsToSelector: @selector(setDataDetectorTypes:)]) [(id) self.webView setDataDetectorTypes: 0];
 	
     NSURLRequest *request = [self CULoginURLRequest];
     
-	[self.webView loadRequest: request];
+	[self.webView loadRequest:request];
 	
 	[self.view addSubview: self.webView];
-	[self.view addSubview: _navBar];
+	[self.view addSubview: navBar];
     
     UIActivityIndicatorView *activeIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activeIndicator.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin
-    | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    activeIndicator.autoresizingMask = UIViewAutoresizingFlexibleTopMargin 
+                                            | UIViewAutoresizingFlexibleBottomMargin
+                                            | UIViewAutoresizingFlexibleLeftMargin 
+                                            | UIViewAutoresizingFlexibleRightMargin;
     activeIndicator.tag = kActiveIndicatorTag;
     activeIndicator.hidden = YES;
     activeIndicator.frame = CGRectMake(CGRectGetMidX(self.webView.bounds) - 20.0f,
@@ -98,7 +95,6 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
                                        40.0f, 40.0f);
     [self.webView addSubview:activeIndicator];
     [activeIndicator release];
-
 	
 	UINavigationItem *navItem = [[[UINavigationItem alloc] initWithTitle: NSLocalizedString(@"Sina Weibo Info", nil)] autorelease];
 	navItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
@@ -106,41 +102,37 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
                                                                                action:@selector(cancel:)] 
                                  autorelease];
 	
-	[_navBar pushNavigationItem: navItem animated: NO];
+	[navBar pushNavigationItem: navItem animated: NO];
 }
 
 - (NSURLRequest *)CULoginURLRequest
 {
-    //subclass implement;
+    NSAssert(0,@"subclass implement");
     return nil;
 }
 
 #pragma mark common method
 
-- (void)denied {
-    [self CUNotifyAuthFailed:self withError:nil];
-}
-
 - (void)cancel:(id)sender {
-    [self CUNotifyShareCancel:self];
+    [self performSelector:@selector(close:) withObject:nil afterDelay:.2f];
 }
 
 - (UIToolbar *) pinCopyPromptBar {
-	if (_pinCopyPromptBar == nil){
+	if (pinCopyPromptBar == nil){
 		CGRect					bounds = self.view.bounds;
 		
-		_pinCopyPromptBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 44, bounds.size.width, 44)] autorelease];
-		_pinCopyPromptBar.barStyle = UIBarStyleBlackTranslucent;
-		_pinCopyPromptBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+		pinCopyPromptBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 44, bounds.size.width, 44)] autorelease];
+		pinCopyPromptBar.barStyle = UIBarStyleBlackTranslucent;
+		pinCopyPromptBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 		
-		_pinCopyPromptBar.items = [NSArray arrayWithObjects: 
+		pinCopyPromptBar.items = [NSArray arrayWithObjects: 
 								   [[[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target: nil action: nil] autorelease],
 								   [[[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Select and Copy the PIN", @"Select and Copy the PIN") style: UIBarButtonItemStylePlain target: nil action: nil] autorelease], 
 								   [[[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target: nil action: nil] autorelease], 
 								   nil];
 	}
 	
-	return _pinCopyPromptBar;
+	return pinCopyPromptBar;
 }
 
 - (UIActivityIndicatorView *)getActivityIndicatorView
@@ -160,7 +152,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
         [delegate CUShareFailed:client withError:error];
     }
     
-    [self performSelector:@selector(close:) withObject:nil afterDelay:1.0f];
+    [self performSelector:@selector(close:) withObject:nil afterDelay:.2f];
 }
 
 - (void)CUNotifyShareSucceed:(CUShareClient *)client
@@ -169,7 +161,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
         [delegate CUShareSucceed:client];
     }
     
-    [self performSelector:@selector(close:) withObject:nil afterDelay:1.0f];
+    [self performSelector:@selector(close:) withObject:nil afterDelay:.2f];
 }
 
 - (void)CUNotifyShareCancel:(CUShareClient *)client
@@ -178,7 +170,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
         [delegate CUSHareCancel:client];
     }
     
-    [self performSelector:@selector(close:) withObject:nil afterDelay:1.0f];
+    [self performSelector:@selector(close:) withObject:nil afterDelay:.20f];
 }
 
 - (void)CUNotifyAuthSucceed:(CUShareClient *)client
@@ -187,7 +179,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
         [delegate CUAuthSucceed:client];
     }
     
-    [self performSelector:@selector(close:) withObject:nil afterDelay:1.0f];
+    [self performSelector:@selector(close:) withObject:nil afterDelay:.2f];
 }
 
 - (void)CUNotifyAuthFailed:(CUShareClient *)client withError:(NSError *)error
@@ -196,8 +188,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
         [delegate CUShareFailed:client withError:error];
     }
     
-    [self performSelector:@selector(close:) withObject:nil afterDelay:1.0f];
+    [self performSelector:@selector(close:) withObject:nil afterDelay:.2f];
 }
-
 
 @end

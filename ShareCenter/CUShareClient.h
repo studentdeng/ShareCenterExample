@@ -46,13 +46,11 @@ CUShareClientType;
 
 @interface CUShareClient : UIViewController <UIWebViewDelegate>
 {
-    UIWebView									*webView;
-	UINavigationBar								*_navBar;
-	//UIView										*_blockerView;
+    UIWebView *webView;
+	UINavigationBar *navBar;
 	
-	UIInterfaceOrientation                      _orientation;
-	BOOL										_loading, _firstLoad;
-	UIToolbar									*_pinCopyPromptBar;    
+	UIInterfaceOrientation                      orientation;
+	UIToolbar									*pinCopyPromptBar;    
     
     id<CUShareClientDelegate> delegate;
 }

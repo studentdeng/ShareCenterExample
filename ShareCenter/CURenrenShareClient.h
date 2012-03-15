@@ -13,21 +13,15 @@
 <CUShareClientData, RenrenDelegate>
 {
     Renren *renren;
-    
-    BOOL bAuth;
-    
-    //CUShareClient
-    /*
-     UIWebView									*webView;
-     UINavigationBar								*_navBar;
-     UIView										*_blockerView;
-     
-     UIInterfaceOrientation                      _orientation;
-     BOOL										_loading, _firstLoad;
-     UIToolbar									*_pinCopyPromptBar;    
-     
-     id<CUShareClientDelegate> delegate;
-     */
+    /**************************************
+     * Inherited from CUShareClient:
+     * 
+     * UIWebView *webView;
+     * UINavigationBar	*navBar;
+     * UIInterfaceOrientation orientation;
+     * UIToolbar *pinCopyPromptBar;    
+     * id<CUShareClientDelegate> delegate;
+     ***************************************/
 }
 
 //CUShareClientData
