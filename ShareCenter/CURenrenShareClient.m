@@ -6,9 +6,18 @@
 //  Copyright (c) 2012年 zhubu. All rights reserved.
 //
 
+#import "SFHFKeychainUtils.h"
 #import "CURenrenShareClient.h"
 #import "ROMacroDef.h"
 #import "ROUtility.h"
+
+#define kWBURLSchemePrefix              @"WB_renren_"
+
+#define kWBKeychainServiceNameSuffix    @"_WeiBoServiceName_renren"
+#define kWBKeychainUserID               @"WeiBoUserID_renren"
+#define kWBKeychainAccessToken          @"WeiBoAccessToken_renren"
+#define kWBKeychainExpireTime           @"WeiBoExpireTime_renren"
+#define kWBKeychainSecret_Key           @"WeiBoSecretKEY_renren"
 
 @interface CURenrenShareClient ()
 @property (nonatomic, retain) NSMutableDictionary *sendParams;
@@ -59,7 +68,7 @@
 
 - (BOOL)isCUAuth
 {
-    return bAuth = [renren isSessionValid];
+    return [renren isSessionValid];
 }
 
 - (void)CUOpenAuthViewInViewController:(UIViewController *)vc;
@@ -230,11 +239,9 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     if (!([error.domain isEqualToString:@"WebKitErrorDomain"] && error.code == 102)) {
-        //[self dismissWithError:error animated:YES];
         [self CUNotifyAuthFailed:self withError:error];
     }
 }
-
 #pragma mark common method
 
 - (BOOL)isAuthDialog
@@ -243,51 +250,29 @@
 }
 
 - (void)dialogDidSucceed:(NSURL *)url {
+	
 	NSString *q = [url absoluteString];
-	if([self isAuthDialog]) {
+    NSString *token = [ROUtility getValueStringFromUrl:q forParam:@"access_token"];
+    NSString *expTime = [ROUtility getValueStringFromUrl:q forParam:@"expires_in"];
+    NSDate   *expirationDate = [ROUtility getDateFromString:expTime];
         
-        NSString *token = [ROUtility getValueStringFromUrl:q forParam:@"access_token"];
-        NSString *expTime = [ROUtility getValueStringFromUrl:q forParam:@"expires_in"];
-        NSDate   *expirationDate = [ROUtility getDateFromString:expTime];
-        //NSDictionary *responseDic = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:token,expirationDate,nil]
-                                                                //forKeys:[NSArray arrayWithObjects:@"token",@"expirationDate",nil]];
-        
-        renren.accessToken = token;
-        renren.expirationDate = expirationDate;
-        renren.secret=[ROUtility getSecretKeyByToken:token];
-        renren.sessionKey=[ROUtility getSessionKeyByToken:token];
-        //self.response = [ROResponse responseWithRootObject:responseDic];
-        
-        if ((token == (NSString *) [NSNull null]) || (token.length == 0)) {
-            [self dialogDidCancel:nil];
-        } 
-        else 
-        {
-            //TODO:save userinfo
-            [renren saveUserSessionInfo];	
-            [renren getLoggedInUserId];
-
-            [self CUNotifyAuthSucceed:self];
-        }
-        
-        return;
-    }
+    renren.accessToken = token;
+    renren.expirationDate = expirationDate;
+    renren.secret=[ROUtility getSecretKeyByToken:token];
+    renren.sessionKey=[ROUtility getSessionKeyByToken:token];
+    
+    if ((token == (NSString *) [NSNull null]) || (token.length == 0)) {
+        [self dialogDidCancel:nil];
+    } 
     else 
     {
-        NSString *flag = [ROUtility getValueStringFromUrl:q forParam:@"flag"];	
-        if ([flag isEqualToString:@"success"]) {
-            NSString *query = [url fragment];
-            if (!query) {
-                query = [url query];
-            }
-            //NSDictionary *params = [ROUtility parseURLParams:query];
-            //self.response = [ROResponse responseWithRootObject:params];
-            return [self CUNotifyShareSucceed:self];
-        }
+        [renren saveUserSessionInfo];
+        [renren getLoggedInUserId];
+        
+        [self CUNotifyAuthSucceed:self];
     }
     
-    //should not be here
-    return [self CUNotifyShareCancel:self];
+    return;
 }
 
 - (void)dialogDidCancel:(NSURL *)url {

@@ -10,6 +10,8 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "ROMacroDef.h"
 #import "RORequest.h"
+#import <QuartzCore/QuartzCore.h>
+
 // 给上传图像加的水印文字常量
 #define kWatermarkString @"renren-inc.com"
 

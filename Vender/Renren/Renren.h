@@ -60,6 +60,8 @@
 
 @property(nonatomic, retain) RORequest *request;
 
+-(void)saveUserSessionInfo;
+
 #pragma mark - Initialization -
 
 /*
