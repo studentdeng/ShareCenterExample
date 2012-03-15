@@ -62,7 +62,9 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 {
     [super viewDidLoad];
     
-    self.view = [[[UIView alloc] initWithFrame: ApplicationFrame(self.orientation)] autorelease];
+    CGRect rc = ApplicationFrame(self.orientation);
+    
+    self.view = [[[UIView alloc] initWithFrame: rc] autorelease];
 	_navBar = [[[UINavigationBar alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 44)] autorelease];
 	
 	_navBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
@@ -71,7 +73,8 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 	CGRect frame = ApplicationFrame(self.orientation);
 	frame.origin.y = 44;
 	frame.size.height -= 44;
-	self.webView = [[UIWebView alloc] initWithFrame: ApplicationFrame(self.orientation)];
+    
+	self.webView = [[UIWebView alloc] initWithFrame:frame];
 	//self.webView.alpha = 0.0;
 	self.webView.delegate = self;
 	//_webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -114,6 +117,14 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 
 #pragma mark common method
 
+- (void)denied {
+    [self CUNotifyAuthFailed:self withError:nil];
+}
+
+- (void)cancel:(id)sender {
+    [self CUNotifyShareCancel:self];
+}
+
 - (UIToolbar *) pinCopyPromptBar {
 	if (_pinCopyPromptBar == nil){
 		CGRect					bounds = self.view.bounds;
@@ -130,6 +141,61 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 	}
 	
 	return _pinCopyPromptBar;
+}
+
+- (UIActivityIndicatorView *)getActivityIndicatorView
+{
+    return (UIActivityIndicatorView *)[self.webView viewWithTag:kActiveIndicatorTag];
+}
+
+- (void)CUNotifyShareFailed:(CUShareClient *)client withError:(NSError *)error
+{
+    if ([delegate respondsToSelector:@selector(CUShareFailed:withError:)]) {
+        [delegate CUShareFailed:client withError:error];
+    }
+    
+    [self.webView loadHTMLString:nil baseURL:nil];
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)CUNotifyShareSucceed:(CUShareClient *)client
+{
+    if ([delegate respondsToSelector:@selector(CUShareSucceed:)]) {
+        [delegate CUShareSucceed:client];
+    }
+    
+    [self.webView loadHTMLString:nil baseURL:nil];
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)CUNotifyShareCancel:(CUShareClient *)client
+{
+    if ([delegate respondsToSelector:@selector(CUSHareCancel:)]) {
+        [delegate CUSHareCancel:client];
+    }
+    
+    [self.webView loadHTMLString:nil baseURL:nil];
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)CUNotifyAuthSucceed:(CUShareClient *)client
+{
+    if ([delegate respondsToSelector:@selector(CUAuthSucceed:)]) {
+        [delegate CUAuthSucceed:client];
+    }
+    
+    [self.webView loadHTMLString:nil baseURL:nil];
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)CUNotifyAuthFailed:(CUShareClient *)client withError:(NSError *)error
+{
+    if ([delegate respondsToSelector:@selector(CUShareFailed:withError:)]) {
+        [delegate CUShareFailed:client withError:error];
+    }
+    
+    [self.webView loadHTMLString:nil baseURL:nil];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 

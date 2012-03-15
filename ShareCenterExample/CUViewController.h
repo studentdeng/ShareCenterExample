@@ -14,4 +14,7 @@
 - (IBAction)shareSina:(id)sender;
 - (IBAction)logoutSina:(id)sender;
 
+- (IBAction)shareRenren:(id)sender;
+- (IBAction)logoutRenren:(id)sender;
+
 @end

@@ -9,6 +9,7 @@
 #import "CUViewController.h"
 #import "CUShareCenter.h"
 #import "CUSinaShareClient.h"
+#import "CURenrenShareClient.h"
 
 @interface CUViewController ()
 
@@ -31,6 +32,12 @@
     
     [CUShareCenter setupClient:sinaClient withType:SINACLIENT];
     [CUShareCenter setupContainer:self withType:SINACLIENT];
+    
+    CURenrenShareClient *renrenClient = [[[CURenrenShareClient alloc] init] autorelease];
+    renrenClient.delegate = self;
+    
+    [CUShareCenter setupClient:renrenClient withType:RENRENCLIENT];
+    [CUShareCenter setupContainer:self withType:RENRENCLIENT];
 }    
 
 - (void)viewDidUnload
@@ -53,6 +60,17 @@
 - (IBAction)logoutSina:(id)sender
 {
     [[CUShareCenter sharedInstanceWithType:SINACLIENT] unBind];
+}
+
+- (IBAction)shareRenren:(id)sender
+{
+    UIImage *image = [UIImage imageNamed:@"test.jpg"];
+    [[CUShareCenter sharedInstanceWithType:RENRENCLIENT] showWithText:@"test" andImage:image];
+}
+
+- (IBAction)logoutRenren:(id)sender
+{
+    [[CUShareCenter sharedInstanceWithType:RENRENCLIENT] unBind];
 }
 
 - (void)CUShareFailed:(CUShareClient *)client withError:(NSError *)error

@@ -74,6 +74,25 @@
 		8748B87A150F7E7400A2DE88 /* StringUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8748B86B150F7E7400A2DE88 /* StringUtil.m */; };
 		8748B87D150F7F2800A2DE88 /* CUSinaShareClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8748B87C150F7F2800A2DE88 /* CUSinaShareClient.m */; };
 		87869A70151080C40079D8FC /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87869A6F151080C40079D8FC /* test.jpg */; };
+		87869AB415108C820079D8FC /* Renren.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869A8815108C820079D8FC /* Renren.m */; };
+		87869AB515108C820079D8FC /* ROBaseDialogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869A8C15108C820079D8FC /* ROBaseDialogViewController.m */; };
+		87869AB615108C820079D8FC /* ROCheckDialogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869A8E15108C820079D8FC /* ROCheckDialogViewController.m */; };
+		87869AB715108C820079D8FC /* ROWebDialogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869A9015108C820079D8FC /* ROWebDialogViewController.m */; };
+		87869AB815108C820079D8FC /* ROError.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869A9315108C820079D8FC /* ROError.m */; };
+		87869AB915108C820079D8FC /* ROBaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869A9615108C820079D8FC /* ROBaseNavigationViewController.m */; };
+		87869ABA15108C820079D8FC /* ROCheckNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869A9815108C820079D8FC /* ROCheckNavigationViewController.m */; };
+		87869ABB15108C820079D8FC /* ROWebNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869A9A15108C820079D8FC /* ROWebNavigationViewController.m */; };
+		87869ABC15108C820079D8FC /* ROAlbumsInfoRequestParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869A9E15108C820079D8FC /* ROAlbumsInfoRequestParam.m */; };
+		87869ABD15108C820079D8FC /* ROPasswordFlowRequestParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869AA015108C820079D8FC /* ROPasswordFlowRequestParam.m */; };
+		87869ABE15108C820079D8FC /* RORequestParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869AA215108C820079D8FC /* RORequestParam.m */; };
+		87869ABF15108C820079D8FC /* ROUserInfoRequestParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869AA415108C820079D8FC /* ROUserInfoRequestParam.m */; };
+		87869AC015108C820079D8FC /* ROAlbumResponseltem.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869AA715108C820079D8FC /* ROAlbumResponseltem.m */; };
+		87869AC115108C820079D8FC /* ROResponseItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869AA915108C820079D8FC /* ROResponseItem.m */; };
+		87869AC215108C820079D8FC /* ROUserResponseItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869AAB15108C820079D8FC /* ROUserResponseItem.m */; };
+		87869AC315108C820079D8FC /* RORequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869AAD15108C820079D8FC /* RORequest.m */; };
+		87869AC415108C820079D8FC /* ROResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869AAF15108C820079D8FC /* ROResponse.m */; };
+		87869AC515108C820079D8FC /* ROUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869AB315108C820079D8FC /* ROUtility.m */; };
+		87869AC915108E700079D8FC /* CURenrenShareClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 87869AC815108E700079D8FC /* CURenrenShareClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -211,6 +230,46 @@
 		8748B87B150F7F2800A2DE88 /* CUSinaShareClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUSinaShareClient.h; sourceTree = "<group>"; };
 		8748B87C150F7F2800A2DE88 /* CUSinaShareClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUSinaShareClient.m; sourceTree = "<group>"; };
 		87869A6F151080C40079D8FC /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
+		87869A8715108C820079D8FC /* Renren.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renren.h; sourceTree = "<group>"; };
+		87869A8815108C820079D8FC /* Renren.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Renren.m; sourceTree = "<group>"; };
+		87869A8915108C820079D8FC /* ROConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROConnect.h; sourceTree = "<group>"; };
+		87869A8B15108C820079D8FC /* ROBaseDialogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROBaseDialogViewController.h; sourceTree = "<group>"; };
+		87869A8C15108C820079D8FC /* ROBaseDialogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROBaseDialogViewController.m; sourceTree = "<group>"; };
+		87869A8D15108C820079D8FC /* ROCheckDialogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROCheckDialogViewController.h; sourceTree = "<group>"; };
+		87869A8E15108C820079D8FC /* ROCheckDialogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROCheckDialogViewController.m; sourceTree = "<group>"; };
+		87869A8F15108C820079D8FC /* ROWebDialogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROWebDialogViewController.h; sourceTree = "<group>"; };
+		87869A9015108C820079D8FC /* ROWebDialogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROWebDialogViewController.m; sourceTree = "<group>"; };
+		87869A9215108C820079D8FC /* ROError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROError.h; sourceTree = "<group>"; };
+		87869A9315108C820079D8FC /* ROError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROError.m; sourceTree = "<group>"; };
+		87869A9515108C820079D8FC /* ROBaseNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROBaseNavigationViewController.h; sourceTree = "<group>"; };
+		87869A9615108C820079D8FC /* ROBaseNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROBaseNavigationViewController.m; sourceTree = "<group>"; };
+		87869A9715108C820079D8FC /* ROCheckNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROCheckNavigationViewController.h; sourceTree = "<group>"; };
+		87869A9815108C820079D8FC /* ROCheckNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROCheckNavigationViewController.m; sourceTree = "<group>"; };
+		87869A9915108C820079D8FC /* ROWebNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROWebNavigationViewController.h; sourceTree = "<group>"; };
+		87869A9A15108C820079D8FC /* ROWebNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROWebNavigationViewController.m; sourceTree = "<group>"; };
+		87869A9D15108C820079D8FC /* ROAlbumsInfoRequestParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROAlbumsInfoRequestParam.h; sourceTree = "<group>"; };
+		87869A9E15108C820079D8FC /* ROAlbumsInfoRequestParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROAlbumsInfoRequestParam.m; sourceTree = "<group>"; };
+		87869A9F15108C820079D8FC /* ROPasswordFlowRequestParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROPasswordFlowRequestParam.h; sourceTree = "<group>"; };
+		87869AA015108C820079D8FC /* ROPasswordFlowRequestParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROPasswordFlowRequestParam.m; sourceTree = "<group>"; };
+		87869AA115108C820079D8FC /* RORequestParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORequestParam.h; sourceTree = "<group>"; };
+		87869AA215108C820079D8FC /* RORequestParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORequestParam.m; sourceTree = "<group>"; };
+		87869AA315108C820079D8FC /* ROUserInfoRequestParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROUserInfoRequestParam.h; sourceTree = "<group>"; };
+		87869AA415108C820079D8FC /* ROUserInfoRequestParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROUserInfoRequestParam.m; sourceTree = "<group>"; };
+		87869AA615108C820079D8FC /* ROAlbumResponseltem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROAlbumResponseltem.h; sourceTree = "<group>"; };
+		87869AA715108C820079D8FC /* ROAlbumResponseltem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROAlbumResponseltem.m; sourceTree = "<group>"; };
+		87869AA815108C820079D8FC /* ROResponseItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROResponseItem.h; sourceTree = "<group>"; };
+		87869AA915108C820079D8FC /* ROResponseItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROResponseItem.m; sourceTree = "<group>"; };
+		87869AAA15108C820079D8FC /* ROUserResponseItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROUserResponseItem.h; sourceTree = "<group>"; };
+		87869AAB15108C820079D8FC /* ROUserResponseItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROUserResponseItem.m; sourceTree = "<group>"; };
+		87869AAC15108C820079D8FC /* RORequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RORequest.h; sourceTree = "<group>"; };
+		87869AAD15108C820079D8FC /* RORequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RORequest.m; sourceTree = "<group>"; };
+		87869AAE15108C820079D8FC /* ROResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROResponse.h; sourceTree = "<group>"; };
+		87869AAF15108C820079D8FC /* ROResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROResponse.m; sourceTree = "<group>"; };
+		87869AB115108C820079D8FC /* ROMacroDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROMacroDef.h; sourceTree = "<group>"; };
+		87869AB215108C820079D8FC /* ROUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROUtility.h; sourceTree = "<group>"; };
+		87869AB315108C820079D8FC /* ROUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROUtility.m; sourceTree = "<group>"; };
+		87869AC715108E700079D8FC /* CURenrenShareClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CURenrenShareClient.h; sourceTree = "<group>"; };
+		87869AC815108E700079D8FC /* CURenrenShareClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CURenrenShareClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,6 +353,7 @@
 		8748B74B150F6ECD00A2DE88 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				87869A8615108C820079D8FC /* Renren */,
 				8748B849150F7E7400A2DE88 /* External */,
 				8748B74C150F6ECD00A2DE88 /* ASIHTTPRequest */,
 				8748B785150F6ECD00A2DE88 /* JSON */,
@@ -440,6 +500,8 @@
 				8748B80E150F7A6800A2DE88 /* CUShareClient.m */,
 				8748B87B150F7F2800A2DE88 /* CUSinaShareClient.h */,
 				8748B87C150F7F2800A2DE88 /* CUSinaShareClient.m */,
+				87869AC715108E700079D8FC /* CURenrenShareClient.h */,
+				87869AC815108E700079D8FC /* CURenrenShareClient.m */,
 			);
 			path = ShareCenter;
 			sourceTree = "<group>";
@@ -490,6 +552,107 @@
 				8748B867150F7E7400A2DE88 /* OAuthConsumer.h */,
 			);
 			path = OAuthConsumer;
+			sourceTree = "<group>";
+		};
+		87869A8615108C820079D8FC /* Renren */ = {
+			isa = PBXGroup;
+			children = (
+				87869A8715108C820079D8FC /* Renren.h */,
+				87869A8815108C820079D8FC /* Renren.m */,
+				87869A8915108C820079D8FC /* ROConnect.h */,
+				87869A8A15108C820079D8FC /* RODialogViewController */,
+				87869A9115108C820079D8FC /* ROError */,
+				87869A9415108C820079D8FC /* RONavigationViewController */,
+				87869A9B15108C820079D8FC /* RORequest */,
+				87869AB015108C820079D8FC /* ROTools */,
+			);
+			path = Renren;
+			sourceTree = "<group>";
+		};
+		87869A8A15108C820079D8FC /* RODialogViewController */ = {
+			isa = PBXGroup;
+			children = (
+				87869A8B15108C820079D8FC /* ROBaseDialogViewController.h */,
+				87869A8C15108C820079D8FC /* ROBaseDialogViewController.m */,
+				87869A8D15108C820079D8FC /* ROCheckDialogViewController.h */,
+				87869A8E15108C820079D8FC /* ROCheckDialogViewController.m */,
+				87869A8F15108C820079D8FC /* ROWebDialogViewController.h */,
+				87869A9015108C820079D8FC /* ROWebDialogViewController.m */,
+			);
+			path = RODialogViewController;
+			sourceTree = "<group>";
+		};
+		87869A9115108C820079D8FC /* ROError */ = {
+			isa = PBXGroup;
+			children = (
+				87869A9215108C820079D8FC /* ROError.h */,
+				87869A9315108C820079D8FC /* ROError.m */,
+			);
+			path = ROError;
+			sourceTree = "<group>";
+		};
+		87869A9415108C820079D8FC /* RONavigationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				87869A9515108C820079D8FC /* ROBaseNavigationViewController.h */,
+				87869A9615108C820079D8FC /* ROBaseNavigationViewController.m */,
+				87869A9715108C820079D8FC /* ROCheckNavigationViewController.h */,
+				87869A9815108C820079D8FC /* ROCheckNavigationViewController.m */,
+				87869A9915108C820079D8FC /* ROWebNavigationViewController.h */,
+				87869A9A15108C820079D8FC /* ROWebNavigationViewController.m */,
+			);
+			path = RONavigationViewController;
+			sourceTree = "<group>";
+		};
+		87869A9B15108C820079D8FC /* RORequest */ = {
+			isa = PBXGroup;
+			children = (
+				87869A9C15108C820079D8FC /* RequestParam */,
+				87869AA515108C820079D8FC /* ResponseItem */,
+				87869AAC15108C820079D8FC /* RORequest.h */,
+				87869AAD15108C820079D8FC /* RORequest.m */,
+				87869AAE15108C820079D8FC /* ROResponse.h */,
+				87869AAF15108C820079D8FC /* ROResponse.m */,
+			);
+			path = RORequest;
+			sourceTree = "<group>";
+		};
+		87869A9C15108C820079D8FC /* RequestParam */ = {
+			isa = PBXGroup;
+			children = (
+				87869A9D15108C820079D8FC /* ROAlbumsInfoRequestParam.h */,
+				87869A9E15108C820079D8FC /* ROAlbumsInfoRequestParam.m */,
+				87869A9F15108C820079D8FC /* ROPasswordFlowRequestParam.h */,
+				87869AA015108C820079D8FC /* ROPasswordFlowRequestParam.m */,
+				87869AA115108C820079D8FC /* RORequestParam.h */,
+				87869AA215108C820079D8FC /* RORequestParam.m */,
+				87869AA315108C820079D8FC /* ROUserInfoRequestParam.h */,
+				87869AA415108C820079D8FC /* ROUserInfoRequestParam.m */,
+			);
+			path = RequestParam;
+			sourceTree = "<group>";
+		};
+		87869AA515108C820079D8FC /* ResponseItem */ = {
+			isa = PBXGroup;
+			children = (
+				87869AA615108C820079D8FC /* ROAlbumResponseltem.h */,
+				87869AA715108C820079D8FC /* ROAlbumResponseltem.m */,
+				87869AA815108C820079D8FC /* ROResponseItem.h */,
+				87869AA915108C820079D8FC /* ROResponseItem.m */,
+				87869AAA15108C820079D8FC /* ROUserResponseItem.h */,
+				87869AAB15108C820079D8FC /* ROUserResponseItem.m */,
+			);
+			path = ResponseItem;
+			sourceTree = "<group>";
+		};
+		87869AB015108C820079D8FC /* ROTools */ = {
+			isa = PBXGroup;
+			children = (
+				87869AB115108C820079D8FC /* ROMacroDef.h */,
+				87869AB215108C820079D8FC /* ROUtility.h */,
+				87869AB315108C820079D8FC /* ROUtility.m */,
+			);
+			path = ROTools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -613,6 +776,25 @@
 				8748B879150F7E7400A2DE88 /* OAuthEngine.m in Sources */,
 				8748B87A150F7E7400A2DE88 /* StringUtil.m in Sources */,
 				8748B87D150F7F2800A2DE88 /* CUSinaShareClient.m in Sources */,
+				87869AB415108C820079D8FC /* Renren.m in Sources */,
+				87869AB515108C820079D8FC /* ROBaseDialogViewController.m in Sources */,
+				87869AB615108C820079D8FC /* ROCheckDialogViewController.m in Sources */,
+				87869AB715108C820079D8FC /* ROWebDialogViewController.m in Sources */,
+				87869AB815108C820079D8FC /* ROError.m in Sources */,
+				87869AB915108C820079D8FC /* ROBaseNavigationViewController.m in Sources */,
+				87869ABA15108C820079D8FC /* ROCheckNavigationViewController.m in Sources */,
+				87869ABB15108C820079D8FC /* ROWebNavigationViewController.m in Sources */,
+				87869ABC15108C820079D8FC /* ROAlbumsInfoRequestParam.m in Sources */,
+				87869ABD15108C820079D8FC /* ROPasswordFlowRequestParam.m in Sources */,
+				87869ABE15108C820079D8FC /* RORequestParam.m in Sources */,
+				87869ABF15108C820079D8FC /* ROUserInfoRequestParam.m in Sources */,
+				87869AC015108C820079D8FC /* ROAlbumResponseltem.m in Sources */,
+				87869AC115108C820079D8FC /* ROResponseItem.m in Sources */,
+				87869AC215108C820079D8FC /* ROUserResponseItem.m in Sources */,
+				87869AC315108C820079D8FC /* RORequest.m in Sources */,
+				87869AC415108C820079D8FC /* ROResponse.m in Sources */,
+				87869AC515108C820079D8FC /* ROUtility.m in Sources */,
+				87869AC915108E700079D8FC /* CURenrenShareClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,7 +870,10 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShareCenterExample/ShareCenterExample-Prefix.pch";
-				HEADER_SEARCH_PATHS = "${SDK_DIR}/usr/include/libxml2";
+				HEADER_SEARCH_PATHS = (
+					"${SDK_DIR}/usr/include/libxml2",
+					"${SRCROOT}/Vender/Renren",
+				);
 				INFOPLIST_FILE = "ShareCenterExample/ShareCenterExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";
@@ -703,7 +888,10 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShareCenterExample/ShareCenterExample-Prefix.pch";
-				HEADER_SEARCH_PATHS = "${SDK_DIR}/usr/include/libxml2";
+				HEADER_SEARCH_PATHS = (
+					"${SDK_DIR}/usr/include/libxml2",
+					"${SRCROOT}/Vender/Renren",
+				);
 				INFOPLIST_FILE = "ShareCenterExample/ShareCenterExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";

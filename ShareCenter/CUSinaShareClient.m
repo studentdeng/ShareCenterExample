@@ -59,6 +59,25 @@
     [super dealloc];
 }
 
+#pragma mark viewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    if (!engine.OAuthSetup) 
+    {
+        [engine requestRequestToken];
+    }
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+}
+
+
 #pragma mark CUShareClientData
 
 - (BOOL)isCUAuth
@@ -107,20 +126,10 @@
     return engine.authorizeURLRequest;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    if (!engine.OAuthSetup) 
-    {
-        [engine requestRequestToken];
-    }
-}
-
 #pragma mark webview
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    UIActivityIndicatorView *activeIndicator = (UIActivityIndicatorView *)[self.webView viewWithTag:kActiveIndicatorTag];
+    UIActivityIndicatorView *activeIndicator = [self getActivityIndicatorView];
     [activeIndicator sizeToFit];
     [activeIndicator startAnimating];
 }
@@ -133,7 +142,7 @@
 		return;
 	}  
     
-    UIActivityIndicatorView *activeIndicator = (UIActivityIndicatorView *)[self.webView viewWithTag:kActiveIndicatorTag];
+    UIActivityIndicatorView *activeIndicator = [self getActivityIndicatorView];
     activeIndicator.hidden = YES;
     [activeIndicator stopAnimating];    
     
@@ -155,7 +164,7 @@
         [delegate CUAuthFailed:self withError:error];
     }
     
-    UIActivityIndicatorView *activeIndicator = (UIActivityIndicatorView *)[self.webView viewWithTag:kActiveIndicatorTag];
+    UIActivityIndicatorView *activeIndicator = [self getActivityIndicatorView];
     activeIndicator.hidden = YES;
     [activeIndicator stopAnimating];    
     
@@ -169,35 +178,9 @@
 - (void)gotPin:(NSString *)pin {
 	engine.pin = pin;
 	[engine requestAccessToken];
-	
-	//if ([delegate respondsToSelector: @selector(OAuthController:authenticatedWithUsername:)]) 
-    //    [delegate OAuthController: self authenticatedWithUsername: engine.username];
     
-    if ([delegate respondsToSelector:@selector(CUAuthSucceed:)]) {
-        [delegate CUAuthSucceed:self];
-    }
-    
-    [self.webView loadHTMLString:nil baseURL:nil];
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-- (void)denied {
-	if ([delegate respondsToSelector:@selector(CUAuthFailed:withError:)]) {
-        [delegate CUAuthFailed:self withError:nil];
-    }
-    
-    [self.webView loadHTMLString:nil baseURL:nil];
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-- (void)cancel:(id)sender {
-    if ([delegate respondsToSelector:@selector(CUSHareCancel:)]) {
-        [delegate CUSHareCancel:self];
-    }
-    
-    [self.webView loadHTMLString:nil baseURL:nil];
-    
-    [self dismissModalViewControllerAnimated:YES];
+    //some err may be happen here
+    [self CUNotifyAuthSucceed:self];
 }
 
 #pragma mark OAuthEngineDelegate

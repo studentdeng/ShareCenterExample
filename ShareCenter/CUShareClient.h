@@ -56,6 +56,14 @@ CUShareClientType;
     id<CUShareClientDelegate> delegate;
 }
 
+- (UIActivityIndicatorView *)getActivityIndicatorView;
+
+- (void)CUNotifyShareFailed:(CUShareClient *)client withError:(NSError *)error;
+- (void)CUNotifyShareSucceed:(CUShareClient *)client;
+- (void)CUNotifyShareCancel:(CUShareClient *)client;
+- (void)CUNotifyAuthSucceed:(CUShareClient *)client;
+- (void)CUNotifyAuthFailed:(CUShareClient *)client withError:(NSError *)error;
+
 - (NSURLRequest *)CULoginURLRequest;
 
 @property (nonatomic, retain) UIWebView *webView;

@@ -67,12 +67,12 @@ static CUShareCenter *s_instance3 = nil;
             break;
         case QQZONECLIENT:
             center = [CUShareCenter sharedInstance:s_instance2];
-            s_instance1 = center;
+            s_instance2 = center;
             
             break;    
         case RENRENCLIENT:
             center = [CUShareCenter sharedInstance:s_instance3];
-            s_instance1 = center;
+            s_instance3 = center;
             
             break;
             
