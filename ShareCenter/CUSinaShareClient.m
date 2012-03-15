@@ -59,7 +59,6 @@
             engine.authorize = auth;
             
             [auth release];
-
         }
     }
     
@@ -96,7 +95,6 @@
 
 - (void)CUOpenAuthViewInViewController:(UIViewController *)vc;
 {
-    
     UIViewController *controller = [self CUGetAuthViewController];
     
     [vc presentModalViewController:controller animated:YES];
@@ -273,10 +271,12 @@
 
 - (void)engine:(WBEngine *)engine requestDidFailWithError:(NSError *)error
 {
+    [self CUNotifyShareFailed:self withError:error];
 }
 
 - (void)engine:(WBEngine *)engine requestDidSucceedWithResult:(id)result
 {
+    [self CUNotifyShareSucceed:self];
 }
 
 @end
