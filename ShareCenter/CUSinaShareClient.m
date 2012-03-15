@@ -78,11 +78,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    //if (!engine.OAuthSetup) 
-    //{
-    //    [engine requestRequestToken];
-    //}
 }
 
 - (void)viewDidUnload
@@ -107,8 +102,6 @@
     [vc presentModalViewController:controller animated:YES];
     
     return;
-    
-    //[engine logIn];
 }
 
 - (void)CULogout
@@ -231,7 +224,7 @@
 
 - (void)engineAuthorizeExpired:(WBEngine *)engine
 {
-    //[self CUNotifyAuthFailed:self withError:nil];
+    [self CUNotifyAuthFailed:self withError:nil];
 }
 
 - (void)engine:(WBEngine *)engine requestDidFailWithError:(NSError *)error
