@@ -7,9 +7,14 @@
 //
 
 #import "CUSinaShareClient.h"
-#import "OAMutableURLRequest.h"
 #import "ASIFormDataRequest.h"
-#import "StringUtil.h"
+
+#import "WBAuthorize.h"
+#import "WBRequest.h"
+#import "WBSDKGlobal.h"
+
+#define kWBAuthorizeURL     @"https://api.weibo.com/oauth2/authorize"
+#define kWBAccessTokenURL   @"https://api.weibo.com/oauth2/access_token"
 
 //< For Sina
 #define kSinaKeyCodeLead @"获取到的授权码"
@@ -38,14 +43,13 @@
 {
     if (self = [super init]) {
         if (engine == nil){
-            engine = [[OAuthEngine alloc] initOAuthWithDelegate: self];
-            engine.consumerKey = kOAuthConsumerKey;
-            engine.consumerSecret = kOAuthConsumerSecret;
+            engine = [[WBEngine alloc] initWithAppKey:kOAuthConsumerKey appSecret:kOAuthConsumerSecret];
+            [engine setRootViewController:self];
+            [engine setDelegate:self];
+            [engine setRedirectURI:@"http://"];
+            [engine setIsUserExclusive:NO];
             
-            if (!engine.OAuthSetup) 
-            {
-                [engine requestRequestToken];
-            }
+            [engine setRedirectURI:@"http://"];
         }
     }
     
@@ -65,10 +69,10 @@
 {
     [super viewDidLoad];
     
-    if (!engine.OAuthSetup) 
-    {
-        [engine requestRequestToken];
-    }
+    //if (!engine.OAuthSetup) 
+    //{
+    //    [engine requestRequestToken];
+    //}
 }
 
 - (void)viewDidUnload
@@ -82,21 +86,23 @@
 
 - (BOOL)isCUAuth
 {
-    return [engine isAuthorized];
+    return [engine isLoggedIn] && ![engine isAuthorizeExpired];
 }
 
 - (void)CUOpenAuthViewInViewController:(UIViewController *)vc;
 {
+    /*
     UIViewController *controller = [self CUGetAuthViewController];
     
     [vc presentModalViewController:controller animated:YES];
     
-    return;
+    return;*/
+    [engine logIn];
 }
 
 - (void)CULogout
 {
-    [self removeCachedOAuthDataForUsername:@""];
+    [engine logOut];
     return;
 }
 
@@ -123,7 +129,13 @@
 
 - (NSURLRequest *)CULoginURLRequest
 {
-    return engine.authorizeURLRequest;
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:engine.appKey, @"client_id",
+                            @"code", @"response_type",
+                            engine.redirectURI, @"redirect_uri", 
+                            @"mobile", @"display", nil];
+    NSString *urlString = [WBRequest serializeURL:kWBAuthorizeURL
+                                           params:params
+                                       httpMethod:@"GET"];
 }
 
 #pragma mark webview
@@ -138,7 +150,7 @@
     NSString *authPin = [self locateAuthPinInWebView:webView];
 	
 	if (authPin.length) {
-		[self gotPin: authPin];
+		//[self gotPin: authPin];
 		return;
 	}  
     
@@ -176,8 +188,8 @@
 #pragma mark Actions
 
 - (void)gotPin:(NSString *)pin {
-	engine.pin = pin;
-	[engine requestAccessToken];
+	//engine.pin = pin;
+	//[engine requestAccessToken];
     
     //some err may be happen here
     [self CUNotifyAuthSucceed:self];
@@ -249,64 +261,7 @@
 
 - (void)post:(NSString *)text andImage:(UIImage *)image
 {
-    NSString *path = (image ? kSinaPostImagePath : kSinaPostPath);
-    
-    NSString *postString = [NSString stringWithFormat:@"status=%@", [text encodeAsURIComponent]];
-    
-    NSString *URL = (NSString*)CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)path, (CFStringRef)@"%", NULL, kCFStringEncodingUTF8);
-    [URL autorelease];
-    NSURL *finalURL = [NSURL URLWithString:URL];
-    OAMutableURLRequest* req = [[[OAMutableURLRequest alloc] initWithURL:finalURL
-                                                                consumer:engine.consumer 
-                                                                   token:engine.accessToken 
-                                                                   realm:nil
-                                                       signatureProvider:nil] autorelease];
-    [req setHTTPMethod:@"POST"];
-    [req setHTTPShouldHandleCookies:NO];
-    
-    NSString *textBody = [NSString stringWithString:postString];
-    textBody = [textBody stringByAppendingString:[NSString stringWithFormat:@"%@source=%@", 
-                                                  (postString) ? @"&" : @"?" , 
-                                                  engine.consumerKey]];
-    
-    [req setHTTPBody:[textBody dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSError *err = nil;
-    
-    [(OAMutableURLRequest *)req prepare];
-    
-    ASIFormDataRequest *asiReq = [ASIFormDataRequest requestWithURL:[req URL]];
-    [asiReq setRequestHeaders:[NSMutableDictionary dictionaryWithCapacity:1]];
-    [asiReq.requestHeaders setDictionary:[req allHTTPHeaderFields]];
-    [asiReq setPostValue:text forKey:@"status"];
-    [asiReq setPostValue:engine.consumerKey forKey:@"source"];
-    if (image)
-    {
-        NSData *jpegImageData = UIImageJPEGRepresentation(image, 1.0f);
-        [asiReq addData:jpegImageData withFileName:@"image.jpeg" andContentType:@"image/jpeg" forKey:@"pic"];
-    }
-    
-    [asiReq startSynchronous];
-    
-    err = asiReq.error;
-    
-    if (err)
-    {
-        //< Error Handle
-        NSLog(@"Error %@", err);
-        if ([delegate respondsToSelector:@selector(CUShareFailed:withError:)]) {
-            [delegate CUShareFailed:self withError:nil];
-        }
-    }
-    else
-    {
-        if ([delegate respondsToSelector:@selector(CUShareSucceed:)])
-        {
-            [delegate CUShareSucceed:self];
-            //[self.delegate shareFailedWithError:err];
-        }
-    }
-
+    [engine sendWeiBoWithText:text image:image];
 }
 
 @end

@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "CUShareClient.h"
-#import "OAuthEngine.h"
+#import "WBEngine.h"
 
 @interface CUSinaShareClient : CUShareClient
-<CUShareClientData>
+<CUShareClientData, WBEngineDelegate>
 {
-    OAuthEngine *engine;
+    WBEngine *engine;
     
     //CUShareClient
     /*
