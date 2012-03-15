@@ -47,9 +47,19 @@
             [engine setRootViewController:self];
             [engine setDelegate:self];
             [engine setRedirectURI:@"http://"];
-            [engine setIsUserExclusive:NO];
-            
+            [engine setIsUserExclusive:NO];            
             [engine setRedirectURI:@"http://"];
+            
+            WBAuthorize *auth = [[WBAuthorize alloc] initWithAppKey:kOAuthConsumerKey 
+                                                          appSecret:kOAuthConsumerSecret];
+            [auth setRootViewController:self];
+            [auth setDelegate:engine];
+            [auth setRedirectURI:engine.redirectURI];
+            
+            engine.authorize = auth;
+            
+            [auth release];
+
         }
     }
     
@@ -91,13 +101,14 @@
 
 - (void)CUOpenAuthViewInViewController:(UIViewController *)vc;
 {
-    /*
+    
     UIViewController *controller = [self CUGetAuthViewController];
     
     [vc presentModalViewController:controller animated:YES];
     
-    return;*/
-    [engine logIn];
+    return;
+    
+    //[engine logIn];
 }
 
 - (void)CULogout
@@ -136,128 +147,102 @@
     NSString *urlString = [WBRequest serializeURL:kWBAuthorizeURL
                                            params:params
                                        httpMethod:@"GET"];
+    
+    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                            cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                        timeoutInterval:60.0];
+
+    return request;
 }
 
-#pragma mark webview
+#pragma mark - UIWebViewDelegate Methods
 
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    UIActivityIndicatorView *activeIndicator = [self getActivityIndicatorView];
-    [activeIndicator sizeToFit];
-    [activeIndicator startAnimating];
+- (void)webViewDidStartLoad:(UIWebView *)aWebView
+{
+    UIActivityIndicatorView *indicatorView = [self getActivityIndicatorView];
+	[indicatorView startAnimating];
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)aWebView {
-    NSString *authPin = [self locateAuthPinInWebView:webView];
-	
-	if (authPin.length) {
-		//[self gotPin: authPin];
-		return;
-	}  
-    
-    UIActivityIndicatorView *activeIndicator = [self getActivityIndicatorView];
-    activeIndicator.hidden = YES;
-    [activeIndicator stopAnimating];    
-    
-    [UIView beginAnimations: nil context: nil];
-	//_blockerView.alpha = 0.0;
-	[UIView commitAnimations];
-	
-	if ([webView isLoading]) {
-		webView.alpha = 0.0;
-	} else {
-		webView.alpha = 1.0;
-	}
+- (void)webViewDidFinishLoad:(UIWebView *)aWebView
+{
+    UIActivityIndicatorView *indicatorView = [self getActivityIndicatorView];
+	[indicatorView stopAnimating];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {    
+- (void)webView:(UIWebView *)aWebView didFailLoadWithError:(NSError *)error
+{
+    UIActivityIndicatorView *indicatorView = [self getActivityIndicatorView];
+    [indicatorView stopAnimating];
+}
+
+- (BOOL)webView:(UIWebView *)aWebView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSRange range = [request.URL.absoluteString rangeOfString:@"code="];
     
-    if ([delegate respondsToSelector:@selector(CUAuthFailed:withError:)])
+    if (range.location != NSNotFound)
     {
-        [delegate CUAuthFailed:self withError:error];
+        NSString *code = [request.URL.absoluteString substringFromIndex:range.location + range.length];
+        
+        [engine.authorize authorizeWebView:nil didReceiveAuthorizeCode:code];
     }
     
-    UIActivityIndicatorView *activeIndicator = [self getActivityIndicatorView];
-    activeIndicator.hidden = YES;
-    [activeIndicator stopAnimating];    
-    
-    //[self performSelector:@selector(dismissView) withObject:nil afterDelay:1.0f];
-    //[self cancel:nil];
-    [self performSelector:@selector(cancel:) withObject:nil afterDelay:1.0f];
+    return YES;
 }
 
-#pragma mark Actions
+#pragma mark WBEngineDelegate
 
-- (void)gotPin:(NSString *)pin {
-	//engine.pin = pin;
-	//[engine requestAccessToken];
-    
-    //some err may be happen here
+// If you try to log in with logIn or logInUsingUserID method, and
+// there is already some authorization info in the Keychain,
+// this method will be invoked.
+// You may or may not be allowed to continue your authorization,
+// which depends on the value of isUserExclusive.
+- (void)engineAlreadyLoggedIn:(WBEngine *)engine
+{
+
+}
+
+// Log in successfully.
+- (void)engineDidLogIn:(WBEngine *)engine
+{
     [self CUNotifyAuthSucceed:self];
 }
 
-#pragma mark OAuthEngineDelegate
-
-- (void)storeCachedOAuthData:(NSString *)data forUsername:(NSString *)username {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];	
-	[defaults setObject:data forKey: @"authData"];
-	[defaults synchronize];
+// Failed to log in.
+// Possible reasons are:
+// 1) Either username or password is wrong;
+// 2) Your app has not been authorized by Sina yet.
+- (void)engine:(WBEngine *)engine didFailToLogInWithError:(NSError *)error
+{
+    [self CUNotifyAuthFailed:self withError:error];
 }
 
-- (NSString *)cachedOAuthDataForUsername:(NSString *)username {
-	return [[NSUserDefaults standardUserDefaults] objectForKey:@"authData"];
+// Log out successfully.
+- (void)engineDidLogOut:(WBEngine *)engine
+{
+    
 }
 
-- (void)removeCachedOAuthDataForUsername:(NSString *)username {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];	
-	[defaults removeObjectForKey: @"authData"];
-	[defaults synchronize];
+// When you use the WBEngine's request methods,
+// you may receive the following four callbacks.
+- (void)engineNotAuthorized:(WBEngine *)engine
+{
+    [self CUNotifyAuthFailed:self withError:nil];
+}
+
+- (void)engineAuthorizeExpired:(WBEngine *)engine
+{
+    //[self CUNotifyAuthFailed:self withError:nil];
+}
+
+- (void)engine:(WBEngine *)engine requestDidFailWithError:(NSError *)error
+{
+}
+
+- (void)engine:(WBEngine *)engine requestDidSucceedWithResult:(id)result
+{
 }
 
 #pragma mark common method
-
-/*********************************************************************************************************
- I am fully aware that this code is chock full 'o flunk. That said:
- 
- - first we check, using standard DOM-diving, for the pin, looking at both the old and new tags for it.
- - if not found, we try a regex for it. This did not work for me (though it did work in test web pages).
- - if STILL not found, we iterate the entire HTML and look for an all-numeric 'word', 7 characters in length
- 
- Ugly. I apologize for its inelegance. Bleah.
- 
- *********************************************************************************************************/
-
-- (NSString *)locateAuthPinInWebView:(UIWebView *)webView {
-    
-    NSString *pin;
-	
-	NSString *html = [self.webView stringByEvaluatingJavaScriptFromString: @"document.body.innerText"];
-	NSLog(@"html:%@", [self.webView stringByEvaluatingJavaScriptFromString: @"document.body.innerHTML"]);
-	
-	if (html.length == 0) 
-        return nil;
-	
-	const char			*rawHTML = (const char *) [html UTF8String];
-	int					length = strlen(rawHTML), chunkLength = 0;
-	
-	for (int i = 0; i < length; i++) {
-		if (rawHTML[i] < '0' || rawHTML[i] > '9') {
-			if (chunkLength == 6) {
-				char				*buffer = (char *) malloc(chunkLength + 1);
-				
-				memmove(buffer, &rawHTML[i - chunkLength], chunkLength);
-				buffer[chunkLength] = 0;
-				
-				pin = [NSString stringWithUTF8String: buffer];
-				free(buffer);
-				return pin;
-			}
-			chunkLength = 0;
-		} else
-			chunkLength++;
-	}
-	
-	return nil;
-}
 
 - (void)post:(NSString *)text andImage:(UIImage *)image
 {

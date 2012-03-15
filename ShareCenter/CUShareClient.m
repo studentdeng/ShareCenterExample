@@ -148,14 +148,19 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
     return (UIActivityIndicatorView *)[self.webView viewWithTag:kActiveIndicatorTag];
 }
 
+- (void)close:(id)sender
+{
+    //[self.webView loadHTMLString:nil baseURL:nil];
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 - (void)CUNotifyShareFailed:(CUShareClient *)client withError:(NSError *)error
 {
     if ([delegate respondsToSelector:@selector(CUShareFailed:withError:)]) {
         [delegate CUShareFailed:client withError:error];
     }
     
-    [self.webView loadHTMLString:nil baseURL:nil];
-    [self dismissModalViewControllerAnimated:YES];
+    [self performSelector:@selector(close:) withObject:nil afterDelay:1.0f];
 }
 
 - (void)CUNotifyShareSucceed:(CUShareClient *)client
@@ -164,8 +169,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
         [delegate CUShareSucceed:client];
     }
     
-    [self.webView loadHTMLString:nil baseURL:nil];
-    [self dismissModalViewControllerAnimated:YES];
+    [self performSelector:@selector(close:) withObject:nil afterDelay:1.0f];
 }
 
 - (void)CUNotifyShareCancel:(CUShareClient *)client
@@ -174,8 +178,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
         [delegate CUSHareCancel:client];
     }
     
-    [self.webView loadHTMLString:nil baseURL:nil];
-    [self dismissModalViewControllerAnimated:YES];
+    [self performSelector:@selector(close:) withObject:nil afterDelay:1.0f];
 }
 
 - (void)CUNotifyAuthSucceed:(CUShareClient *)client
@@ -184,8 +187,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
         [delegate CUAuthSucceed:client];
     }
     
-    [self.webView loadHTMLString:nil baseURL:nil];
-    [self dismissModalViewControllerAnimated:YES];
+    [self performSelector:@selector(close:) withObject:nil afterDelay:1.0f];
 }
 
 - (void)CUNotifyAuthFailed:(CUShareClient *)client withError:(NSError *)error
@@ -194,8 +196,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
         [delegate CUShareFailed:client withError:error];
     }
     
-    [self.webView loadHTMLString:nil baseURL:nil];
-    [self dismissModalViewControllerAnimated:YES];
+    [self performSelector:@selector(close:) withObject:nil afterDelay:1.0f];
 }
 
 
