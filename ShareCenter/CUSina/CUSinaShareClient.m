@@ -21,10 +21,6 @@
 #define kSinaPostImagePath @"http://api.t.sina.com.cn/statuses/upload.json"
 #define kSinaPostPath @"http://api.t.sina.com.cn/statuses/update.json"
 
-//project key
-#define kOAuthConsumerKey				@""
-#define kOAuthConsumerSecret			@""
-
 //view
 
 @interface  CUShareClient()
@@ -39,19 +35,18 @@
 
 #pragma mark life
 
-- (id)init
+- (id)initWithAppKey:(NSString *)theAppKey appSecret:(NSString *)theAppSecret
 {
     if (self = [super init]) {
         if (engine == nil){
-            engine = [[WBEngine alloc] initWithAppKey:kOAuthConsumerKey appSecret:kOAuthConsumerSecret];
+            engine = [[WBEngine alloc] initWithAppKey:theAppKey appSecret:theAppSecret];
             [engine setRootViewController:self];
             [engine setDelegate:self];
             [engine setRedirectURI:@"http://"];
             [engine setIsUserExclusive:NO];            
-            [engine setRedirectURI:@"http://"];
             
-            WBAuthorize *auth = [[WBAuthorize alloc] initWithAppKey:kOAuthConsumerKey 
-                                                          appSecret:kOAuthConsumerSecret];
+            WBAuthorize *auth = [[WBAuthorize alloc] initWithAppKey:theAppKey 
+                                                          appSecret:theAppSecret];
             [auth setRootViewController:self];
             [auth setDelegate:engine];
             [auth setRedirectURI:engine.redirectURI];
@@ -261,7 +256,7 @@
 // you may receive the following four callbacks.
 - (void)engineNotAuthorized:(WBEngine *)engine
 {
-    [self CUNotifyAuthFailed:self withError:nil];
+    [self CUNotifyShareFailed:self withError:nil];
 }
 
 - (void)engineAuthorizeExpired:(WBEngine *)engine

@@ -28,7 +28,7 @@
 
 #pragma mark viewController
 
-- (id)init
+- (id)initWithAppKey:(NSString *)theAppKey appSecret:(NSString *)theAppSecret
 {
     self = [super init];
     if (self) {

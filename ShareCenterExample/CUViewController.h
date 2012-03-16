@@ -11,10 +11,7 @@
 
 @interface CUViewController : UIViewController <CUShareClientDelegate>
 
-- (IBAction)shareSina:(id)sender;
-- (IBAction)logoutSina:(id)sender;
-
-- (IBAction)shareRenren:(id)sender;
-- (IBAction)logoutRenren:(id)sender;
+- (IBAction)share:(id)sender;
+- (IBAction)logout:(id)sender;
 
 @end

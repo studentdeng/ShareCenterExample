@@ -36,13 +36,16 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 @synthesize webView;
 @synthesize delegate;
 @synthesize orientation;
+@synthesize appKey;
+@synthesize appKeySecret;
 
 #pragma mark life
 
-- (id)init
+- (id)initWithAppKey:(NSString *)theAppKey appSecret:(NSString *)theAppSecret
 {
     if (self = [super init]) {
-        
+        self.appKey = theAppKey;
+        self.appKeySecret = theAppSecret;
     }
     
     return self;
@@ -51,6 +54,8 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 - (void)dealloc
 {
     self.webView = nil;
+    self.appKey = nil;
+    self.appKeySecret = nil;
     
     [super dealloc];
 }

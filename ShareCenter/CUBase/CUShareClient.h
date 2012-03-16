@@ -13,12 +13,14 @@ extern int kActiveIndicatorTag;
 typedef enum _CUShareClientType
 {
     SINACLIENT = 0,
-    QQZONECLIENT = 1,
-    RENRENCLIENT = 2,
+    RENRENCLIENT = 1,
+    TTWEIBOCLIENT = 2
 }
 CUShareClientType;
 
 @protocol CUShareClientData <UIWebViewDelegate>
+
+- (id)initWithAppKey:(NSString *)theAppKey appSecret:(NSString *)theAppSecret;
 
 - (BOOL)isCUAuth;
 - (void)CUOpenAuthViewInViewController:(UIViewController *)vc;
@@ -53,6 +55,9 @@ CUShareClientType;
 	UIToolbar									*pinCopyPromptBar;    
     
     id<CUShareClientDelegate> delegate;
+    
+    NSString *appKey;
+    NSString *appKeySecret;
 }
 
 - (UIActivityIndicatorView *)getActivityIndicatorView;
@@ -67,5 +72,7 @@ CUShareClientType;
 
 @property (nonatomic, retain) UIWebView *webView;
 @property (nonatomic, assign) id<CUShareClientDelegate> delegate;
+@property (nonatomic, copy) NSString *appKey;
+@property (nonatomic, copy) NSString *appKeySecret;
 
 @end
