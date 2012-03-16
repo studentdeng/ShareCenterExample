@@ -10,6 +10,7 @@
 #import "NSURL+QAdditions.h"
 #import "QWeiboSyncApi.h"
 #import "SFHFKeychainUtils.h"
+#import "NSString+SBJSON.h"
 
 #define kWBURLSchemePrefix              @"WB_Tencent_"
 
@@ -119,6 +120,7 @@
 {
     QWeiboSyncApi *api = [[[QWeiboSyncApi alloc] init] autorelease];
     
+    NSString *resString = 
     [api publishMsgWithConsumerKey:self.appKey 
                     consumerSecret:self.appSecret 
                     accessTokenKey:self.tokenKey 
@@ -126,6 +128,25 @@
                            content:text 
                           imageURL:url
                         resultType:RESULTTYPE_JSON];
+    
+    NSLog(@"%@", resString);
+    
+    id jsonObject = [resString JSONValue];
+    
+    if ([jsonObject isKindOfClass:[NSDictionary class]]) {
+        if ([jsonObject objectForKey:@"errorcode"] == nil) {
+            if ([delegate respondsToSelector:@selector(engine:requestDidSucceedWithResult:)])
+            {
+                [delegate engine:self requestDidSucceedWithResult:jsonObject];
+            }
+            
+            return;
+        }
+    }
+    
+    if ([delegate respondsToSelector:@selector(engine:requestDidFailWithError:)]) {
+        [delegate engine:self requestDidFailWithError:nil];
+    }
 }
 
 - (void)loadRequestWithMethodName:(NSString *)methodName
