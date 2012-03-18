@@ -148,7 +148,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 
 - (void)close:(id)sender
 {
-    //[self.webView loadHTMLString:nil baseURL:nil];
+    self.webView.delegate = nil;
     [self dismissModalViewControllerAnimated:YES];
 }
 

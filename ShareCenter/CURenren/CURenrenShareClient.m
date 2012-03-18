@@ -41,6 +41,7 @@
 
 - (void)dealloc
 {
+    renren.renrenDelegate = nil;
     [renren release];
     [sendParams release];
     

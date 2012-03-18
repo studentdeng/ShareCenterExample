@@ -41,6 +41,7 @@
 
 - (void)dealloc
 {
+    engine.delegate = nil;
     [engine release];
     
     [super dealloc];
