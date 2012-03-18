@@ -101,7 +101,8 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
     [self.webView addSubview:activeIndicator];
     [activeIndicator release];
 	
-	UINavigationItem *navItem = [[[UINavigationItem alloc] initWithTitle: NSLocalizedString(@"Sina Weibo Info", nil)] autorelease];
+	//UINavigationItem *navItem = [[[UINavigationItem alloc] initWithTitle: NSLocalizedString(@"Sina Weibo Info", nil)] autorelease];
+    UINavigationItem *navItem = [[[UINavigationItem alloc] initWithTitle:@"登陆"] autorelease];
 	navItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
                                                                                target:self 
                                                                                action:@selector(cancel:)] 

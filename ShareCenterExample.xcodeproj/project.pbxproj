@@ -132,7 +132,7 @@
 		874F6EBD1512F074003A6618 /* CURenrenShareClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CURenrenShareClient.m; sourceTree = "<group>"; };
 		874F6EBF1512F074003A6618 /* CUSinaShareClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUSinaShareClient.h; sourceTree = "<group>"; };
 		874F6EC01512F074003A6618 /* CUSinaShareClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUSinaShareClient.m; sourceTree = "<group>"; };
-		874F6EC21512F074003A6618 /* CUTencentShareClient.h */ = {isa = PBXFileReference; fileEncoding = 4; path = CUTencentShareClient.h; sourceTree = "<group>"; };
+		874F6EC21512F074003A6618 /* CUTencentShareClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUTencentShareClient.h; sourceTree = "<group>"; };
 		874F6EC31512F074003A6618 /* CUTencentShareClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUTencentShareClient.m; sourceTree = "<group>"; };
 		874F6EC61512F074003A6618 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		874F6EC71512F074003A6618 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };

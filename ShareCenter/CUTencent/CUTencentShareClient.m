@@ -111,6 +111,7 @@
 
 #pragma mark CUShareClient
 
+//TODO : 处理网络情况不好时的做法
 - (NSURLRequest *)CULoginURLRequest
 {
     QWeiboSyncApi *api = [[[QWeiboSyncApi alloc] init] autorelease];
