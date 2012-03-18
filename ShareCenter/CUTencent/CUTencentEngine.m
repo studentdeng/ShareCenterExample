@@ -31,6 +31,8 @@
 @synthesize tokenSecret;
 @synthesize verifier;
 @synthesize delegate;
+@synthesize requestTokenKey;
+@synthesize requestTokenSecret;
 
 - (id)initWithAppKey:(NSString *)theAppKey appSecret:(NSString *)theAppSecret
 {
@@ -51,6 +53,8 @@
 	[tokenKey release];
 	[tokenSecret release];
 	[verifier release];
+    [requestTokenKey release];
+    [requestTokenSecret release];
     
     [super dealloc];
 }
@@ -64,11 +68,11 @@
 		QWeiboSyncApi *api = [[[QWeiboSyncApi alloc] init] autorelease];
 		NSString *result = [api getAccessTokenWithConsumerKey:self.appKey 
                                                consumerSecret:self.appSecret 
-                                              requestTokenKey:self.tokenKey 
-                                           requestTokenSecret:self.tokenSecret 
+                                              requestTokenKey:self.requestTokenKey 
+                                           requestTokenSecret:self.requestTokenSecret
                                                        verify:aVerifier];
 		NSLog(@"\nget access token:%@", result);
-        
+
         BOOL bRes = [self parseTokenKeyWithResponse:result];
         if (bRes) {
             [self saveAuthorizeDataToKeychain];

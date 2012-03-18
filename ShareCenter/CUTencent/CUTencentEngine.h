@@ -29,6 +29,9 @@
 	NSString *tokenSecret;
 	NSString *verifier;
     
+    NSString *requestTokenKey;
+    NSString *requestTokenSecret;
+    
     QWeiboRequest *request;
     
     id<CUTencentEngineDelegate> delegate;
@@ -39,6 +42,8 @@
 @property (nonatomic, copy) NSString *tokenKey;
 @property (nonatomic, copy) NSString *tokenSecret;
 @property (nonatomic, copy) NSString *verifier;
+@property (nonatomic, copy) NSString *requestTokenKey;
+@property (nonatomic, copy) NSString *requestTokenSecret;
 
 @property (nonatomic, assign) id<CUTencentEngineDelegate> delegate;
 
