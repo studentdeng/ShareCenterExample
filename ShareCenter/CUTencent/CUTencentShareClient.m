@@ -120,10 +120,10 @@
                                                consumerSecret:engine.appSecret];
     NSLog(@"Get requestToken:%@", retString);
     
-    [engine parseTokenKeyWithResponse:retString];
+    [engine parseRequestTokenKeyWithResponse:retString];
 
     
-    NSString *urlString = [NSString stringWithFormat:@"%@%@", VERIFY_URL, engine.tokenKey];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", VERIFY_URL, engine.requestTokenKey];
 
     
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]

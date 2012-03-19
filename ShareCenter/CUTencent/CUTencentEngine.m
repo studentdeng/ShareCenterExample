@@ -105,6 +105,15 @@
     return [self.tokenKey length] && [self.tokenSecret length];
 }
 
+- (BOOL)parseRequestTokenKeyWithResponse:(NSString *)aResponse {
+    
+	NSDictionary *params = [NSURL parseURLQueryString:aResponse];
+	self.requestTokenKey = [params objectForKey:@"oauth_token"];
+	self.requestTokenSecret = [params objectForKey:@"oauth_token_secret"];
+    
+    return [self.tokenKey length] && [self.tokenSecret length];
+}
+
 - (void)logOut
 {
     [self deleteAuthorizeDataInKeychain];

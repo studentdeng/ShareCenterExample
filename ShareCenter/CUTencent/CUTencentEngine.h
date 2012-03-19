@@ -49,6 +49,7 @@
 
 - (id)initWithAppKey:(NSString *)theAppKey appSecret:(NSString *)theAppSecret;
 
+- (BOOL)parseRequestTokenKeyWithResponse:(NSString *)aResponse;
 - (BOOL)parseTokenKeyWithResponse:(NSString *)aResponse;
 - (BOOL)authorizeResponse:(NSString *)aResponse;
 
