@@ -10,6 +10,15 @@
 #import "CUSinaShareClient.h"
 
 @interface CUViewController : UIViewController <CUShareClientDelegate>
+{
+    IBOutlet UILabel *sinaBindLabel;
+    IBOutlet UILabel *renrenBindLabel;
+    IBOutlet UILabel *tencentBindLabel;
+}
+
+@property (nonatomic, retain) UILabel *sinaBindLabel;
+@property (nonatomic, retain) UILabel *renrenBindLabel;
+@property (nonatomic, retain) UILabel *tencentBindLabel;
 
 - (IBAction)share:(id)sender;
 - (IBAction)logout:(id)sender;

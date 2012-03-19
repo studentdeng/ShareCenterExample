@@ -26,13 +26,11 @@
 
 //CUShareClientData
 - (BOOL)isCUAuth;
-- (void)CUOpenAuthViewInViewController:(UIViewController *)vc;
 - (void)CULogout;
 
 - (void)CUShowWithText:(NSString *)text;
 - (void)CUShowWithText:(NSString *)text andImage:(UIImage *)image;
 
 - (NSURLRequest *)CULoginURLRequest;
-- (UIViewController *)CUGetAuthViewController;
 
 @end

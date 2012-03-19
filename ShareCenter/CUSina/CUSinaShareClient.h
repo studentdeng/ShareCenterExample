@@ -10,6 +10,8 @@
 #import "CUShareClient.h"
 #import "WBEngine.h"
 
+#import "CUShareViewClient.h"
+
 @interface CUSinaShareClient : CUShareClient
 <CUShareClientData, WBEngineDelegate>
 {
@@ -28,7 +30,6 @@
 
 //CUShareClientData
 - (BOOL)isCUAuth;
-- (void)CUOpenAuthViewInViewController:(UIViewController *)vc;
 - (void)CULogout;
 
 - (void)CUShowWithText:(NSString *)text;
@@ -36,6 +37,5 @@
 - (void)CUShowWithText:(NSString *)text andImageURLString:(NSString *)imageURLString;
 
 - (NSURLRequest *)CULoginURLRequest;
-- (UIViewController *)CUGetAuthViewController;
 
 @end

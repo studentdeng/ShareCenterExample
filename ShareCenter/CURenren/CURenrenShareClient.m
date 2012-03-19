@@ -48,37 +48,11 @@
     [super dealloc];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
 #pragma mark CUShareClientData
 
 - (BOOL)isCUAuth
 {
     return [renren isSessionValid];
-}
-
-- (void)CUOpenAuthViewInViewController:(UIViewController *)vc;
-{
-    UIViewController *controller = [self CUGetAuthViewController];
-    
-    [vc presentModalViewController:controller animated:YES];
-    
-    return;
 }
 
 - (void)CULogout
@@ -104,11 +78,6 @@
 - (void)CUShowWithText:(NSString *)text andImageURLString:(NSString *)imageURLString
 {
     return [self post:text andImageURLString:imageURLString];
-}
-
-- (UIViewController *)CUGetAuthViewController
-{
-    return self;
 }
 
 #pragma mark CUShareClient
@@ -183,7 +152,7 @@
 #pragma mark - UIWebViewDelegate Method
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    UIActivityIndicatorView *activeIndicator = [self getActivityIndicatorView];
+    UIActivityIndicatorView *activeIndicator = [self.viewClient getActivityIndicatorView];
     [activeIndicator sizeToFit];
     [activeIndicator startAnimating];
 }
@@ -233,7 +202,7 @@
 {
     //[self.indicatorView stopAnimating];
     //    self.cancelButton.hidden = YES;
-    UIActivityIndicatorView *view = [self getActivityIndicatorView];
+    UIActivityIndicatorView *view = [self.viewClient getActivityIndicatorView];
     [view stopAnimating];
 }
 

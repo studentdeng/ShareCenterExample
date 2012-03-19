@@ -21,7 +21,7 @@
 		8748B748150F6E8000A2DE88 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8748B747150F6E8000A2DE88 /* CFNetwork.framework */; };
 		8748B74A150F6E8C00A2DE88 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8748B749150F6E8C00A2DE88 /* MobileCoreServices.framework */; };
 		874F6F761512F074003A6618 /* CUShareCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 874F6EB81512F074003A6618 /* CUShareCenter.m */; };
-		874F6F771512F074003A6618 /* CUShareClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 874F6EBA1512F074003A6618 /* CUShareClient.m */; };
+		874F6F771512F074003A6618 /* CUShareViewClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 874F6EBA1512F074003A6618 /* CUShareViewClient.m */; };
 		874F6F781512F074003A6618 /* CURenrenShareClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 874F6EBD1512F074003A6618 /* CURenrenShareClient.m */; };
 		874F6F791512F074003A6618 /* CUSinaShareClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 874F6EC01512F074003A6618 /* CUSinaShareClient.m */; };
 		874F6F7A1512F074003A6618 /* CUTencentShareClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 874F6EC31512F074003A6618 /* CUTencentShareClient.m */; };
@@ -103,6 +103,7 @@
 		874F6FD715130B66003A6618 /* QWeiboSyncApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 874F6FD615130B66003A6618 /* QWeiboSyncApi.m */; };
 		87869A70151080C40079D8FC /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87869A6F151080C40079D8FC /* test.jpg */; };
 		87896A6815118BC300D6189C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87896A6715118BC300D6189C /* Security.framework */; };
+		87E86C5515179109002D6CD0 /* CUShareClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 87E86C5415179109002D6CD0 /* CUShareClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -126,8 +127,8 @@
 		8748B749150F6E8C00A2DE88 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		874F6EB71512F074003A6618 /* CUShareCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUShareCenter.h; sourceTree = "<group>"; };
 		874F6EB81512F074003A6618 /* CUShareCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUShareCenter.m; sourceTree = "<group>"; };
-		874F6EB91512F074003A6618 /* CUShareClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUShareClient.h; sourceTree = "<group>"; };
-		874F6EBA1512F074003A6618 /* CUShareClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUShareClient.m; sourceTree = "<group>"; };
+		874F6EB91512F074003A6618 /* CUShareViewClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUShareViewClient.h; sourceTree = "<group>"; };
+		874F6EBA1512F074003A6618 /* CUShareViewClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUShareViewClient.m; sourceTree = "<group>"; };
 		874F6EBC1512F074003A6618 /* CURenrenShareClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CURenrenShareClient.h; sourceTree = "<group>"; };
 		874F6EBD1512F074003A6618 /* CURenrenShareClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CURenrenShareClient.m; sourceTree = "<group>"; };
 		874F6EBF1512F074003A6618 /* CUSinaShareClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUSinaShareClient.h; sourceTree = "<group>"; };
@@ -298,6 +299,8 @@
 		874F6FD615130B66003A6618 /* QWeiboSyncApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWeiboSyncApi.m; sourceTree = "<group>"; };
 		87869A6F151080C40079D8FC /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
 		87896A6715118BC300D6189C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		87E86C5315179109002D6CD0 /* CUShareClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUShareClient.h; sourceTree = "<group>"; };
+		87E86C5415179109002D6CD0 /* CUShareClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUShareClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -396,8 +399,10 @@
 			children = (
 				874F6EB71512F074003A6618 /* CUShareCenter.h */,
 				874F6EB81512F074003A6618 /* CUShareCenter.m */,
-				874F6EB91512F074003A6618 /* CUShareClient.h */,
-				874F6EBA1512F074003A6618 /* CUShareClient.m */,
+				874F6EB91512F074003A6618 /* CUShareViewClient.h */,
+				874F6EBA1512F074003A6618 /* CUShareViewClient.m */,
+				87E86C5315179109002D6CD0 /* CUShareClient.h */,
+				87E86C5415179109002D6CD0 /* CUShareClient.m */,
 			);
 			path = CUBase;
 			sourceTree = "<group>";
@@ -819,7 +824,7 @@
 				8748B730150F6E0D00A2DE88 /* CUAppDelegate.m in Sources */,
 				8748B733150F6E0D00A2DE88 /* CUViewController.m in Sources */,
 				874F6F761512F074003A6618 /* CUShareCenter.m in Sources */,
-				874F6F771512F074003A6618 /* CUShareClient.m in Sources */,
+				874F6F771512F074003A6618 /* CUShareViewClient.m in Sources */,
 				874F6F781512F074003A6618 /* CURenrenShareClient.m in Sources */,
 				874F6F791512F074003A6618 /* CUSinaShareClient.m in Sources */,
 				874F6F7A1512F074003A6618 /* CUTencentShareClient.m in Sources */,
@@ -899,6 +904,7 @@
 				874F6FC41512F075003A6618 /* QWeiboRequest.m in Sources */,
 				874F6FC71512F0DB003A6618 /* CUTencentEngine.m in Sources */,
 				874F6FD715130B66003A6618 /* QWeiboSyncApi.m in Sources */,
+				87E86C5515179109002D6CD0 /* CUShareClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

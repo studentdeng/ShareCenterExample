@@ -47,37 +47,11 @@
     [super dealloc];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
 #pragma mark CUShareClientData
 
 - (BOOL)isCUAuth
 {
     return [engine isLoggedIn] && ![engine isAuthorizeExpired];
-}
-
-- (void)CUOpenAuthViewInViewController:(UIViewController *)vc;
-{
-    UIViewController *controller = [self CUGetAuthViewController];
-    
-    [vc presentModalViewController:controller animated:YES];
-    
-    return;
 }
 
 - (void)CULogout
@@ -103,11 +77,6 @@
 - (void)CUShowWithText:(NSString *)text andImageURLString:(NSString *)imageURLString
 {
     return [self post:text andImageURLString:imageURLString];
-}
-
-- (UIViewController *)CUGetAuthViewController
-{
-    return self;
 }
 
 #pragma mark CUShareClient
@@ -168,19 +137,19 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)aWebView
 {
-    UIActivityIndicatorView *indicatorView = [self getActivityIndicatorView];
+    UIActivityIndicatorView *indicatorView = [self.viewClient getActivityIndicatorView];
 	[indicatorView startAnimating];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)aWebView
 {
-    UIActivityIndicatorView *indicatorView = [self getActivityIndicatorView];
+    UIActivityIndicatorView *indicatorView = [self.viewClient getActivityIndicatorView];
 	[indicatorView stopAnimating];
 }
 
 - (void)webView:(UIWebView *)aWebView didFailLoadWithError:(NSError *)error
 {
-    UIActivityIndicatorView *indicatorView = [self getActivityIndicatorView];
+    UIActivityIndicatorView *indicatorView = [self.viewClient getActivityIndicatorView];
     [indicatorView stopAnimating];
 }
 

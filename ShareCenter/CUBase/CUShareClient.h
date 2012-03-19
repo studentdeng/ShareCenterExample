@@ -8,6 +8,60 @@
 
 #import <Foundation/Foundation.h>
 
+#import "CUShareViewClient.h"
+
+typedef enum _CUShareClientType
+{
+    SINACLIENT = 0,
+    RENRENCLIENT = 1,
+    TTWEIBOCLIENT = 2
+}
+CUShareClientType;
+
+@protocol CUShareClientData <UIWebViewDelegate>
+
+- (id)initWithAppKey:(NSString *)theAppKey appSecret:(NSString *)theAppSecret;
+
+- (BOOL)isCUAuth;
+- (void)CUOpenAuthViewInViewController:(UIViewController *)vc;
+- (void)CULogout;
+
+- (void)CUShowWithText:(NSString *)text;
+- (void)CUShowWithText:(NSString *)text andImage:(UIImage *)image;
+- (void)CUShowWithText:(NSString *)text andImageURLString:(NSString *)imageURLString;
+
+@end
+
+@class CUShareClient;
+@protocol CUShareClientDelegate <NSObject>
+
+- (void)CUShareFailed:(CUShareClient *)client withError:(NSError *)error;
+- (void)CUShareSucceed:(CUShareClient *)client;
+- (void)CUSHareCancel:(CUShareClient *)client;
+
+- (void)CUAuthSucceed:(CUShareClient *)client;
+- (void)CUAuthFailed:(CUShareClient *)client withError:(NSError *)error;
+
+@end
+
+
 @interface CUShareClient : NSObject
+<UIWebViewDelegate>
+{
+    id<CUShareClientDelegate> delegate;
+    
+    CUShareViewClient *viewClient;
+}
+
+@property (nonatomic, assign) id<CUShareClientDelegate> delegate;
+@property (nonatomic, retain) CUShareViewClient *viewClient;
+
+- (void)CUOpenAuthViewInViewController:(UIViewController *)vc;
+
+- (void)CUNotifyShareFailed:(CUShareClient *)client withError:(NSError *)error;
+- (void)CUNotifyShareSucceed:(CUShareClient *)client;
+- (void)CUNotifyShareCancel:(CUShareClient *)client;
+- (void)CUNotifyAuthSucceed:(CUShareClient *)client;
+- (void)CUNotifyAuthFailed:(CUShareClient *)client withError:(NSError *)error;
 
 @end

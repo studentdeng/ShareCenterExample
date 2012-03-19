@@ -9,6 +9,8 @@
 #import "CUSinaShareClient.h"
 #import "ASIFormDataRequest.h"
 
+#import "CUShareViewClient.h"
+
 #import "WBAuthorize.h"
 #import "WBRequest.h"
 #import "WBSDKGlobal.h"
@@ -23,10 +25,8 @@
 
 //view
 
-@interface  CUShareClient()
+@interface  CUSinaShareClient()
 
-- (NSString *)locateAuthPinInWebView:(UIWebView *)webView;
-- (void)gotPin:(NSString *)pin;
 - (void)post:(NSString *)text andImage:(UIImage *)image;
 
 @end
@@ -40,14 +40,14 @@
     if (self = [super init]) {
         if (engine == nil){
             engine = [[WBEngine alloc] initWithAppKey:theAppKey appSecret:theAppSecret];
-            [engine setRootViewController:self];
+            [engine setRootViewController:nil];
             [engine setDelegate:self];
             [engine setRedirectURI:@"http://"];
             [engine setIsUserExclusive:NO];            
             
             WBAuthorize *auth = [[WBAuthorize alloc] initWithAppKey:theAppKey 
                                                           appSecret:theAppSecret];
-            [auth setRootViewController:self];
+            [auth setRootViewController:nil];
             [auth setDelegate:engine];
             [auth setRedirectURI:engine.redirectURI];
             
@@ -68,20 +68,6 @@
     [super dealloc];
 }
 
-#pragma mark viewController
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
-
-
 #pragma mark CUShareClientData
 
 - (BOOL)isCUAuth
@@ -89,17 +75,15 @@
     return [engine isLoggedIn] && ![engine isAuthorizeExpired];
 }
 
-- (void)CUOpenAuthViewInViewController:(UIViewController *)vc;
-{
-    UIViewController *controller = [self CUGetAuthViewController];
-    
-    [vc presentModalViewController:controller animated:YES];
-    
-    return;
-}
-
 - (void)CULogout
 {
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    
+    for (cookie in [storage cookies]) {
+        [storage deleteCookie:cookie];
+    }
+    
     [engine logOut];
     return;
 }
@@ -122,11 +106,6 @@
 - (void)CUShowWithText:(NSString *)text andImageURLString:(NSString *)imageURLString
 {
     return [self post:text andImageURLString:imageURLString];
-}
-
-- (UIViewController *)CUGetAuthViewController
-{
-    return self;
 }
 
 #pragma mark CUShareClient
@@ -190,19 +169,20 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)aWebView
 {
-    UIActivityIndicatorView *indicatorView = [self getActivityIndicatorView];
+    UIActivityIndicatorView *indicatorView = [self.viewClient getActivityIndicatorView];;
+    
 	[indicatorView startAnimating];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)aWebView
 {
-    UIActivityIndicatorView *indicatorView = [self getActivityIndicatorView];
+    UIActivityIndicatorView *indicatorView = [self.viewClient getActivityIndicatorView];
 	[indicatorView stopAnimating];
 }
 
 - (void)webView:(UIWebView *)aWebView didFailLoadWithError:(NSError *)error
 {
-    UIActivityIndicatorView *indicatorView = [self getActivityIndicatorView];
+    UIActivityIndicatorView *indicatorView = [self.viewClient getActivityIndicatorView];
     [indicatorView stopAnimating];
 }
 

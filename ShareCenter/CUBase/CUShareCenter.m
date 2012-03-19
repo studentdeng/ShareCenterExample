@@ -144,7 +144,8 @@ static CUShareCenter *s_instance3 = nil;
 
 - (void)Bind;
 {    
-    [clientContainerVC presentModalViewController:[shareClient CUGetAuthViewController] animated:YES];
+    [shareClient CUOpenAuthViewInViewController:clientContainerVC];
+   // [clientContainerVC presentModalViewController:[shareClient CUGetAuthViewController] animated:YES];
     
     return;
 }

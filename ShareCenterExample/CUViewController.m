@@ -27,6 +27,10 @@
 
 @implementation CUViewController
 
+@synthesize renrenBindLabel;
+@synthesize sinaBindLabel;
+@synthesize tencentBindLabel;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -54,6 +58,15 @@
     tencentClient.delegate = self;
     [CUShareCenter setupClient:tencentClient withType:TTWEIBOCLIENT];
     [CUShareCenter setupContainer:self withType:TTWEIBOCLIENT];
+    
+    BOOL bBind = [[CUShareCenter sharedInstanceWithType:SINACLIENT] isBind];
+    sinaBindLabel.text = bBind ? @"sina bind" : @"sina unbind";
+    
+    bBind = [[CUShareCenter sharedInstanceWithType:RENRENCLIENT] isBind];
+    renrenBindLabel.text = bBind ? @"renren bind" : @"renren unbind";
+    
+    bBind = [[CUShareCenter sharedInstanceWithType:TTWEIBOCLIENT] isBind];
+    tencentBindLabel.text = bBind ? @"tencent bind" : @"tencent unbind";
 }    
 
 - (void)viewDidUnload
@@ -70,15 +83,7 @@
 - (IBAction)share:(id)sender
 {
     UIButton *btn = sender;
-    /*
-    switch (btn.tag) {
-        case 0:
-            [self shareSina:sender];
-            break;
-            
-        default:
-            break;
-    }*/
+    
     [[CUShareCenter sharedInstanceWithType:btn.tag] showWithText:@"tencent的sdk还是挺给力的，尽管啥都没有，不过总比人人的好使"
                                                andImageURLString:TEST_IMAGEURL_NICE_GIRL];
 }
@@ -87,23 +92,6 @@
 {
     UIButton *btn = sender;
     [[CUShareCenter sharedInstanceWithType:btn.tag] unBind];
-}
-
-- (IBAction)shareSina:(id)sender
-{
-    UIImage *image = [UIImage imageNamed:@"test.jpg"];
-    [[CUShareCenter sharedInstanceWithType:SINACLIENT] showWithText:@"test" andImage:image];
-}
-
-- (IBAction)logoutSina:(id)sender
-{
-    [[CUShareCenter sharedInstanceWithType:SINACLIENT] unBind];
-}
-
-- (IBAction)shareRenren:(id)sender
-{
-    [[CUShareCenter sharedInstanceWithType:RENRENCLIENT] showWithText:@"123" 
-    andImageURLString:@"http://www.imiknow.com/iks/res/NDM4ODUwM2UxZTVjZmNiZjMyODllMTk2YTY2YzBjMDc/aW1hZ2UvanBlZw/a3410670-ede8-49ab-b5e6-6cbb3c8d3f77.jpeg"];
 }
 
 - (IBAction)logoutRenren:(id)sender

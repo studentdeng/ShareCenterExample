@@ -1,5 +1,5 @@
 //
-//  CUShareClient.m
+//  CUShareViewClient.m
 //  ShareCenterExample
 //
 //  Created by curer yg on 12-3-13.
@@ -7,7 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import "CUShareClient.h"
+#import "CUShareViewClient.h"
 
 int kActiveIndicatorTag = 10;
 
@@ -24,28 +24,30 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 	return bounds;
 }
 
-@interface  CUShareClient()
+@interface  CUShareViewClient()
 
-@property (nonatomic, readonly) UIToolbar *pinCopyPromptBar;
 @property (nonatomic, readwrite) UIInterfaceOrientation orientation;
 
 @end
 
-@implementation CUShareClient
+@implementation CUShareViewClient
 
 @synthesize webView;
-@synthesize delegate;
 @synthesize orientation;
-@synthesize appKey;
-@synthesize appKeySecret;
+@synthesize loginRequest;
 
 #pragma mark life
 
-- (id)initWithAppKey:(NSString *)theAppKey appSecret:(NSString *)theAppSecret
+- (id)init
 {
     if (self = [super init]) {
-        self.appKey = theAppKey;
-        self.appKeySecret = theAppSecret;
+        CGRect rc = ApplicationFrame(self.orientation);
+        rc.size.height -= 24;
+        rc.origin.y += 24;
+        
+        self.webView = [[[UIWebView alloc] initWithFrame:rc] autorelease];
+        
+        [self.view addSubview: self.webView];
     }
     
     return self;
@@ -54,8 +56,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 - (void)dealloc
 {
     self.webView = nil;
-    self.appKey = nil;
-    self.appKeySecret = nil;
+    self.loginRequest = nil;
     
     [super dealloc];
 }
@@ -78,14 +79,6 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 	frame.origin.y = 44;
 	frame.size.height -= 44;
     
-	self.webView = [[UIWebView alloc] initWithFrame:frame];
-	self.webView.delegate = self;
-	
-    NSURLRequest *request = [self CULoginURLRequest];
-    
-	[self.webView loadRequest:request];
-	
-	[self.view addSubview: self.webView];
 	[self.view addSubview: navBar];
     
     UIActivityIndicatorView *activeIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -111,18 +104,13 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 	[navBar pushNavigationItem: navItem animated: NO];
 }
 
-- (NSURLRequest *)CULoginURLRequest
-{
-    NSAssert(0,@"subclass implement");
-    return nil;
-}
-
 #pragma mark common method
 
 - (void)cancel:(id)sender {
     [self performSelector:@selector(close:) withObject:nil afterDelay:.2f];
 }
 
+/*
 - (UIToolbar *) pinCopyPromptBar {
 	if (pinCopyPromptBar == nil){
 		CGRect					bounds = self.view.bounds;
@@ -139,7 +127,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 	}
 	
 	return pinCopyPromptBar;
-}
+}*/
 
 - (UIActivityIndicatorView *)getActivityIndicatorView
 {
@@ -148,53 +136,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 
 - (void)close:(id)sender
 {
-    self.webView.delegate = nil;
     [self dismissModalViewControllerAnimated:YES];
-}
-
-- (void)CUNotifyShareFailed:(CUShareClient *)client withError:(NSError *)error
-{
-    if ([delegate respondsToSelector:@selector(CUShareFailed:withError:)]) {
-        [delegate CUShareFailed:client withError:error];
-    }
-    
-    [self performSelector:@selector(close:) withObject:nil afterDelay:.2f];
-}
-
-- (void)CUNotifyShareSucceed:(CUShareClient *)client
-{
-    if ([delegate respondsToSelector:@selector(CUShareSucceed:)]) {
-        [delegate CUShareSucceed:client];
-    }
-    
-    [self performSelector:@selector(close:) withObject:nil afterDelay:.2f];
-}
-
-- (void)CUNotifyShareCancel:(CUShareClient *)client
-{
-    if ([delegate respondsToSelector:@selector(CUSHareCancel:)]) {
-        [delegate CUSHareCancel:client];
-    }
-    
-    [self performSelector:@selector(close:) withObject:nil afterDelay:.20f];
-}
-
-- (void)CUNotifyAuthSucceed:(CUShareClient *)client
-{
-    if ([delegate respondsToSelector:@selector(CUAuthSucceed:)]) {
-        [delegate CUAuthSucceed:client];
-    }
-    
-    [self performSelector:@selector(close:) withObject:nil afterDelay:.2f];
-}
-
-- (void)CUNotifyAuthFailed:(CUShareClient *)client withError:(NSError *)error
-{
-    if ([delegate respondsToSelector:@selector(CUShareFailed:withError:)]) {
-        [delegate CUShareFailed:client withError:error];
-    }
-    
-    [self performSelector:@selector(close:) withObject:nil afterDelay:.2f];
 }
 
 @end
