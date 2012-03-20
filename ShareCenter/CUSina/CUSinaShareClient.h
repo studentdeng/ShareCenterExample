@@ -10,7 +10,7 @@
 #import "CUShareClient.h"
 #import "WBEngine.h"
 
-#import "CUShareViewClient.h"
+#import "CUShareOAuthView.h"
 
 @interface CUSinaShareClient : CUShareClient
 <CUShareClientData, WBEngineDelegate>

@@ -9,7 +9,7 @@
 #import "CUSinaShareClient.h"
 #import "ASIFormDataRequest.h"
 
-#import "CUShareViewClient.h"
+#import "CUShareOAuthView.h"
 
 #import "WBAuthorize.h"
 #import "WBRequest.h"
@@ -170,7 +170,7 @@
 - (void)webViewDidStartLoad:(UIWebView *)aWebView
 {
     UIActivityIndicatorView *indicatorView = [self.viewClient getActivityIndicatorView];;
-    
+    [indicatorView sizeToFit];
 	[indicatorView startAnimating];
 }
 

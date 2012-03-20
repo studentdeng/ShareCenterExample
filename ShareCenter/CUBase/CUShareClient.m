@@ -7,7 +7,7 @@
 //
 
 #import "CUShareClient.h"
-#import "CUShareViewClient.h"
+#import "CUShareOAuthView.h"
 
 @implementation CUShareClient
 
@@ -16,14 +16,14 @@
 
 - (void)dealloc
 {
-    [viewClient release];
+    self.viewClient = nil;
     
     [super dealloc];
 }
 
 - (void)CUOpenAuthViewInViewController:(UIViewController *)vc;
 {
-    self.viewClient = [[[CUShareViewClient alloc] init] autorelease];
+    self.viewClient = [[[CUShareOAuthView alloc] init] autorelease];
     self.viewClient.loginRequest = [self CULoginURLRequest];
     self.viewClient.webView.delegate = self;
     [self.viewClient.webView loadRequest:[self CULoginURLRequest]];

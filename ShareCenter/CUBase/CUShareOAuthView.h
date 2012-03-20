@@ -1,5 +1,5 @@
 //
-//  CUShareViewClient.h
+//  CUShareOAuthView.h
 //  ShareCenterExample
 //
 //  Created by curer yg on 12-3-13.
@@ -10,7 +10,7 @@
 
 extern int kActiveIndicatorTag;
 
-@interface CUShareViewClient : UIViewController <UIWebViewDelegate>
+@interface CUShareOAuthView : UIViewController <UIWebViewDelegate>
 {
     UIWebView *webView;
 	UINavigationBar *navBar;

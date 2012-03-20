@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "CUShareViewClient.h"
+#import "CUShareOAuthView.h"
 
 typedef enum _CUShareClientType
 {
@@ -50,11 +50,11 @@ CUShareClientType;
 {
     id<CUShareClientDelegate> delegate;
     
-    CUShareViewClient *viewClient;
+    CUShareOAuthView *viewClient;
 }
 
 @property (nonatomic, assign) id<CUShareClientDelegate> delegate;
-@property (nonatomic, retain) CUShareViewClient *viewClient;
+@property (nonatomic, retain) CUShareOAuthView *viewClient;
 
 - (void)CUOpenAuthViewInViewController:(UIViewController *)vc;
 

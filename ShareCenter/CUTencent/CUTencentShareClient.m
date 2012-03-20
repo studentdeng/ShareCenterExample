@@ -138,6 +138,7 @@
 - (void)webViewDidStartLoad:(UIWebView *)aWebView
 {
     UIActivityIndicatorView *indicatorView = [self.viewClient getActivityIndicatorView];
+    [indicatorView sizeToFit];
 	[indicatorView startAnimating];
 }
 

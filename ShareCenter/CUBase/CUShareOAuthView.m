@@ -1,5 +1,5 @@
 //
-//  CUShareViewClient.m
+//  CUShareOAuthView.m
 //  ShareCenterExample
 //
 //  Created by curer yg on 12-3-13.
@@ -7,7 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import "CUShareViewClient.h"
+#import "CUShareOAuthView.h"
 
 int kActiveIndicatorTag = 10;
 
@@ -24,17 +24,18 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 	return bounds;
 }
 
-@interface  CUShareViewClient()
+@interface  CUShareOAuthView()
 
 @property (nonatomic, readwrite) UIInterfaceOrientation orientation;
-
+@property (nonatomic, retain) UINavigationBar *navBar;
 @end
 
-@implementation CUShareViewClient
+@implementation CUShareOAuthView
 
 @synthesize webView;
 @synthesize orientation;
 @synthesize loginRequest;
+@synthesize navBar;
 
 #pragma mark life
 
@@ -57,6 +58,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 {
     self.webView = nil;
     self.loginRequest = nil;
+    self.navBar = nil;
     
     [super dealloc];
 }
@@ -70,9 +72,9 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
     CGRect rc = ApplicationFrame(self.orientation);
     
     self.view = [[[UIView alloc] initWithFrame: rc] autorelease];
-	navBar = [[[UINavigationBar alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 44)] autorelease];
+	self.navBar = [[[UINavigationBar alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 44)] autorelease];
 	
-	navBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+	self.navBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	
 	CGRect frame = ApplicationFrame(self.orientation);
@@ -94,7 +96,6 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
     [self.webView addSubview:activeIndicator];
     [activeIndicator release];
 	
-	//UINavigationItem *navItem = [[[UINavigationItem alloc] initWithTitle: NSLocalizedString(@"Sina Weibo Info", nil)] autorelease];
     UINavigationItem *navItem = [[[UINavigationItem alloc] initWithTitle:@"登陆"] autorelease];
 	navItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
                                                                                target:self 
@@ -110,25 +111,6 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
     [self performSelector:@selector(close:) withObject:nil afterDelay:.2f];
 }
 
-/*
-- (UIToolbar *) pinCopyPromptBar {
-	if (pinCopyPromptBar == nil){
-		CGRect					bounds = self.view.bounds;
-		
-		pinCopyPromptBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 44, bounds.size.width, 44)] autorelease];
-		pinCopyPromptBar.barStyle = UIBarStyleBlackTranslucent;
-		pinCopyPromptBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
-		
-		pinCopyPromptBar.items = [NSArray arrayWithObjects: 
-								   [[[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target: nil action: nil] autorelease],
-								   [[[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Select and Copy the PIN", @"Select and Copy the PIN") style: UIBarButtonItemStylePlain target: nil action: nil] autorelease], 
-								   [[[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target: nil action: nil] autorelease], 
-								   nil];
-	}
-	
-	return pinCopyPromptBar;
-}*/
-
 - (UIActivityIndicatorView *)getActivityIndicatorView
 {
     return (UIActivityIndicatorView *)[self.webView viewWithTag:kActiveIndicatorTag];
@@ -136,6 +118,10 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 
 - (void)close:(id)sender
 {
+    [[self getActivityIndicatorView] stopAnimating];
+    
+    self.webView.delegate = nil;
+    
     [self dismissModalViewControllerAnimated:YES];
 }
 
