@@ -34,6 +34,8 @@
     if (self) {
         // Custom initialization
         renren = [[Renren sharedRenren] retain];
+        renren.appId = theAppKey;
+        renren.appKey = theAppSecret;
     }
     
     return self;

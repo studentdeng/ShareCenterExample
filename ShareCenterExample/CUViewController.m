@@ -21,6 +21,9 @@
 #define kOAuthConsumerKey_tencent			@"801111961"
 #define kOAuthConsumerSecret_tencent		@"782bbf09d7b33223cf60b83bcdfb728f"
 
+#define kAPP_ID_renren                      @"173991"
+#define kAPI_Key_renren                     @"9799b61fc602443690c5fad39e34bf9a"
+
 @interface CUViewController ()
 
 @end
@@ -47,8 +50,8 @@
     [CUShareCenter setupClient:sinaClient withType:SINACLIENT];
     [CUShareCenter setupContainer:self withType:SINACLIENT];
     
-    CURenrenShareClient *renrenClient = [[[CURenrenShareClient alloc] initWithAppKey:nil
-                                                                           appSecret:nil] autorelease];
+    CURenrenShareClient *renrenClient = [[[CURenrenShareClient alloc] initWithAppKey:kAPP_ID_renren
+                                                                           appSecret:kAPI_Key_renren] autorelease];
     renrenClient.delegate = self;
     [CUShareCenter setupClient:renrenClient withType:RENRENCLIENT];
     [CUShareCenter setupContainer:self withType:RENRENCLIENT];

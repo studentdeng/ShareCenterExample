@@ -68,8 +68,8 @@ static Renren *sharedRenren = nil;
 + (Renren *)newRenRen{
     Renren *newRenrenObject = [[Renren alloc] init];
     [newRenrenObject isSessionValid];
-    newRenrenObject.appKey = kAPI_Key;
-    newRenrenObject.appId = kAPP_ID;
+    //newRenrenObject.appKey = kAPI_Key;
+    //newRenrenObject.appId = kAPP_ID;
     return [newRenrenObject autorelease];
 }
 
@@ -77,8 +77,8 @@ static Renren *sharedRenren = nil;
     if (!sharedRenren) {
         sharedRenren = [[Renren alloc] init];
         [sharedRenren isSessionValid];
-        sharedRenren.appKey = kAPI_Key;
-        sharedRenren.appId = kAPP_ID;
+        //sharedRenren.appKey = kAPI_Key;
+        //sharedRenren.appId = kAPP_ID;
     }
     return sharedRenren;
 }
