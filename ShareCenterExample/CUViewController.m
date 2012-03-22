@@ -87,6 +87,14 @@
 {
     UIButton *btn = sender;
     
+    if (btn.tag == SINACLIENT) {
+    
+        [[CUShareCenter sharedInstanceWithType:SINACLIENT] showWithText:@"hi" 
+                                                               andImage:[UIImage imageNamed:@"test.jpg"]];
+        return;
+    }
+    
+    
     [[CUShareCenter sharedInstanceWithType:btn.tag] showWithText:@"tencent的sdk还是挺给力的，尽管啥都没有，不过总比人人的好使"
                                                andImageURLString:TEST_IMAGEURL_NICE_GIRL];
 }
