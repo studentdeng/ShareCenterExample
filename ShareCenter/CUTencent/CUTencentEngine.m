@@ -147,7 +147,10 @@
     id jsonObject = [resString JSONValue];
     
     if ([jsonObject isKindOfClass:[NSDictionary class]]) {
-        if ([[jsonObject objectForKey:@"msg"] isEqualToString:@"ok"]) {
+        
+        int ret = [[jsonObject objectForKey:@"ret"] intValue];
+        
+        if (ret == 0) {
             if ([delegate respondsToSelector:@selector(engine:requestDidSucceedWithResult:)])
             {
                 [delegate engine:self requestDidSucceedWithResult:jsonObject];

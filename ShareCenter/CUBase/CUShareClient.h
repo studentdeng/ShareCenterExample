@@ -35,6 +35,7 @@ CUShareClientType;
 @class CUShareClient;
 @protocol CUShareClientDelegate <NSObject>
 
+@optional
 - (void)CUShareFailed:(CUShareClient *)client withError:(NSError *)error;
 - (void)CUShareSucceed:(CUShareClient *)client;
 - (void)CUSHareCancel:(CUShareClient *)client;
