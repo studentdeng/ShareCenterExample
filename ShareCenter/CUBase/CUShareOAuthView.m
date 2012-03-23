@@ -105,6 +105,12 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 	[navBar pushNavigationItem: navItem animated: NO];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return toInterfaceOrientation == UIDeviceOrientationPortraitUpsideDown 
+    || toInterfaceOrientation == UIInterfaceOrientationPortrait;
+}
+
 #pragma mark common method
 
 - (void)cancel:(id)sender {
