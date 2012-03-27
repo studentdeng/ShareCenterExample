@@ -36,6 +36,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 @synthesize orientation;
 @synthesize loginRequest;
 @synthesize navBar;
+@synthesize tintColor;
 
 #pragma mark life
 
@@ -43,11 +44,12 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 {
     if (self = [super init]) {
         CGRect rc = ApplicationFrame(self.orientation);
-        rc.size.height -= 24;
-        rc.origin.y += 24;
+
+        rc.size.height -= 44;
+        rc.origin.y = 44;
         
         self.webView = [[[UIWebView alloc] initWithFrame:rc] autorelease];
-        
+	        
         [self.view addSubview: self.webView];
     }
     
@@ -59,6 +61,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
     self.webView = nil;
     self.loginRequest = nil;
     self.navBar = nil;
+    self.tintColor = nil;
     
     [super dealloc];
 }
@@ -97,12 +100,16 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
     [activeIndicator release];
 	
     UINavigationItem *navItem = [[[UINavigationItem alloc] initWithTitle:@"登陆"] autorelease];
-	navItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
-                                                                               target:self 
-                                                                               action:@selector(cancel:)] 
-                                 autorelease];
-	
-	[navBar pushNavigationItem: navItem animated: NO];
+    
+    if (tintColor) {
+        self.navBar.tintColor = tintColor;
+    }
+    
+    navItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"返回" 
+                                                                  style:UIBarButtonItemStylePlain target:self 
+                                                                 action:@selector(cancel:)] autorelease];
+    
+    [navBar pushNavigationItem: navItem animated: NO];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation

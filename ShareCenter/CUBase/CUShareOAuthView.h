@@ -15,12 +15,15 @@ extern int kActiveIndicatorTag;
     UIWebView *webView;
 	UINavigationBar *navBar;
 	
-	UIInterfaceOrientation                      orientation;
-	UIToolbar									*pinCopyPromptBar;    
+	UIInterfaceOrientation orientation;
+	UIToolbar *pinCopyPromptBar;    
+    UIColor *tintColor;
 }
 
 @property (nonatomic, retain) UIWebView *webView;
 @property (nonatomic, retain) NSURLRequest *loginRequest;
+
+@property (nonatomic, retain) UIColor *tintColor;
 
 - (UIActivityIndicatorView *)getActivityIndicatorView;
 

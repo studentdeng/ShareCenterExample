@@ -10,7 +10,7 @@
 #import "QOauthKey.h"
 #import "QWeiboRequest.h"
 
-#define TEST_IP     @"127.0.0.1"
+#define TEST_IP     @"202.10.10.21"
 
 @implementation QWeiboSyncApi
 
