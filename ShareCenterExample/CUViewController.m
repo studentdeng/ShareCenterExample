@@ -11,6 +11,7 @@
 #import "CUSinaShareClient.h"
 #import "CURenrenShareClient.h"
 #import "CUTencentShareClient.h"
+#import "CUTimelineViewController.h"
 
 #define TEST_IMAGEURL_NICE_GIRL     @"http://www.imiknow.com/iks/res/MGMxMDA5NzUyNTQ4ZWU4ZmUyMWZiNGRlM2Y1NDM1ZGE/YXBwbGljYXRpb24vb2N0ZXQtc3RyZWFt/bf980271-5f1e-458c-a513-4a49457e0268.jpg"
 
@@ -109,6 +110,22 @@
 {
     [[CUShareCenter sharedInstanceWithType:RENRENCLIENT] unBind];
 }
+
+- (IBAction)showTimeline:(id)sender
+{
+    NSString *token = [[[CUShareCenter sharedInstanceWithType:SINACLIENT] shareClient] requestToken];
+    if ([token length] == 0) {
+        return;
+    }
+    
+    CUTimelineViewController *vc = [[CUTimelineViewController alloc] initWithToken:token];
+    
+    [self presentModalViewController:vc animated:YES];
+    
+    [vc release];
+}
+
+#pragma mark CUShareClientDelegate
 
 - (void)CUShareFailed:(CUShareClient *)client withError:(NSError *)error
 {

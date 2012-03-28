@@ -75,6 +75,15 @@
     return [engine isLoggedIn] && ![engine isAuthorizeExpired];
 }
 
+- (NSString *)requestToken
+{
+    if (![self isCUAuth]) {
+        return nil;
+    }
+    
+    return engine.accessToken;
+}
+
 - (void)CULogout
 {
     NSHTTPCookie *cookie;

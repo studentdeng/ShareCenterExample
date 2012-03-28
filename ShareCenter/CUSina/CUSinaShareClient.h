@@ -36,6 +36,8 @@
 - (void)CUShowWithText:(NSString *)text andImage:(UIImage *)image;
 - (void)CUShowWithText:(NSString *)text andImageURLString:(NSString *)imageURLString;
 
+- (NSString *)requestToken;
+
 - (NSURLRequest *)CULoginURLRequest;
 
 @end

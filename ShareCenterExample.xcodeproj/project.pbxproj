@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8727F3981521AAF5006A0EE8 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 8727F3951521AAF5006A0EE8 /* Status.m */; };
+		8727F3991521AAF5006A0EE8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8727F3971521AAF5006A0EE8 /* User.m */; };
+		8727F39E1521AB8C006A0EE8 /* CUTimelineDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8727F39D1521AB8C006A0EE8 /* CUTimelineDataSource.m */; };
+		8727F3A11521B51B006A0EE8 /* NSDictionaryAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8727F3A01521B51B006A0EE8 /* NSDictionaryAdditions.m */; };
 		8748B720150F6E0C00A2DE88 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8748B71F150F6E0C00A2DE88 /* UIKit.framework */; };
 		8748B722150F6E0C00A2DE88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8748B721150F6E0C00A2DE88 /* Foundation.framework */; };
 		8748B724150F6E0C00A2DE88 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8748B723150F6E0C00A2DE88 /* CoreGraphics.framework */; };
@@ -103,10 +107,22 @@
 		874F6FD715130B66003A6618 /* QWeiboSyncApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 874F6FD615130B66003A6618 /* QWeiboSyncApi.m */; };
 		87869A70151080C40079D8FC /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87869A6F151080C40079D8FC /* test.jpg */; };
 		87896A6815118BC300D6189C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87896A6715118BC300D6189C /* Security.framework */; };
+		87D880721522B63800CFC90D /* CUTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D880711522B63800CFC90D /* CUTimelineViewController.m */; };
+		87D8807A1522BCDF00CFC90D /* ABTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D880791522BCDF00CFC90D /* ABTableViewCell.m */; };
+		87D8807D1522BD9200CFC90D /* LoadMoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D8807C1522BD9200CFC90D /* LoadMoreCell.m */; };
+		87D880831522C04A00CFC90D /* CUTimelineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87D880821522C04A00CFC90D /* CUTimelineView.xib */; };
 		87E86C5515179109002D6CD0 /* CUShareClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 87E86C5415179109002D6CD0 /* CUShareClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8727F3941521AAF5006A0EE8 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
+		8727F3951521AAF5006A0EE8 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
+		8727F3961521AAF5006A0EE8 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		8727F3971521AAF5006A0EE8 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		8727F39C1521AB8C006A0EE8 /* CUTimelineDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUTimelineDataSource.h; sourceTree = "<group>"; };
+		8727F39D1521AB8C006A0EE8 /* CUTimelineDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUTimelineDataSource.m; sourceTree = "<group>"; };
+		8727F39F1521B51B006A0EE8 /* NSDictionaryAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionaryAdditions.h; sourceTree = "<group>"; };
+		8727F3A01521B51B006A0EE8 /* NSDictionaryAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionaryAdditions.m; sourceTree = "<group>"; };
 		8748B71B150F6E0C00A2DE88 /* ShareCenterExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareCenterExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8748B71F150F6E0C00A2DE88 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8748B721150F6E0C00A2DE88 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -127,7 +143,7 @@
 		8748B749150F6E8C00A2DE88 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		874F6EB71512F074003A6618 /* CUShareCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUShareCenter.h; sourceTree = "<group>"; };
 		874F6EB81512F074003A6618 /* CUShareCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUShareCenter.m; sourceTree = "<group>"; };
-		874F6EB91512F074003A6618 /* CUShareOAuthView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = CUShareOAuthView.h; sourceTree = "<group>"; };
+		874F6EB91512F074003A6618 /* CUShareOAuthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUShareOAuthView.h; sourceTree = "<group>"; };
 		874F6EBA1512F074003A6618 /* CUShareOAuthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUShareOAuthView.m; sourceTree = "<group>"; };
 		874F6EBC1512F074003A6618 /* CURenrenShareClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CURenrenShareClient.h; sourceTree = "<group>"; };
 		874F6EBD1512F074003A6618 /* CURenrenShareClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CURenrenShareClient.m; sourceTree = "<group>"; };
@@ -299,6 +315,13 @@
 		874F6FD615130B66003A6618 /* QWeiboSyncApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWeiboSyncApi.m; sourceTree = "<group>"; };
 		87869A6F151080C40079D8FC /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
 		87896A6715118BC300D6189C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		87D880701522B63800CFC90D /* CUTimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUTimelineViewController.h; sourceTree = "<group>"; };
+		87D880711522B63800CFC90D /* CUTimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUTimelineViewController.m; sourceTree = "<group>"; };
+		87D880781522BCDF00CFC90D /* ABTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABTableViewCell.h; sourceTree = "<group>"; };
+		87D880791522BCDF00CFC90D /* ABTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABTableViewCell.m; sourceTree = "<group>"; };
+		87D8807B1522BD9200CFC90D /* LoadMoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMoreCell.h; sourceTree = "<group>"; };
+		87D8807C1522BD9200CFC90D /* LoadMoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadMoreCell.m; sourceTree = "<group>"; };
+		87D880821522C04A00CFC90D /* CUTimelineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CUTimelineView.xib; sourceTree = "<group>"; };
 		87E86C5315179109002D6CD0 /* CUShareClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUShareClient.h; sourceTree = "<group>"; };
 		87E86C5415179109002D6CD0 /* CUShareClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUShareClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -323,6 +346,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8727F3931521AAF5006A0EE8 /* ZhiWeibo */ = {
+			isa = PBXGroup;
+			children = (
+				87D8807B1522BD9200CFC90D /* LoadMoreCell.h */,
+				87D8807C1522BD9200CFC90D /* LoadMoreCell.m */,
+				87D880781522BCDF00CFC90D /* ABTableViewCell.h */,
+				87D880791522BCDF00CFC90D /* ABTableViewCell.m */,
+				8727F39F1521B51B006A0EE8 /* NSDictionaryAdditions.h */,
+				8727F3A01521B51B006A0EE8 /* NSDictionaryAdditions.m */,
+				8727F3941521AAF5006A0EE8 /* Status.h */,
+				8727F3951521AAF5006A0EE8 /* Status.m */,
+				8727F3961521AAF5006A0EE8 /* User.h */,
+				8727F3971521AAF5006A0EE8 /* User.m */,
+			);
+			path = ZhiWeibo;
+			sourceTree = "<group>";
+		};
+		8727F39B1521AB78006A0EE8 /* CUTimeline */ = {
+			isa = PBXGroup;
+			children = (
+				8727F39C1521AB8C006A0EE8 /* CUTimelineDataSource.h */,
+				8727F39D1521AB8C006A0EE8 /* CUTimelineDataSource.m */,
+				87D880701522B63800CFC90D /* CUTimelineViewController.h */,
+				87D880711522B63800CFC90D /* CUTimelineViewController.m */,
+				87D880821522C04A00CFC90D /* CUTimelineView.xib */,
+			);
+			path = CUTimeline;
+			sourceTree = "<group>";
+		};
 		8748B710150F6E0C00A2DE88 = {
 			isa = PBXGroup;
 			children = (
@@ -385,6 +437,7 @@
 		8748B801150F6EE500A2DE88 /* ShareCenter */ = {
 			isa = PBXGroup;
 			children = (
+				8727F39B1521AB78006A0EE8 /* CUTimeline */,
 				874F6EB61512F074003A6618 /* CUBase */,
 				874F6EBB1512F074003A6618 /* CURenren */,
 				874F6EBE1512F074003A6618 /* CUSina */,
@@ -439,6 +492,7 @@
 		874F6EC41512F074003A6618 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				8727F3931521AAF5006A0EE8 /* ZhiWeibo */,
 				874F6EC51512F074003A6618 /* ASIHTTPRequest */,
 				874F6EFE1512F074003A6618 /* CTMBase64 */,
 				874F6F021512F074003A6618 /* JSON */,
@@ -810,6 +864,7 @@
 				8748B72A150F6E0C00A2DE88 /* InfoPlist.strings in Resources */,
 				8748B736150F6E0D00A2DE88 /* CUViewController.xib in Resources */,
 				87869A70151080C40079D8FC /* test.jpg in Resources */,
+				87D880831522C04A00CFC90D /* CUTimelineView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -905,6 +960,13 @@
 				874F6FC71512F0DB003A6618 /* CUTencentEngine.m in Sources */,
 				874F6FD715130B66003A6618 /* QWeiboSyncApi.m in Sources */,
 				87E86C5515179109002D6CD0 /* CUShareClient.m in Sources */,
+				8727F3981521AAF5006A0EE8 /* Status.m in Sources */,
+				8727F3991521AAF5006A0EE8 /* User.m in Sources */,
+				8727F39E1521AB8C006A0EE8 /* CUTimelineDataSource.m in Sources */,
+				8727F3A11521B51B006A0EE8 /* NSDictionaryAdditions.m in Sources */,
+				87D880721522B63800CFC90D /* CUTimelineViewController.m in Sources */,
+				87D8807A1522BCDF00CFC90D /* ABTableViewCell.m in Sources */,
+				87D8807D1522BD9200CFC90D /* LoadMoreCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

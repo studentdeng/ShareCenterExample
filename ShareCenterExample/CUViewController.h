@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "CUSinaShareClient.h"
 
+@class CUTimelineDataSource;
+
 @interface CUViewController : UIViewController <CUShareClientDelegate>
 {
     IBOutlet UILabel *sinaBindLabel;
@@ -22,5 +24,6 @@
 
 - (IBAction)share:(id)sender;
 - (IBAction)logout:(id)sender;
+- (IBAction)showTimeline:(id)sender;
 
 @end
