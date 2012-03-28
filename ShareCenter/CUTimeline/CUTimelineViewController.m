@@ -39,8 +39,10 @@
 
 - (void)dealloc
 {
+    self.timelineDataSource.delegate = nil;
     self.timelineDataSource = nil;
     self.tableView = nil;
+    [loadMoreCell release];
     
     [super dealloc];
 }

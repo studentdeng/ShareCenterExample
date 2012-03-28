@@ -11,9 +11,9 @@
 
 @class Status;
 
-@interface Status : NSObject {
+@interface Status : NSObject <NSCoding>{
     long long		_statusId; //微博ID
-    NSNumber		*statusKey;
+    NSNumber		*_statusKey;
     time_t          _createdAt;
 	NSString*       _text; //微博信息内容
 	NSString*       _source; //微博来源

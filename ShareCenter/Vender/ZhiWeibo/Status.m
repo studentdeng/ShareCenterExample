@@ -11,7 +11,7 @@
 
 @implementation Status
 @synthesize statusId = _statusId;
-@synthesize statusKey;
+@synthesize statusKey = _statusKey;
 @synthesize createdAt = _createdAt;
 @synthesize text = _text;
 @synthesize thumbnailPic = _thumbnailPic;
@@ -36,6 +36,40 @@ int				_commentsCount; // 评论数
 int				_retweetsCount; // 转发数
 Status*			_retweetedStatus; //转发的博文，内容为status，如果不是转发，则没有此字段
 
+- (id)initWithCoder:(NSCoder *)decoder {
+	if (self = [super init]) {
+		_statusId = [decoder decodeInt64ForKey:@"statusId"];
+		_statusKey = [[NSNumber alloc]initWithLongLong:_statusId];
+		_createdAt = [decoder decodeIntForKey:@"createdAt"];
+		_text = [[decoder decodeObjectForKey:@"text"] retain];
+		_source = [[decoder decodeObjectForKey:@"source"] retain];
+		_sourceUrl = [[decoder decodeObjectForKey:@"sourceUrl"] retain];
+		_thumbnailPic = [[decoder decodeObjectForKey:@"thumbnailPic"] retain];
+		_bmiddlePic = [[decoder decodeObjectForKey:@"bmiddlePic"] retain];
+		_originalPic = [[decoder decodeObjectForKey:@"originalPic"] retain];
+		_user = [[decoder decodeObjectForKey:@"user"] retain];
+		_retweetedStatus = [[decoder decodeObjectForKey:@"retweetedStatus"]retain];
+		_commentsCount = [decoder decodeIntForKey:@"commentsCount"];
+		_retweetsCount = [decoder decodeIntForKey:@"retweetsCount"];
+	}
+	return self;
+}
+
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+ 	[encoder encodeInt64:_statusId forKey:@"statusId"];
+	[encoder encodeInt:_createdAt forKey:@"createdAt"];
+	[encoder encodeObject:_text forKey:@"text"];
+	[encoder encodeObject:_source forKey:@"source"];
+	[encoder encodeObject:_sourceUrl forKey:@"sourceUrl"];
+	[encoder encodeObject:_thumbnailPic forKey:@"thumbnailPic"];
+	[encoder encodeObject:_bmiddlePic forKey:@"bmiddlePic"];
+	[encoder encodeObject:_originalPic forKey:@"originalPic"];
+	[encoder encodeObject:_user forKey:@"user"];
+	[encoder encodeObject:_retweetedStatus forKey:@"retweetedStatus"];
+	[encoder encodeInt:_commentsCount forKey:@"commentsCount"];
+	[encoder encodeInt:_retweetsCount forKey:@"retweetsCount"];
+}
 
 - (time_t)getTimeValueFromString:(NSString *)stringTime {
     if ((id)stringTime == [NSNull null]) {
@@ -58,7 +92,7 @@ Status*			_retweetedStatus; //转发的博文，内容为status，如果不是�
     self = [super init];
     if (self) {
         _statusId = [[dic objectForKey:@"id"] longLongValue];
-        statusKey = [[NSNumber alloc] initWithLongLong:_statusId];
+        _statusKey = [[NSNumber alloc] initWithLongLong:_statusId];
         _createdAt = [self getTimeValueFromString:[dic objectForKey:@"created_at"]];
         _text = [[dic objectForKey:@"text"] retain];
         _thumbnailPic = [[dic objectForKey:@"thumbnail_pic"] retain];
@@ -134,7 +168,7 @@ Status*			_retweetedStatus; //转发的博文，内容为status，如果不是�
     [_source release];
     [_sourceUrl release];
     [_timeString release];
-    [statusKey release];
+    [_statusKey release];
     
     [super dealloc];
 }

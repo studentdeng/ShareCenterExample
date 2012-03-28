@@ -36,6 +36,9 @@
 - (void)loadTimelineBySinceId:(long long)sinceId;
 - (void)loadTimelineByMaxId:(long long)maxId;
 
+- (NSMutableArray *)loadTimelineFromLocal;
+- (void)saveTimelineToLocal;
+
 - (NSDictionary *)timelineData;
 - (NSArray *)timelineDataKey;
 

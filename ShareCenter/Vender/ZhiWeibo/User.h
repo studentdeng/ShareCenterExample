@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface User : NSObject {
+@interface User : NSObject<NSCoding> {
  	long long   _userId; //用户UID
 	NSString*   _screenName; //微博昵称
 	NSString*   _profileImageUrl; //自定义图像   

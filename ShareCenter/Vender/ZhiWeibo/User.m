@@ -14,6 +14,22 @@
 @synthesize screenName = _screenName;
 @synthesize profileImageUrl = _profileImageUrl;
 
+- (id)initWithCoder:(NSCoder *)decoder {
+    self = [super init];
+    if (self != nil) {
+        _userId = [decoder decodeInt64ForKey:@"userId"];
+        _profileImageUrl = [[decoder decodeObjectForKey:@"profileImageUrl"]retain];
+        _screenName = [[decoder decodeObjectForKey:@"screenName"] retain];
+    }
+    return self;
+}     
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeInt64:_userId forKey:@"userId"];
+    [encoder encodeObject:_screenName forKey:@"screenName"];
+    [encoder encodeObject:_profileImageUrl forKey:@"profileImageUrl"];
+}
+
 - (id)initWithJsonDictionary:(NSDictionary*)dic {
     self = [super init];
     if (self) {
