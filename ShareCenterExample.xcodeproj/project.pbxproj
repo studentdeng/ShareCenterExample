@@ -110,7 +110,15 @@
 		87D880721522B63800CFC90D /* CUTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D880711522B63800CFC90D /* CUTimelineViewController.m */; };
 		87D8807A1522BCDF00CFC90D /* ABTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D880791522BCDF00CFC90D /* ABTableViewCell.m */; };
 		87D8807D1522BD9200CFC90D /* LoadMoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D8807C1522BD9200CFC90D /* LoadMoreCell.m */; };
-		87D880831522C04A00CFC90D /* CUTimelineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87D880821522C04A00CFC90D /* CUTimelineView.xib */; };
+		87D9B7E415232BCF00D780E8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87D9B7E315232BCF00D780E8 /* QuartzCore.framework */; };
+		87D9B7F115232E0600D780E8 /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 87D9B7ED15232E0600D780E8 /* blackArrow.png */; };
+		87D9B7F215232E0600D780E8 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 87D9B7EE15232E0600D780E8 /* blueArrow.png */; };
+		87D9B7F315232E0600D780E8 /* blueArrow_new.png in Resources */ = {isa = PBXBuildFile; fileRef = 87D9B7EF15232E0600D780E8 /* blueArrow_new.png */; };
+		87D9B7F415232E0600D780E8 /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 87D9B7F015232E0600D780E8 /* whiteArrow.png */; };
+		87D9B80415232FCF00D780E8 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D9B7FF15232FCF00D780E8 /* EGORefreshTableHeaderView.m */; };
+		87D9B80515232FCF00D780E8 /* NSDate+Nibware.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D9B80115232FCF00D780E8 /* NSDate+Nibware.m */; };
+		87D9B80615232FCF00D780E8 /* PullToRefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D9B80315232FCF00D780E8 /* PullToRefreshViewController.m */; };
+		87D9B8081523301A00D780E8 /* CUTimelineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87D9B8071523301A00D780E8 /* CUTimelineView.xib */; };
 		87E86C5515179109002D6CD0 /* CUShareClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 87E86C5415179109002D6CD0 /* CUShareClient.m */; };
 /* End PBXBuildFile section */
 
@@ -321,7 +329,19 @@
 		87D880791522BCDF00CFC90D /* ABTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABTableViewCell.m; sourceTree = "<group>"; };
 		87D8807B1522BD9200CFC90D /* LoadMoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMoreCell.h; sourceTree = "<group>"; };
 		87D8807C1522BD9200CFC90D /* LoadMoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadMoreCell.m; sourceTree = "<group>"; };
-		87D880821522C04A00CFC90D /* CUTimelineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CUTimelineView.xib; sourceTree = "<group>"; };
+		87D9B7E315232BCF00D780E8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		87D9B7E715232C2200D780E8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		87D9B7ED15232E0600D780E8 /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
+		87D9B7EE15232E0600D780E8 /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		87D9B7EF15232E0600D780E8 /* blueArrow_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow_new.png; sourceTree = "<group>"; };
+		87D9B7F015232E0600D780E8 /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
+		87D9B7FE15232FCF00D780E8 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		87D9B7FF15232FCF00D780E8 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		87D9B80015232FCF00D780E8 /* NSDate+Nibware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Nibware.h"; sourceTree = "<group>"; };
+		87D9B80115232FCF00D780E8 /* NSDate+Nibware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Nibware.m"; sourceTree = "<group>"; };
+		87D9B80215232FCF00D780E8 /* PullToRefreshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshViewController.h; sourceTree = "<group>"; };
+		87D9B80315232FCF00D780E8 /* PullToRefreshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshViewController.m; sourceTree = "<group>"; };
+		87D9B8071523301A00D780E8 /* CUTimelineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CUTimelineView.xib; sourceTree = "<group>"; };
 		87E86C5315179109002D6CD0 /* CUShareClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUShareClient.h; sourceTree = "<group>"; };
 		87E86C5415179109002D6CD0 /* CUShareClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUShareClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -331,6 +351,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87D9B7E415232BCF00D780E8 /* QuartzCore.framework in Frameworks */,
 				87896A6815118BC300D6189C /* Security.framework in Frameworks */,
 				8748B742150F6E5500A2DE88 /* SystemConfiguration.framework in Frameworks */,
 				8748B74A150F6E8C00A2DE88 /* MobileCoreServices.framework in Frameworks */,
@@ -366,11 +387,11 @@
 		8727F39B1521AB78006A0EE8 /* CUTimeline */ = {
 			isa = PBXGroup;
 			children = (
+				87D9B8071523301A00D780E8 /* CUTimelineView.xib */,
 				8727F39C1521AB8C006A0EE8 /* CUTimelineDataSource.h */,
 				8727F39D1521AB8C006A0EE8 /* CUTimelineDataSource.m */,
 				87D880701522B63800CFC90D /* CUTimelineViewController.h */,
 				87D880711522B63800CFC90D /* CUTimelineViewController.m */,
-				87D880821522C04A00CFC90D /* CUTimelineView.xib */,
 			);
 			path = CUTimeline;
 			sourceTree = "<group>";
@@ -396,6 +417,8 @@
 		8748B71E150F6E0C00A2DE88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				87D9B7E715232C2200D780E8 /* AudioToolbox.framework */,
+				87D9B7E315232BCF00D780E8 /* QuartzCore.framework */,
 				87896A6715118BC300D6189C /* Security.framework */,
 				8748B749150F6E8C00A2DE88 /* MobileCoreServices.framework */,
 				8748B747150F6E8000A2DE88 /* CFNetwork.framework */,
@@ -492,6 +515,7 @@
 		874F6EC41512F074003A6618 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				87D9B7D615232B2600D780E8 /* PullToRefreshTableView */,
 				8727F3931521AAF5006A0EE8 /* ZhiWeibo */,
 				874F6EC51512F074003A6618 /* ASIHTTPRequest */,
 				874F6EFE1512F074003A6618 /* CTMBase64 */,
@@ -809,6 +833,31 @@
 			path = tencent;
 			sourceTree = "<group>";
 		};
+		87D9B7D615232B2600D780E8 /* PullToRefreshTableView */ = {
+			isa = PBXGroup;
+			children = (
+				87D9B7FE15232FCF00D780E8 /* EGORefreshTableHeaderView.h */,
+				87D9B7FF15232FCF00D780E8 /* EGORefreshTableHeaderView.m */,
+				87D9B80015232FCF00D780E8 /* NSDate+Nibware.h */,
+				87D9B80115232FCF00D780E8 /* NSDate+Nibware.m */,
+				87D9B80215232FCF00D780E8 /* PullToRefreshViewController.h */,
+				87D9B80315232FCF00D780E8 /* PullToRefreshViewController.m */,
+				87D9B7EC15232E0600D780E8 /* image */,
+			);
+			path = PullToRefreshTableView;
+			sourceTree = "<group>";
+		};
+		87D9B7EC15232E0600D780E8 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				87D9B7ED15232E0600D780E8 /* blackArrow.png */,
+				87D9B7EE15232E0600D780E8 /* blueArrow.png */,
+				87D9B7EF15232E0600D780E8 /* blueArrow_new.png */,
+				87D9B7F015232E0600D780E8 /* whiteArrow.png */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -864,7 +913,11 @@
 				8748B72A150F6E0C00A2DE88 /* InfoPlist.strings in Resources */,
 				8748B736150F6E0D00A2DE88 /* CUViewController.xib in Resources */,
 				87869A70151080C40079D8FC /* test.jpg in Resources */,
-				87D880831522C04A00CFC90D /* CUTimelineView.xib in Resources */,
+				87D9B7F115232E0600D780E8 /* blackArrow.png in Resources */,
+				87D9B7F215232E0600D780E8 /* blueArrow.png in Resources */,
+				87D9B7F315232E0600D780E8 /* blueArrow_new.png in Resources */,
+				87D9B7F415232E0600D780E8 /* whiteArrow.png in Resources */,
+				87D9B8081523301A00D780E8 /* CUTimelineView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -967,6 +1020,9 @@
 				87D880721522B63800CFC90D /* CUTimelineViewController.m in Sources */,
 				87D8807A1522BCDF00CFC90D /* ABTableViewCell.m in Sources */,
 				87D8807D1522BD9200CFC90D /* LoadMoreCell.m in Sources */,
+				87D9B80415232FCF00D780E8 /* EGORefreshTableHeaderView.m in Sources */,
+				87D9B80515232FCF00D780E8 /* NSDate+Nibware.m in Sources */,
+				87D9B80615232FCF00D780E8 /* PullToRefreshViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

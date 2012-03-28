@@ -10,17 +10,19 @@
 #import "CUTimelineDataSource.h"
 #import "CUShareClient.h"
 
+#import "PullToRefreshViewController.h"
+
 @class LoadMoreCell;
-@interface CUTimelineViewController : UIViewController
+@interface CUTimelineViewController : PullToRefreshViewController
 <CUTimelineDataSourceDelegate, UITableViewDataSource, UITableViewDelegate, CUShareClientDelegate>
 {
     CUTimelineDataSource *timelineDataSource;
     
-    UITableView *tableView;
+    //UITableView *tableView;
     LoadMoreCell *loadMoreCell;
 }
 
-@property (nonatomic, retain) IBOutlet UITableView *tableView;
+//@property (nonatomic, retain) IBOutlet UITableView *tableView;
 
 - (id)initWithToken:(NSString *)token;
 

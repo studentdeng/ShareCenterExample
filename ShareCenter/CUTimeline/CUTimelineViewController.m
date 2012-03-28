@@ -107,6 +107,10 @@
 - (void)CUTimelineDataSourceFinish:(CUTimelineDataSource *)ds
 {
     [self.tableView reloadData];
+    
+    [super performSelector:@selector(dataSourceDidFinishLoadingNewData:) 
+                withObject:[NSNumber numberWithInt:1] 
+                afterDelay:0.1];
 }
 
 - (void)CUTimelineDataSource:(CUTimelineDataSource *)ds failedWithError:(NSError *)err
@@ -114,6 +118,8 @@
     NSLog(@"tilelineDataSource load error");
     
     [[CUShareCenter sharedInstanceWithType:SINACLIENT] Bind];
+    
+    [super performSelector:@selector(dataSourceDidFinishLoadingNewData:) withObject:nil afterDelay:0.1];
 }
 
 #pragma mark -
@@ -225,6 +231,40 @@
 - (void)CUAuthSucceed:(CUShareClient *)client
 {
     
+}
+
+#pragma mark
+
+- (void)reloadTableViewDataSource
+{
+    [self refresh:nil];
+    // Should be calling your tableview's model to reload.
+    //[super performSelector:@selector(dataSourceDidFinishLoadingNewData:) withObject:nil afterDelay:3.0];
+}
+
+- (void)dataSourceDidFinishLoadingNewData:(NSNumber *)loadedData
+{
+    // Should check if data reload was successful.
+    if ([loadedData boolValue]) {
+        [refreshHeaderView setCurrentDate];
+        [super dataSourceDidFinishLoadingNewData:nil];
+        [self.tableView reloadData];
+    } else {
+        [super dataSourceDidFinishLoadingNewData:nil];
+        // Present an informative UIAlertView
+        [self dataSourceDidFailPresentingError];
+    }
+}
+
+- (void)dataSourceDidFailPresentingError
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Network Error"
+                                                        message:@"Unable to contact the server.\n Please try again later."
+                                                       delegate:self 
+                                              cancelButtonTitle:@"Okay" 
+                                              otherButtonTitles:nil];
+    [alertView show];
+    [alertView release];
 }
 
 
