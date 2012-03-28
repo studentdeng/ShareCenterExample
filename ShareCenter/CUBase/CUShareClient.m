@@ -28,7 +28,12 @@
     self.viewClient.webView.delegate = self;
     [self.viewClient.webView loadRequest:[self CULoginURLRequest]];
     
-    [vc presentModalViewController:viewClient animated:YES];
+    [self performSelector:@selector(show:) withObject:vc afterDelay:0.1];
+}
+
+- (void)show:(UIViewController *)vc
+{
+    [vc presentModalViewController:viewClient animated:NO];
 }
 
 - (NSURLRequest *)CULoginURLRequest

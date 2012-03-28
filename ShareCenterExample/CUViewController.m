@@ -15,16 +15,6 @@
 
 #define TEST_IMAGEURL_NICE_GIRL     @"http://www.imiknow.com/iks/res/MGMxMDA5NzUyNTQ4ZWU4ZmUyMWZiNGRlM2Y1NDM1ZGE/YXBwbGljYXRpb24vb2N0ZXQtc3RyZWFt/bf980271-5f1e-458c-a513-4a49457e0268.jpg"
 
-
-#define kOAuthConsumerKey_sina				@"1128481868"
-#define kOAuthConsumerSecret_sina			@"024e9c1c0aca2d28c03f182e5924de67"
-
-#define kOAuthConsumerKey_tencent			@"801111961"
-#define kOAuthConsumerSecret_tencent		@"782bbf09d7b33223cf60b83bcdfb728f"
-
-#define kAPP_ID_renren                      @"173991"
-#define kAPI_Key_renren                     @"9799b61fc602443690c5fad39e34bf9a"
-
 @interface CUViewController ()
 
 @end
@@ -94,7 +84,6 @@
                                                                andImage:[UIImage imageNamed:@"test.jpg"]];
         return;
     }
-    
     
     [[CUShareCenter sharedInstanceWithType:btn.tag] showWithText:@"tencent的sdk还是挺给力的，尽管啥都没有，不过总比人人的好使"
                                                andImageURLString:TEST_IMAGEURL_NICE_GIRL];

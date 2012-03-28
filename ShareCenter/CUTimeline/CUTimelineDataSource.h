@@ -33,7 +33,8 @@
 @property (nonatomic, assign) id <CUTimelineDataSourceDelegate> delegate;
 
 - (id)initWithToken:(NSString *)token;
-- (void)loadRecentSinceID:(long long)sinceID;
+- (void)loadTimelineBySinceId:(long long)sinceId;
+- (void)loadTimelineByMaxId:(long long)maxId;
 
 - (NSDictionary *)timelineData;
 - (NSArray *)timelineDataKey;

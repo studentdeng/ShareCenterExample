@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CUTimelineDataSource.h"
+#import "CUShareClient.h"
 
 @class LoadMoreCell;
 @interface CUTimelineViewController : UIViewController
-<CUTimelineDataSourceDelegate, UITableViewDataSource, UITableViewDelegate>
+<CUTimelineDataSourceDelegate, UITableViewDataSource, UITableViewDelegate, CUShareClientDelegate>
 {
     CUTimelineDataSource *timelineDataSource;
     
@@ -24,5 +25,6 @@
 - (id)initWithToken:(NSString *)token;
 
 - (IBAction)close:(id)sender;
+- (IBAction)refresh:(id)sender;
 
 @end

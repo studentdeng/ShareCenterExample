@@ -67,10 +67,10 @@
     return [NSArray arrayWithArray:self.statusIds];
 }
 
-- (void)loadRecentSinceID:(long long)sinceID
+- (void)loadTimelineBySinceId:(long long)sinceId
 {
     //TODO URL ERROR
-    NSString *url = [NSString stringWithFormat:@"https://api.weibo.com/2/statuses/home_timeline.json?access_token=%@&since_id=%lld&count=20", accessToken, sinceID];
+    NSString *url = [NSString stringWithFormat:@"https://api.weibo.com/2/statuses/home_timeline.json?access_token=%@&since_id=%lld&count=20", accessToken, sinceId];
     
     self.request.delegate = nil;
     [self.request cancel];
@@ -92,9 +92,53 @@
                 [self report:self withFailed:nil];
             }
             else {
+                
+                //TODO parser in background
+                
                 NSArray *statusArray = [result objectForKey:@"statuses"];
                 if ([statusArray count]) {
-                    [self parseData:[result objectForKey:@"statuses"]];
+                    [self parseNewData:[result objectForKey:@"statuses"]];
+                }
+                
+                [self reportSuccess:self];
+            }
+        }
+    }];
+    
+    [self.request startAsynchronous];
+}
+
+- (void)loadTimelineByMaxId:(long long)maxId
+{
+    //TODO URL ERROR
+    NSString *url = [NSString stringWithFormat:@"https://api.weibo.com/2/statuses/home_timeline.json?access_token=%@&max_id=%lld&count=20", accessToken, maxId];
+    
+    self.request.delegate = nil;
+    [self.request cancel];
+    
+    self.request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
+    [self.request setFailedBlock:^{
+        [self report:self withFailed:request.error];
+    }];
+    
+    [self.request setCompletionBlock:^{
+        id jsonObject = [request.responseString JSONValue];
+        
+        if (![jsonObject isKindOfClass:[NSDictionary class]]) {
+            [self report:self withFailed:nil];
+        }
+        else {
+            NSDictionary *result = (NSDictionary *)jsonObject;
+            if ([result objectForKey:@"error_code"] && [[result objectForKey:@"error_code"] intValue] != 200) {
+                [self report:self withFailed:nil];
+            }
+            else {
+                
+                //TODO parser in background
+                
+                NSArray *statusArray = [result objectForKey:@"statuses"];
+                if ([statusArray count]) {
+                    [self parseMoreData:[result objectForKey:@"statuses"]];
                 }
                 
                 [self reportSuccess:self];
@@ -114,7 +158,7 @@
     }
 }
 
-- (void)parseData:(NSArray *)statusArray
+- (void)parseNewData:(NSArray *)statusArray
 {
     if ([statusArray count] == 0) {
         return;
@@ -151,12 +195,56 @@
         }
     }
     
+    /*
     if ([statusArray count] && lastStatusKey && (lastSyncStatusId > [lastStatusKey longLongValue]))
     {
         NSLog(@"data change");
     }
     else {
         NSLog(@"origin data");
+    }*/
+}
+
+- (void)parseMoreData:(NSArray *)statusArray
+{
+    if ([statusArray count] == 0) {
+        return;
+    }
+    
+    int insertPos = [statusIds count];
+    NSNumber *firstStatusKey = nil;
+    
+    for (int i = [statusIds count] - 1; i >= 0; --i) {
+        NSNumber *statusKey = [statusIds objectAtIndex:i];
+		if (statusKey && [statusKey isKindOfClass:[NSNumber class]]) {
+			firstStatusKey = statusKey;
+			break;
+		}
+    } 
+    
+    for (int i = [statusArray count] - 1; i >= 0; --i) {
+        NSDictionary *item = (NSDictionary *)[statusArray objectAtIndex:i];
+        if (![item isKindOfClass:[NSDictionary class]]) {
+			continue;
+		}
+        
+		long long statusId = [item getLongLongValueValueForKey:@"id" defaultValue:-1];
+		if (statusId <= 0
+            || (firstStatusKey && statusId >= [firstStatusKey longLongValue])) {
+			// Ignore stale message
+			continue;
+		}
+        
+        Status *status = [Status statusWithJsonDictionary:item];
+        if (status && status.statusId) {
+            [self.statusIds insertObject:status.statusKey atIndex:insertPos];
+            [self.statusDic setObject:status forKey:status.statusKey];
+        }
+        
+        //TODO 转发
+        if (status.retweetedStatus) {
+            
+        }
     }
 }
 

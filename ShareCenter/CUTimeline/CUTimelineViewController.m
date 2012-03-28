@@ -10,6 +10,8 @@
 #import "ABTableViewCell.h"
 #import "LoadMoreCell.h"
 #import "Status.h"
+#import "CUSinaShareClient.h"
+#import "CUShareCenter.h"
 
 @interface CUTimelineViewController ()
 
@@ -47,10 +49,18 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
     timelineDataSource.delegate = self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
-    [timelineDataSource loadRecentSinceID:0];
+    CUSinaShareClient *sinaClient = [[[CUSinaShareClient alloc] initWithAppKey:kOAuthConsumerKey_sina 
+                                                                     appSecret:kOAuthConsumerSecret_sina] autorelease];
+    sinaClient.delegate = self;
+    [CUShareCenter setupClient:sinaClient withType:SINACLIENT];
+    [CUShareCenter setupContainer:self withType:SINACLIENT];
 }
 
 - (void)viewDidUnload
@@ -73,6 +83,23 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (IBAction)refresh:(id)sender
+{
+    //[self.timelineDataSource loadTimelineBySinceId:0];
+    NSNumber *newKey = nil;
+    
+    for (int i =  0; i < [self.timelineDataSource.timelineDataKey count]; ++i) {
+        NSNumber *statusKey = [self.timelineDataSource.timelineDataKey objectAtIndex:i];
+        if (statusKey && [statusKey isKindOfClass:[NSNumber class]]) {
+            newKey = [[statusKey copy] autorelease];
+            
+            break;
+        }
+    }
+    
+    [self.timelineDataSource loadTimelineBySinceId:[newKey longLongValue]];
+}
+
 #pragma mark CUTimelineDataSourceDelegate
 
 - (void)CUTimelineDataSourceFinish:(CUTimelineDataSource *)ds
@@ -83,6 +110,8 @@
 - (void)CUTimelineDataSource:(CUTimelineDataSource *)ds failedWithError:(NSError *)err
 {
     NSLog(@"tilelineDataSource load error");
+    
+    [[CUShareCenter sharedInstanceWithType:SINACLIENT] Bind];
 }
 
 #pragma mark -
@@ -93,10 +122,30 @@
     return 1;
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [self.timelineDataSource.timelineDataKey count];
+    return [self.timelineDataSource.timelineDataKey count] + 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < self.timelineDataSource.timelineDataKey.count) {
+        id obj = [self.timelineDataSource.timelineDataKey objectAtIndex:indexPath.row];
+        if ([obj isKindOfClass:[NSNumber class]]) {
+            NSNumber *statusKey = (NSNumber *)obj;
+            Status *status = [self.timelineDataSource.timelineData objectForKey:statusKey];
+            
+            CGSize size = [status.text sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(240, 99999)];
+            
+            CGFloat height = size.height;
+            if (height < 80) {
+                height = 80;
+            }
+            
+            return height;
+        }
+    }
+    
+    return 44;
 }
 
 - (UITableViewCell *)getTableViewCell:(NSNumber *)statusKey
@@ -138,5 +187,43 @@
 
 #pragma mark -
 #pragma mark Table view delegate
+
+- (void)loadMore
+{
+    if ([self.timelineDataSource.timelineDataKey count] == 0) {
+        //return;
+    }
+    
+    NSNumber *lastKey = nil;
+    
+    for (int i = [self.timelineDataSource.timelineDataKey count] - 1; i >= 0; --i) {
+        NSNumber *statusKey = [self.timelineDataSource.timelineDataKey objectAtIndex:i];
+        if (statusKey && [statusKey isKindOfClass:[NSNumber class]]) {
+            lastKey = [[statusKey copy] autorelease];
+            
+            break;
+        }
+    }
+    
+    if (lastKey) {
+        [self.timelineDataSource loadTimelineByMaxId:[lastKey longLongValue] - 1];
+    }
+    else {
+        [self refresh:nil];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == [self.timelineDataSource.timelineDataKey count]) {
+        [self loadMore];
+    }
+}
+
+- (void)CUAuthSucceed:(CUShareClient *)client
+{
+    
+}
+
 
 @end
