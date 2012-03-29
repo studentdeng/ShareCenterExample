@@ -12,6 +12,7 @@
 
 #import "PullToRefreshViewController.h"
 
+@class Status;
 @class LoadMoreCell;
 @interface CUTimelineViewController : PullToRefreshViewController
 <CUTimelineDataSourceDelegate, UITableViewDataSource, UITableViewDelegate, CUShareClientDelegate>
@@ -22,11 +23,11 @@
     LoadMoreCell *loadMoreCell;
 }
 
-//@property (nonatomic, retain) IBOutlet UITableView *tableView;
-
 - (id)initWithToken:(NSString *)token;
 
 - (IBAction)close:(id)sender;
 - (IBAction)refresh:(id)sender;
+
+- (void)CUTimelineViewControllerSelected:(Status *)status;
 
 @end

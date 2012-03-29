@@ -75,7 +75,14 @@ static NSDateFormatter *s_format = nil;
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:status.createdAt];
     
     [self setPublishDate:[s_format stringFromDate:date]];
-    [self setCoverImageUrl:status.bmiddlePic];
+    
+    if (status.bmiddlePic) {
+        [self setCoverImageUrl:status.bmiddlePic];
+    }
+    else {
+        [self setCoverImageUrl:status.retweetedStatus.bmiddlePic];
+    }
+    
 }
 
 
@@ -178,7 +185,7 @@ static NSDateFormatter *s_format = nil;
 		_descriptionLabel.highlightedTextColor = ZBSTYLE_highlightedTextColor;
 		_descriptionLabel.textAlignment = UITextAlignmentLeft;
 		_descriptionLabel.contentMode = UIViewContentModeTop;
-		_descriptionLabel.lineBreakMode = UILineBreakModeTailTruncation;
+		_descriptionLabel.lineBreakMode = UILineBreakModeWordWrap;
 		_descriptionLabel.numberOfLines = 0;
 		
 		[self.contentView addSubview:_descriptionLabel];
@@ -325,8 +332,8 @@ static NSDateFormatter *s_format = nil;
         _nameLabel.highlightedTextColor = ZBSTYLE_highlightedTextColor;
         _nameLabel.textAlignment = UITextAlignmentLeft;
         _nameLabel.contentMode = UIViewContentModeTop;
-        _nameLabel.lineBreakMode = UILineBreakModeTailTruncation;
-        _nameLabel.numberOfLines = 1;
+        _nameLabel.lineBreakMode = UILineBreakModeWordWrap;
+        _nameLabel.numberOfLines = 0;
         
         [self.contentView addSubview:_nameLabel];
     }
@@ -483,12 +490,18 @@ static NSDateFormatter *s_format = nil;
     
     Status *status = object;
 
-    CGFloat coverImageHeight = [status.bmiddlePic length] > 0 ? COVER_BACKGROUND_HEIGHT : kTableCellSmallMargin;
+    CGFloat coverImageHeight = kTableCellSmallMargin;
+    if ([status.bmiddlePic length]) {
+        coverImageHeight = [status.bmiddlePic length] > 0 ? COVER_BACKGROUND_HEIGHT : kTableCellSmallMargin;
+    } 
+    else {
+        coverImageHeight = [status.retweetedStatus.bmiddlePic length] > 0 ? COVER_BACKGROUND_HEIGHT : kTableCellSmallMargin;
+    }
     
     //主标题
-    CGSize titleLabelSize = [@"Hello World" sizeWithFont:ZBSTYLE_tableFont
+    CGSize titleLabelSize = [status.text sizeWithFont:ZBSTYLE_tableFont
                                    constrainedToSize:CGSizeMake(CELL_CONTENT_WIDTH, CGFLOAT_MAX)
-                                       lineBreakMode:UILineBreakModeTailTruncation];
+                                       lineBreakMode:UILineBreakModeWordWrap];
     
     //子标题
     CGSize subtitleLabelSize = [@"Hello World" sizeWithFont:ZBSTYLE_font
@@ -501,12 +514,9 @@ static NSDateFormatter *s_format = nil;
         descriptionLabelSize = [status.retweetedStatus.text sizeWithFont:ZBSTYLE_font
                                                constrainedToSize:CGSizeMake(CELL_CONTENT_WIDTH, CGFLOAT_MAX)
                                                    lineBreakMode:UILineBreakModeWordWrap];
-        
-        if (descriptionLabelSize.height > 3*subtitleLabelSize.height) //文章简介不能超过三行
-            descriptionLabelSize.height = 3*subtitleLabelSize.height;
     }
     
-    CGFloat textHeight = coverImageHeight + titleLabelSize.height + 2 * subtitleLabelSize.height + SUBTITLE_HEIGHT 
+    CGFloat textHeight = coverImageHeight + titleLabelSize.height + subtitleLabelSize.height + SUBTITLE_HEIGHT 
         + descriptionLabelSize.height + (descriptionLabelSize.height > 0 ? kTableCellSmallMargin : 0); 
     
     return textHeight + kTableCellSmallMargin * 4;
@@ -587,11 +597,10 @@ static NSDateFormatter *s_format = nil;
     top += SUBTITLE_HEIGHT;
     
     //取得文章标题的高度
-    /*
-    CGSize nameLabelSize = [@"Hello World" sizeWithFont:ZBSTYLE_tableFont
+    CGSize nameLabelSize = [_nameLabel.text sizeWithFont:ZBSTYLE_tableFont
                                         constrainedToSize:CGSizeMake(CELL_CONTENT_WIDTH, CGFLOAT_MAX)
-                                            lineBreakMode:UILineBreakModeTailTruncation];*/
-    CGSize nameLabelSize = {95, 21};
+                                            lineBreakMode:UILineBreakModeWordWrap];
+    //CGSize nameLabelSize = {95, 21};
     _nameLabel.frame = CGRectMake(left, top, CELL_CONTENT_WIDTH - 2*kTableCellSmallMargin, nameLabelSize.height);
     
     //_coverImageView在_nameLabel之下
@@ -618,9 +627,6 @@ static NSDateFormatter *s_format = nil;
     CGSize descriptionLabelSize = [_descriptionLabel.text sizeWithFont:ZBSTYLE_font
                                           constrainedToSize:CGSizeMake(CELL_CONTENT_WIDTH, CGFLOAT_MAX)
                                               lineBreakMode:UILineBreakModeWordWrap];
-    if (descriptionLabelSize.height > 3*subtitleLabelSize.height) {
-        descriptionLabelSize.height = 3*subtitleLabelSize.height;
-    }
     
     //设置_descriptionLabe的坐标
     _descriptionLabel.frame = CGRectMake(kTableCellSmallMargin, top, CELL_CONTENT_WIDTH - 2*kTableCellSmallMargin, descriptionLabelSize.height);
@@ -657,6 +663,7 @@ static NSDateFormatter *s_format = nil;
     left = 2 * kTableCellSmallMargin;
     top += subtitleLabelSize.height + kTableCellSmallMargin;
     
+    /*
     //取得systemTagLabelSize的宽度和高度
     CGSize systemTagButtonSize = [[_systemTagButton titleForState:UIControlStateNormal] 
                                   sizeWithFont:ZBSTYLE_font
@@ -689,7 +696,7 @@ static NSDateFormatter *s_format = nil;
     _seriesTagButton.frame = CGRectMake(left, 
                                         top, 
                                         seriesTagButtonSize.width, 
-                                        seriesTagButtonSize.height);
+                                        seriesTagButtonSize.height);*/
 }
 
 

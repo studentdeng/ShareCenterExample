@@ -14,6 +14,8 @@
 #import "CUShareCenter.h"
 #import "RTTableViewCell.h"
 
+#import "GlobalDef.h"
+
 @interface CUTimelineViewController ()
 
 @property (nonatomic, retain) CUTimelineDataSource *timelineDataSource;
@@ -171,7 +173,7 @@
         
         // set selection color 
         UIView *backgroundView = [[UIView alloc] initWithFrame:articleTableViewCell.frame]; 
-        //backgroundView.backgroundColor = SELECTED_BACKGROUND;
+        backgroundView.backgroundColor = SELECTED_BACKGROUND;
         articleTableViewCell.selectedBackgroundView = backgroundView; 
         [backgroundView release];
     }
@@ -234,6 +236,17 @@
         [self loadMore];
     }
     
+    if (indexPath.row < self.timelineDataSource.timelineDataKey.count) {
+        id obj = [self.timelineDataSource.timelineDataKey objectAtIndex:indexPath.row];
+        if ([obj isKindOfClass:[NSNumber class]]) {
+            NSNumber *statusKey = (NSNumber *)obj;
+            
+            Status *status = [self.timelineDataSource.timelineData objectForKey:statusKey];
+            
+            [self CUTimelineViewControllerSelected:status];
+        }
+    }
+    
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -242,7 +255,7 @@
     
 }
 
-#pragma mark
+#pragma mark 
 
 - (void)reloadTableViewDataSource
 {
@@ -276,5 +289,11 @@
     [alertView release];
 }
 
+#pragma mark
+
+- (void)CUTimelineViewControllerSelected:(Status *)status
+{
+    NSLog(@"subclass implement");
+}
 
 @end
