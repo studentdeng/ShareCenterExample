@@ -118,9 +118,17 @@
 {
     NSLog(@"tilelineDataSource load error");
     
-    [[CUShareCenter sharedInstanceWithType:SINACLIENT] Bind];
-    
-    [super performSelector:@selector(dataSourceDidFinishLoadingNewData:) withObject:nil afterDelay:0.1];
+    if (err) {
+        //err != nil 为网络错误
+        [super performSelector:@selector(dataSourceDidFinishLoadingNewData:) withObject:nil afterDelay:0.1];
+    }
+    else {
+        //
+        //这里为sina 服务器返回错误，要不sina server crash,要不就是参数错误 要不就是认证失败，认证失败概率最大，这里简单处理了
+        [[CUShareCenter sharedInstanceWithType:SINACLIENT] Bind];
+        
+        [super performSelector:@selector(dataSourceDidFinishLoadingNewData:) withObject:[NSNumber numberWithInt:1]  afterDelay:0.1];
+    }
 }
 
 #pragma mark -
@@ -137,18 +145,6 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    /*
-    if (indexPath.row >= [articleItems count])
-        return 60;
-    
-    Article *article = [articleItems count] == 0 ? nil : [articleItems objectAtIndex:indexPath.row];
-    if (article) {
-        return [RTTableViewCell rowHeightForObject:article];
-    }
-    else {
-        return 0.0;
-    }*/
     
     if (indexPath.row < self.timelineDataSource.timelineDataKey.count) {
         id obj = [self.timelineDataSource.timelineDataKey objectAtIndex:indexPath.row];

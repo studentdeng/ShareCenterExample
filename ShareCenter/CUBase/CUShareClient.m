@@ -33,7 +33,7 @@
 
 - (void)show:(UIViewController *)vc
 {
-    [vc presentModalViewController:viewClient animated:NO];
+    [vc presentModalViewController:viewClient animated:YES];
 }
 
 - (NSURLRequest *)CULoginURLRequest

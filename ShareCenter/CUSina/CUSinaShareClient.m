@@ -251,6 +251,9 @@
 
 - (void)engineAuthorizeExpired:(WBEngine *)engine
 {
+    //NSString *url = @"https://api.weibo.com/oauth2/access_token?client_id=%@&client_secret=%@&grant_type=";
+    
+    
     [self CUNotifyAuthFailed:self withError:nil];
 }
 
