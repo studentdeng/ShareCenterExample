@@ -7,11 +7,12 @@
 //
 
 #import "CUTimelineViewController.h"
-#import "ABTableViewCell.h"
 #import "LoadMoreCell.h"
 #import "Status.h"
+#import "User.h"
 #import "CUSinaShareClient.h"
 #import "CUShareCenter.h"
+#import "RTTableViewCell.h"
 
 @interface CUTimelineViewController ()
 
@@ -136,20 +137,26 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    /*
+    if (indexPath.row >= [articleItems count])
+        return 60;
+    
+    Article *article = [articleItems count] == 0 ? nil : [articleItems objectAtIndex:indexPath.row];
+    if (article) {
+        return [RTTableViewCell rowHeightForObject:article];
+    }
+    else {
+        return 0.0;
+    }*/
+    
     if (indexPath.row < self.timelineDataSource.timelineDataKey.count) {
         id obj = [self.timelineDataSource.timelineDataKey objectAtIndex:indexPath.row];
         if ([obj isKindOfClass:[NSNumber class]]) {
             NSNumber *statusKey = (NSNumber *)obj;
             Status *status = [self.timelineDataSource.timelineData objectForKey:statusKey];
             
-            CGSize size = [status.text sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(240, 99999)];
-            
-            CGFloat height = size.height;
-            if (height < 80) {
-                height = 80;
-            }
-            
-            return height;
+            return [RTTableViewCell rowHeightForObject:status];
         }
     }
     
@@ -158,23 +165,31 @@
 
 - (UITableViewCell *)getTableViewCell:(NSNumber *)statusKey
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *cellIdentifier = @"RTTableViewCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    RTTableViewCell *articleTableViewCell = (RTTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    if (articleTableViewCell == nil)
+    {
+        articleTableViewCell = [[RTTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        
+        // set selection color 
+        UIView *backgroundView = [[UIView alloc] initWithFrame:articleTableViewCell.frame]; 
+        //backgroundView.backgroundColor = SELECTED_BACKGROUND;
+        articleTableViewCell.selectedBackgroundView = backgroundView; 
+        [backgroundView release];
     }
     
-    Status *sts = [self.timelineDataSource.timelineData objectForKey:statusKey];
-    cell.textLabel.font = [UIFont systemFontOfSize:15];
-    cell.textLabel.numberOfLines = 0;
-    cell.textLabel.text = sts.text;
-    cell.imageView.image = [UIImage imageNamed:@"profile_avatar_highlighted_frame.png"];
+    Status *status = [self.timelineDataSource.timelineData objectForKey:statusKey];
+    if (status) {
+        [articleTableViewCell setDataSource:status];
+        [articleTableViewCell setAvatarImageUrl:status.user.profileImageUrl 
+                                          tagId:2
+                                         target:self 
+                                         action:@selector(avatarButtonClicked:)];
+    }
     
-    //[self startImageDownload:sts forIndexPath:indexPath];     
-    // Configure the cell.
-    
-    return cell;
+    return articleTableViewCell;
 }
 
 // Customize the appearance of table view cells.
@@ -198,10 +213,6 @@
 
 - (void)loadMore
 {
-    if ([self.timelineDataSource.timelineDataKey count] == 0) {
-        //return;
-    }
-    
     NSNumber *lastKey = nil;
     
     for (int i = [self.timelineDataSource.timelineDataKey count] - 1; i >= 0; --i) {
@@ -226,6 +237,8 @@
     if (indexPath.row == [self.timelineDataSource.timelineDataKey count]) {
         [self loadMore];
     }
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)CUAuthSucceed:(CUShareClient *)client
