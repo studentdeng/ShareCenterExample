@@ -18,6 +18,8 @@ static CUShareCenter *s_instance3 = nil;
 @synthesize shareClient;
 @synthesize clientContainerVC;
 
+#pragma mark - life
+
 - (id)init
 {
     if (self = [super init]) {
@@ -106,6 +108,8 @@ static CUShareCenter *s_instance3 = nil;
 {
     [CUShareCenter sharedInstanceWithType:type].clientContainerVC = containerVC;
 }
+
+#pragma mark - common method
 
 - (void)showWithText:(NSString *)text
 {

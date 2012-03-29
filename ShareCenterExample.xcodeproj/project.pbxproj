@@ -411,9 +411,9 @@
 		8727F39B1521AB78006A0EE8 /* CUTimeline */ = {
 			isa = PBXGroup;
 			children = (
-				87D9B8071523301A00D780E8 /* CUTimelineView.xib */,
 				8727F39C1521AB8C006A0EE8 /* CUTimelineDataSource.h */,
 				8727F39D1521AB8C006A0EE8 /* CUTimelineDataSource.m */,
+				87D9B8071523301A00D780E8 /* CUTimelineView.xib */,
 				87D880701522B63800CFC90D /* CUTimelineViewController.h */,
 				87D880711522B63800CFC90D /* CUTimelineViewController.m */,
 			);

@@ -102,8 +102,8 @@
 
 - (IBAction)showTimeline:(id)sender
 {
-    NSString *token = [[[CUShareCenter sharedInstanceWithType:SINACLIENT] shareClient] requestToken];
-    //NSString *token = @"123123123";
+    //NSString *token = [[[CUShareCenter sharedInstanceWithType:SINACLIENT] shareClient] requestToken];
+    NSString *token = @"123123123";
     if ([token length] == 0) {
         
         [[CUShareCenter sharedInstanceWithType:SINACLIENT] Bind];

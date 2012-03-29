@@ -14,12 +14,17 @@
 @synthesize delegate;
 @synthesize viewClient;
 
+#pragma mark - life
+
 - (void)dealloc
 {
     self.viewClient = nil;
+    self.delegate = nil;
     
     [super dealloc];
 }
+
+#pragma mark - common method
 
 - (void)CUOpenAuthViewInViewController:(UIViewController *)vc;
 {
@@ -29,16 +34,6 @@
     [self.viewClient.webView loadRequest:[self CULoginURLRequest]];
     
     [self performSelector:@selector(show:) withObject:vc afterDelay:0.1];
-}
-
-- (void)show:(UIViewController *)vc
-{
-    [vc presentModalViewController:viewClient animated:YES];
-}
-
-- (NSURLRequest *)CULoginURLRequest
-{
-    return nil;
 }
 
 - (void)CUNotifyShareFailed:(CUShareClient *)client withError:(NSError *)error
@@ -84,6 +79,20 @@
     }
     
     [self.viewClient performSelector:@selector(close:) withObject:nil afterDelay:.2f];
+}
+
+#pragma mark - private
+
+- (void)show:(UIViewController *)vc
+{
+    [vc presentModalViewController:viewClient animated:YES];
+}
+
+#pragma mark - override me
+
+- (NSURLRequest *)CULoginURLRequest
+{
+    return nil;
 }
 
 @end

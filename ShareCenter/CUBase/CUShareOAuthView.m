@@ -38,7 +38,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 @synthesize navBar;
 @synthesize tintColor;
 
-#pragma mark life
+#pragma mark -  life
 
 - (id)init
 {
@@ -66,7 +66,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
     [super dealloc];
 }
 
-#pragma mark UIViewController
+#pragma mark -  UIViewController
 
 - (void)viewDidLoad
 {
@@ -118,7 +118,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
     || toInterfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
-#pragma mark common method
+#pragma mark - common method
 
 - (void)cancel:(id)sender {
     [self performSelector:@selector(close:) withObject:nil afterDelay:.2f];

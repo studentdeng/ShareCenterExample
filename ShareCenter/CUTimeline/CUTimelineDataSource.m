@@ -50,41 +50,7 @@
     return localFilePath;
 }
 
-- (NSMutableArray *)loadTimelineFromLocal
-{
-    NSString *filePath = [[CUTimelineDataSource getPath] stringByAppendingPathComponent:@"friendsWeiboCache.db"];
-    NSMutableArray *statusArray = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
-    return statusArray;
-}
-
-- (void)saveTimelineToLocal
-{
-    if ([statusDic count] == 0) {
-        return;
-    }
-    
-    
-    int i = 0;
-    NSMutableArray *statuses = [NSMutableArray array];
-    for (NSNumber *item in statusIds) {
-        if ([item isKindOfClass:[NSNumber class]]) {
-			Status *sts = [statusDic objectForKey:item];
-			if (sts) {
-				[statuses addObject:sts];
-			}			
-		}
-        ++i;
-        
-        if (MAX_CACHE_WEIBO_ITEM <= i) {
-            break;
-        }
-    }
-    
-    NSString *filePath = [[CUTimelineDataSource getPath] stringByAppendingPathComponent:@"friendsWeiboCache.db"];
-    BOOL b = [NSKeyedArchiver archiveRootObject:statuses toFile:filePath];
-    
-    b++;
-}
+#pragma mark - life
 
 - (id)initWithToken:(NSString *)token
 {
@@ -123,15 +89,7 @@
     [super dealloc];
 }
 
-- (NSDictionary *)timelineData
-{
-    return [NSDictionary dictionaryWithDictionary:self.statusDic];
-}
-
-- (NSArray *)timelineDataKey
-{
-    return [NSArray arrayWithArray:self.statusIds];
-}
+#pragma mark - common method
 
 - (void)loadTimelineBySinceId:(long long)sinceId
 {
@@ -219,6 +177,55 @@
     
     [self.request startAsynchronous];
 }
+
+
+- (NSDictionary *)timelineData
+{
+    return [NSDictionary dictionaryWithDictionary:self.statusDic];
+}
+
+- (NSArray *)timelineDataKey
+{
+    return [NSArray arrayWithArray:self.statusIds];
+}
+
+- (NSMutableArray *)loadTimelineFromLocal
+{
+    NSString *filePath = [[CUTimelineDataSource getPath] stringByAppendingPathComponent:@"friendsWeiboCache.db"];
+    NSMutableArray *statusArray = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+    return statusArray;
+}
+
+- (void)saveTimelineToLocal
+{
+    if ([statusDic count] == 0) {
+        return;
+    }
+    
+    
+    int i = 0;
+    NSMutableArray *statuses = [NSMutableArray array];
+    for (NSNumber *item in statusIds) {
+        if ([item isKindOfClass:[NSNumber class]]) {
+			Status *sts = [statusDic objectForKey:item];
+			if (sts) {
+				[statuses addObject:sts];
+			}			
+		}
+        ++i;
+        
+        if (MAX_CACHE_WEIBO_ITEM <= i) {
+            break;
+        }
+    }
+    
+    NSString *filePath = [[CUTimelineDataSource getPath] stringByAppendingPathComponent:@"friendsWeiboCache.db"];
+    BOOL b = [NSKeyedArchiver archiveRootObject:statuses toFile:filePath];
+    
+    b++;
+}
+
+#pragma mark - private
 
 - (void)cancel
 {

@@ -26,6 +26,7 @@
 @implementation CURenrenShareClient
 @synthesize sendParams;
 
+#pragma mark -
 #pragma mark viewController
 
 - (id)initWithAppKey:(NSString *)theAppKey appSecret:(NSString *)theAppSecret
@@ -50,6 +51,7 @@
     [super dealloc];
 }
 
+#pragma mark -
 #pragma mark CUShareClientData
 
 - (BOOL)isCUAuth
@@ -82,6 +84,7 @@
     return [self post:text andImageURLString:imageURLString];
 }
 
+#pragma mark -
 #pragma mark CUShareClient
 
 - (NSURLRequest *)CULoginURLRequest
@@ -214,7 +217,7 @@
         [self CUNotifyAuthFailed:self withError:error];
     }
 }
-#pragma mark common method
+#pragma mark - common method
 
 - (BOOL)isAuthDialog
 {
@@ -278,7 +281,7 @@
     [renren requestWithParams:params andDelegate:self];
 }   
 
-#pragma mark RenrenDelegate
+#pragma mark - RenrenDelegate
 
 /**
  * 接口请求成功，第三方开发者实现这个方法

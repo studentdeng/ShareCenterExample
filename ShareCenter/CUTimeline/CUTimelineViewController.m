@@ -81,6 +81,7 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark -
 #pragma mark action
 
 - (IBAction)close:(id)sender
@@ -105,6 +106,7 @@
     [self.timelineDataSource loadTimelineBySinceId:[newKey longLongValue]];
 }
 
+#pragma mark -
 #pragma mark CUTimelineDataSourceDelegate
 
 - (void)CUTimelineDataSourceFinish:(CUTimelineDataSource *)ds
@@ -184,7 +186,7 @@
         [articleTableViewCell setAvatarImageUrl:status.user.profileImageUrl 
                                           tagId:2
                                          target:self 
-                                         action:@selector(avatarButtonClicked:)];
+                                         action:nil];
     }
     
     return articleTableViewCell;
@@ -250,18 +252,27 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark -
+#pragma mark CUShareClientDelegate
+
 - (void)CUAuthSucceed:(CUShareClient *)client
 {
-    
+    if ([client isKindOfClass:[CUSinaShareClient class]]) {
+        CUSinaShareClient *sinaClient = (CUSinaShareClient *)client;
+        CUTimelineDataSource *ds = [[CUTimelineDataSource alloc] initWithToken:sinaClient.requestToken];
+        
+        self.timelineDataSource = ds;
+        timelineDataSource.delegate = self;
+        
+        [ds release];
+    }
 }
 
-#pragma mark 
+#pragma mark PullToRefreshViewController
 
 - (void)reloadTableViewDataSource
 {
     [self refresh:nil];
-    // Should be calling your tableview's model to reload.
-    //[super performSelector:@selector(dataSourceDidFinishLoadingNewData:) withObject:nil afterDelay:3.0];
 }
 
 - (void)dataSourceDidFinishLoadingNewData:(NSNumber *)loadedData
@@ -289,7 +300,8 @@
     [alertView release];
 }
 
-#pragma mark
+#pragma mark -
+#pragma mark override me
 
 - (void)CUTimelineViewControllerSelected:(Status *)status
 {

@@ -47,7 +47,7 @@
     [super dealloc];
 }
 
-#pragma mark CUShareClientData
+#pragma mark -  CUShareClientData
 
 - (BOOL)isCUAuth
 {
@@ -79,7 +79,7 @@
     return [self post:text andImageURLString:imageURLString];
 }
 
-#pragma mark CUShareClient
+#pragma mark -  CUShareClient
 
 //TODO : 处理网络情况不好时的做法
 - (NSURLRequest *)CULoginURLRequest
@@ -102,7 +102,7 @@
     return request;
 }
 
-#pragma mark common method
+#pragma mark -  common method
 
 - (void)post:(NSString *)text andImage:(UIImage *)image
 {
@@ -122,7 +122,7 @@
     return [engine sendWeiBoWithText:text imageURL:imageURLString];
 }
 
-#pragma mark UIWebViewDelegate
+#pragma mark -  UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
 	
@@ -154,7 +154,7 @@
     [indicatorView stopAnimating];
 }
 
-#pragma mark CUTencentEngineDelegate
+#pragma mark -  CUTencentEngineDelegate
 
 // Log in successfully.
 - (void)engineDidLogIn:(CUTencentEngine *)engine

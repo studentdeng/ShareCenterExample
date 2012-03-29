@@ -33,7 +33,7 @@
 
 @implementation CUSinaShareClient
 
-#pragma mark life
+#pragma mark -  life
 
 - (id)initWithAppKey:(NSString *)theAppKey appSecret:(NSString *)theAppSecret
 {
@@ -68,7 +68,7 @@
     [super dealloc];
 }
 
-#pragma mark CUShareClientData
+#pragma mark -  CUShareClientData
 
 - (BOOL)isCUAuth
 {
@@ -117,7 +117,7 @@
     return [self post:text andImageURLString:imageURLString];
 }
 
-#pragma mark CUShareClient
+#pragma mark -  CUShareClient
 
 
 - (NSURLRequest *)CULoginURLRequest
@@ -137,7 +137,7 @@
     return request;
 }
 
-#pragma mark common method
+#pragma mark -  common method
 
 - (void)post:(NSString *)text andImage:(UIImage *)image
 {
@@ -209,7 +209,7 @@
     return YES;
 }
 
-#pragma mark WBEngineDelegate
+#pragma mark -  WBEngineDelegate
 
 // If you try to log in with logIn or logInUsingUserID method, and
 // there is already some authorization info in the Keychain,

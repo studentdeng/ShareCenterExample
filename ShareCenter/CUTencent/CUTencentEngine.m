@@ -173,7 +173,7 @@
     
 }
 
-#pragma mark private
+#pragma mark -  private
 
 - (NSString *)valueForKey:(NSString *)key ofQuery:(NSString *)query
 {
