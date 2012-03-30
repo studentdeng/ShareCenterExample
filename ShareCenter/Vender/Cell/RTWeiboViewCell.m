@@ -1,18 +1,18 @@
 //
-//  RTTableViewCell.m
+//  RTWeiboViewCell.m
 //  iKnow
 //
 //  Created by Cube on 11-5-5.
 //  Copyright 2011 iKnow Team. All rights reserved.
 //
 
-#import "RTTableViewCell.h"
+#import "RTWeiboViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "GlobalDef.h"
 #import <QuartzCore/QuartzCore.h>
 
 
-@implementation RTTableViewCell
+@implementation RTWeiboViewCell
 
 
 static UIImage* defaultAvatarImage;
@@ -61,11 +61,11 @@ static NSDateFormatter *s_format = nil;
     Status *status = data;
     [self setBackgroundImage:nil];
     [self setName:status.text];
-    [self setFavoriteCount:status.retweetsCountText];
-    [self setCommentCount:[NSString stringWithFormat:@"%d", status.commentsCount]];
+    //[self setFavoriteCount:status.retweetsCountText];
+    [self setCommentCount:status.commentsCountText];
     [self setDescription:status.retweetedStatus.text];
     [self setProvider:status.user.screenName];
-    [self setOpenCount:@"0"];
+    [self setOpenCount:status.retweetsCountText];
      
     if (s_format == nil) {
         s_format = [[NSDateFormatter alloc] init];
@@ -162,7 +162,7 @@ static NSDateFormatter *s_format = nil;
         [self.contentView addSubview:_coverBackgroundImageView];
     }
 
-    _coverBackgroundImageView.image = [RTTableViewCell getDefaultCoverBackgroundImage];
+    _coverBackgroundImageView.image = [RTWeiboViewCell getDefaultCoverBackgroundImage];
 
     if (!_coverImageView) {
         _coverImageView = [[UIImageView alloc] init];
@@ -172,7 +172,7 @@ static NSDateFormatter *s_format = nil;
     coverImageUrl = [url copy];
     
     [_coverImageView setImageWithURL:[NSURL URLWithString:url] 
-                    placeholderImage:[RTTableViewCell getDefaultCoverImage]
+                    placeholderImage:[RTWeiboViewCell getDefaultCoverImage]
                              options:0];//SDWebImageLowPriority];
 }
 
@@ -212,7 +212,7 @@ static NSDateFormatter *s_format = nil;
     NSString *openCount = @"";
     
     if ([newCount length] > 0) {
-        openCount = [NSString stringWithFormat:@"阅读：%@", newCount];
+        openCount = [NSString stringWithFormat:@"转发：%@", newCount];
     }
     
     _openCountLabel.text = openCount;
@@ -230,7 +230,7 @@ static NSDateFormatter *s_format = nil;
         _favoriteCountLabel.lineBreakMode = UILineBreakModeTailTruncation;
         _favoriteCountLabel.numberOfLines = 1;
         
-        [self.contentView addSubview:_favoriteCountLabel];
+        //[self.contentView addSubview:_favoriteCountLabel];
     }
     
     NSString *favoriteCount = @"";
@@ -366,7 +366,7 @@ static NSDateFormatter *s_format = nil;
     _avatarButton.tag = tagId;
 
     [_avatarImageView setImageWithURL:[NSURL URLWithString:url]
-                     placeholderImage:[RTTableViewCell getDefaultAvatarImage]
+                     placeholderImage:[RTWeiboViewCell getDefaultAvatarImage]
                               options:SDWebImageLowPriority];
 }
 
@@ -381,7 +381,7 @@ static NSDateFormatter *s_format = nil;
     if (!_tagImageView) {
         
         _tagImageView = [[UIImageView alloc] init];
-        _tagImageView.image = [RTTableViewCell getDefaultTagImage]; 
+        _tagImageView.image = [RTWeiboViewCell getDefaultTagImage]; 
         _tagImageView.frame = CGRectMake(0,
                                          0,
                                          TAG_WIDTH,
@@ -450,7 +450,7 @@ static NSDateFormatter *s_format = nil;
     
     if (theImage == nil) {
 
-        backgroundImage = [RTTableViewCell getDefaultBackgroundImage];
+        backgroundImage = [RTWeiboViewCell getDefaultBackgroundImage];
     }
     else {
         backgroundImage = theImage;
@@ -468,7 +468,7 @@ static NSDateFormatter *s_format = nil;
     if (!_subtitleBackgroundImageView) {
 
         _subtitleBackgroundImageView = [[UIImageView alloc] init];
-        _subtitleBackgroundImageView.image = [RTTableViewCell getDefaultSubtitleBackgroundImage]; 
+        _subtitleBackgroundImageView.image = [RTWeiboViewCell getDefaultSubtitleBackgroundImage]; 
         _subtitleBackgroundImageView.frame = CGRectMake(0, 
                                                         0, 
                                                         CELL_CONTENT_WIDTH, 

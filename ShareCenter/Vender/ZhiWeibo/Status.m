@@ -98,8 +98,8 @@ Status*			_retweetedStatus; //转发的博文，内容为status，如果不是�
         _thumbnailPic = [[dic objectForKey:@"thumbnail_pic"] retain];
         _bmiddlePic = [[dic objectForKey:@"bmiddle_pic"] retain];
         _originalPic = [[dic objectForKey:@"originalPic"] retain];
-		_commentsCount = -1;
-		_retweetsCount = -1;
+		_commentsCount = [[dic objectForKey:@"comments_count"] intValue];
+		_retweetsCount = [[dic objectForKey:@"reposts_count"] intValue];
         NSDictionary* userDic = [dic objectForKey:@"user"];
 		if (userDic) {
 			_user = [[User userWithJsonDictionary:userDic] retain];
@@ -234,11 +234,11 @@ Status*			_retweetedStatus; //转发的博文，内容为status，如果不是�
 }
 
 - (NSString *)commentsCountText {
-	return _commentsCount > 0 ? [NSString stringWithFormat:@"(%d)", _commentsCount] : @"";
+	return _commentsCount > 0 ? [NSString stringWithFormat:@"%d", _commentsCount] : @"0";
 }
 
 - (NSString *)retweetsCountText {
-	return _retweetsCount > 0 ? [NSString stringWithFormat:@"(%d)", _retweetsCount] : @"";
+	return _retweetsCount > 0 ? [NSString stringWithFormat:@"%d", _retweetsCount] : @"0";
 }
 
 

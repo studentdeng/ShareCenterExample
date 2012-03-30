@@ -116,6 +116,9 @@
         else {
             NSDictionary *result = (NSDictionary *)jsonObject;
             if ([result objectForKey:@"error_code"] && [[result objectForKey:@"error_code"] intValue] != 200) {
+                
+                NSLog(@"error : %@", result);
+                
                 [vcSelf report:vcSelf withFailed:nil];
             }
             else {

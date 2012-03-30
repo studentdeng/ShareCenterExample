@@ -29,7 +29,7 @@
 #define CELL_CONTENT_WIDTH   SCREEN_WIDTH
 
 
-@interface RTTableViewCell : UITableViewCell 
+@interface RTWeiboViewCell : UITableViewCell 
 {
     int _type;
     

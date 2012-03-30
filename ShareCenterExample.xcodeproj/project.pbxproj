@@ -24,6 +24,11 @@
 		8748B746150F6E6600A2DE88 /* libxml2.2.7.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8748B745150F6E6600A2DE88 /* libxml2.2.7.3.dylib */; };
 		8748B748150F6E8000A2DE88 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8748B747150F6E8000A2DE88 /* CFNetwork.framework */; };
 		8748B74A150F6E8C00A2DE88 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8748B749150F6E8C00A2DE88 /* MobileCoreServices.framework */; };
+		874D5CFF15254E68006DD576 /* ArticleCoverBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 874D5CFA15254E68006DD576 /* ArticleCoverBackground.png */; };
+		874D5D0015254E68006DD576 /* Avatar1.png in Resources */ = {isa = PBXBuildFile; fileRef = 874D5CFB15254E68006DD576 /* Avatar1.png */; };
+		874D5D0115254E68006DD576 /* CellBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 874D5CFC15254E68006DD576 /* CellBackground.png */; };
+		874D5D0215254E68006DD576 /* DefaultCover.png in Resources */ = {isa = PBXBuildFile; fileRef = 874D5CFD15254E68006DD576 /* DefaultCover.png */; };
+		874D5D0315254E68006DD576 /* SubtitleBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 874D5CFE15254E68006DD576 /* SubtitleBackground.png */; };
 		874F6F761512F074003A6618 /* CUShareCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 874F6EB81512F074003A6618 /* CUShareCenter.m */; };
 		874F6F771512F074003A6618 /* CUShareOAuthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 874F6EBA1512F074003A6618 /* CUShareOAuthView.m */; };
 		874F6F781512F074003A6618 /* CURenrenShareClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 874F6EBD1512F074003A6618 /* CURenrenShareClient.m */; };
@@ -105,7 +110,7 @@
 		874F6FC41512F075003A6618 /* QWeiboRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 874F6F751512F074003A6618 /* QWeiboRequest.m */; };
 		874F6FC71512F0DB003A6618 /* CUTencentEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 874F6FC61512F0DB003A6618 /* CUTencentEngine.m */; };
 		874F6FD715130B66003A6618 /* QWeiboSyncApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 874F6FD615130B66003A6618 /* QWeiboSyncApi.m */; };
-		877A212A15233C5D00991257 /* RTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 877A212915233C5D00991257 /* RTTableViewCell.m */; };
+		877A212A15233C5D00991257 /* RTWeiboViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 877A212915233C5D00991257 /* RTWeiboViewCell.m */; };
 		877A213F15233CB800991257 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 877A212E15233CB800991257 /* SDImageCache.m */; };
 		877A214015233CB800991257 /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 877A213215233CB800991257 /* SDWebImageDecoder.m */; };
 		877A214115233CB800991257 /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 877A213415233CB800991257 /* SDWebImageDownloader.m */; };
@@ -156,6 +161,11 @@
 		8748B745150F6E6600A2DE88 /* libxml2.2.7.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.7.3.dylib; path = usr/lib/libxml2.2.7.3.dylib; sourceTree = SDKROOT; };
 		8748B747150F6E8000A2DE88 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		8748B749150F6E8C00A2DE88 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		874D5CFA15254E68006DD576 /* ArticleCoverBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ArticleCoverBackground.png; sourceTree = "<group>"; };
+		874D5CFB15254E68006DD576 /* Avatar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Avatar1.png; sourceTree = "<group>"; };
+		874D5CFC15254E68006DD576 /* CellBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CellBackground.png; sourceTree = "<group>"; };
+		874D5CFD15254E68006DD576 /* DefaultCover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultCover.png; sourceTree = "<group>"; };
+		874D5CFE15254E68006DD576 /* SubtitleBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SubtitleBackground.png; sourceTree = "<group>"; };
 		874F6EB71512F074003A6618 /* CUShareCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUShareCenter.h; sourceTree = "<group>"; };
 		874F6EB81512F074003A6618 /* CUShareCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUShareCenter.m; sourceTree = "<group>"; };
 		874F6EB91512F074003A6618 /* CUShareOAuthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUShareOAuthView.h; sourceTree = "<group>"; };
@@ -328,8 +338,8 @@
 		874F6FC61512F0DB003A6618 /* CUTencentEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUTencentEngine.m; sourceTree = "<group>"; };
 		874F6FD515130B66003A6618 /* QWeiboSyncApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWeiboSyncApi.h; sourceTree = "<group>"; };
 		874F6FD615130B66003A6618 /* QWeiboSyncApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWeiboSyncApi.m; sourceTree = "<group>"; };
-		877A212815233C5D00991257 /* RTTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTTableViewCell.h; sourceTree = "<group>"; };
-		877A212915233C5D00991257 /* RTTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTTableViewCell.m; sourceTree = "<group>"; };
+		877A212815233C5D00991257 /* RTWeiboViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTWeiboViewCell.h; sourceTree = "<group>"; };
+		877A212915233C5D00991257 /* RTWeiboViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTWeiboViewCell.m; sourceTree = "<group>"; };
 		877A212D15233CB800991257 /* SDImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCache.h; sourceTree = "<group>"; };
 		877A212E15233CB800991257 /* SDImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDImageCache.m; sourceTree = "<group>"; };
 		877A212F15233CB800991257 /* SDImageCacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCacheDelegate.h; sourceTree = "<group>"; };
@@ -863,8 +873,13 @@
 		877A212715233C5D00991257 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				877A212815233C5D00991257 /* RTTableViewCell.h */,
-				877A212915233C5D00991257 /* RTTableViewCell.m */,
+				874D5CFA15254E68006DD576 /* ArticleCoverBackground.png */,
+				874D5CFB15254E68006DD576 /* Avatar1.png */,
+				874D5CFC15254E68006DD576 /* CellBackground.png */,
+				874D5CFD15254E68006DD576 /* DefaultCover.png */,
+				874D5CFE15254E68006DD576 /* SubtitleBackground.png */,
+				877A212815233C5D00991257 /* RTWeiboViewCell.h */,
+				877A212915233C5D00991257 /* RTWeiboViewCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -987,6 +1002,11 @@
 				87D9B7F315232E0600D780E8 /* blueArrow_new.png in Resources */,
 				87D9B7F415232E0600D780E8 /* whiteArrow.png in Resources */,
 				87D9B8081523301A00D780E8 /* CUTimelineView.xib in Resources */,
+				874D5CFF15254E68006DD576 /* ArticleCoverBackground.png in Resources */,
+				874D5D0015254E68006DD576 /* Avatar1.png in Resources */,
+				874D5D0115254E68006DD576 /* CellBackground.png in Resources */,
+				874D5D0215254E68006DD576 /* DefaultCover.png in Resources */,
+				874D5D0315254E68006DD576 /* SubtitleBackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1091,7 +1111,7 @@
 				87D9B80415232FCF00D780E8 /* EGORefreshTableHeaderView.m in Sources */,
 				87D9B80515232FCF00D780E8 /* NSDate+Nibware.m in Sources */,
 				87D9B80615232FCF00D780E8 /* PullToRefreshViewController.m in Sources */,
-				877A212A15233C5D00991257 /* RTTableViewCell.m in Sources */,
+				877A212A15233C5D00991257 /* RTWeiboViewCell.m in Sources */,
 				877A213F15233CB800991257 /* SDImageCache.m in Sources */,
 				877A214015233CB800991257 /* SDWebImageDecoder.m in Sources */,
 				877A214115233CB800991257 /* SDWebImageDownloader.m in Sources */,

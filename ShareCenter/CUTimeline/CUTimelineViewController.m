@@ -12,7 +12,7 @@
 #import "User.h"
 #import "CUSinaShareClient.h"
 #import "CUShareCenter.h"
-#import "RTTableViewCell.h"
+#import "RTWeiboViewCell.h"
 
 #import "GlobalDef.h"
 
@@ -156,7 +156,7 @@
             NSNumber *statusKey = (NSNumber *)obj;
             Status *status = [self.timelineDataSource.timelineData objectForKey:statusKey];
             
-            return [RTTableViewCell rowHeightForObject:status];
+            return [RTWeiboViewCell rowHeightForObject:status];
         }
     }
     
@@ -165,13 +165,13 @@
 
 - (UITableViewCell *)getTableViewCell:(NSNumber *)statusKey
 {
-    static NSString *cellIdentifier = @"RTTableViewCell";
+    static NSString *cellIdentifier = @"RTWeiboViewCell";
     
-    RTTableViewCell *articleTableViewCell = (RTTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    RTWeiboViewCell *articleTableViewCell = (RTWeiboViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if (articleTableViewCell == nil)
     {
-        articleTableViewCell = [[RTTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        articleTableViewCell = [[RTWeiboViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         
         // set selection color 
         UIView *backgroundView = [[UIView alloc] initWithFrame:articleTableViewCell.frame]; 
