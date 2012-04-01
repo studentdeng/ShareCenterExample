@@ -21,7 +21,10 @@
     
     //UITableView *tableView;
     LoadMoreCell *loadMoreCell;
+    UINavigationBar *navBar;
 }
+
+@property (nonatomic, retain) IBOutlet UINavigationBar *navBar;
 
 - (id)initWithToken:(NSString *)token;
 

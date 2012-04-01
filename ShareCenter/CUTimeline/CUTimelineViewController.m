@@ -13,8 +13,11 @@
 #import "CUSinaShareClient.h"
 #import "CUShareCenter.h"
 #import "RTWeiboViewCell.h"
+#import "EGORefreshTableHeaderView.h"
+#import "CUConfig.h"
 
 #import "GlobalDef.h"
+
 
 @interface CUTimelineViewController ()
 
@@ -26,6 +29,7 @@
 
 @synthesize timelineDataSource;
 @synthesize tableView;
+@synthesize navBar;
 
 - (id)initWithToken:(NSString *)token
 {
@@ -46,6 +50,7 @@
     self.timelineDataSource = nil;
     self.tableView = nil;
     [loadMoreCell release];
+    self.navBar = nil;
     
     [super dealloc];
 }
@@ -55,6 +60,17 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     timelineDataSource.delegate = self;
+    
+#ifdef NAV_BAR_ITEM_COLOR
+    self.navBar.tintColor = NAV_BAR_ITEM_COLOR;
+#endif
+    
+#ifdef NAVBAR_TOOLBAR_IMAGE_NAME
+    if ([self.navBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]){
+        [self.navBar setBackgroundImage:[UIImage imageNamed:NAVBAR_TOOLBAR_IMAGE_NAME] 
+                          forBarMetrics:UIBarMetricsDefault];
+    }
+#endif
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -32,7 +32,9 @@
 //官方回复颜色
 #define OFFICIAL_COLOR [UIColor colorWithRed:255.0/255.0 green:155.0/255.0 blue:57.0/255.0 alpha:1.0]
 
-#define NAV_BAR_ITEM_COLOR [UIColor lightGrayColor]
+#ifndef NAV_BAR_ITEM_COLOR
+    #define NAV_BAR_ITEM_COLOR          ([UIColor lightGrayColor])
+#endif
 
 //STYLE
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]

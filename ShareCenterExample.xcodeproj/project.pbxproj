@@ -131,6 +131,8 @@
 		87D9B80515232FCF00D780E8 /* NSDate+Nibware.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D9B80115232FCF00D780E8 /* NSDate+Nibware.m */; };
 		87D9B80615232FCF00D780E8 /* PullToRefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D9B80315232FCF00D780E8 /* PullToRefreshViewController.m */; };
 		87D9B8081523301A00D780E8 /* CUTimelineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87D9B8071523301A00D780E8 /* CUTimelineView.xib */; };
+		87E418611527FF1300A0EED9 /* NavBar_ios5.png in Resources */ = {isa = PBXBuildFile; fileRef = 87E4185F1527FF1300A0EED9 /* NavBar_ios5.png */; };
+		87E418621527FF1300A0EED9 /* NavBar_ios5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87E418601527FF1300A0EED9 /* NavBar_ios5@2x.png */; };
 		87E86C5515179109002D6CD0 /* CUShareClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 87E86C5415179109002D6CD0 /* CUShareClient.m */; };
 /* End PBXBuildFile section */
 
@@ -378,6 +380,9 @@
 		87D9B80215232FCF00D780E8 /* PullToRefreshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshViewController.h; sourceTree = "<group>"; };
 		87D9B80315232FCF00D780E8 /* PullToRefreshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshViewController.m; sourceTree = "<group>"; };
 		87D9B8071523301A00D780E8 /* CUTimelineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CUTimelineView.xib; sourceTree = "<group>"; };
+		87E416EC1527FD4800A0EED9 /* CUConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CUConfig.h; sourceTree = "<group>"; };
+		87E4185F1527FF1300A0EED9 /* NavBar_ios5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBar_ios5.png; sourceTree = "<group>"; };
+		87E418601527FF1300A0EED9 /* NavBar_ios5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBar_ios5@2x.png"; sourceTree = "<group>"; };
 		87E86C5315179109002D6CD0 /* CUShareClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUShareClient.h; sourceTree = "<group>"; };
 		87E86C5415179109002D6CD0 /* CUShareClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUShareClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -469,6 +474,7 @@
 		8748B725150F6E0C00A2DE88 /* ShareCenterExample */ = {
 			isa = PBXGroup;
 			children = (
+				87E4185E1527FF1300A0EED9 /* image */,
 				87869A6F151080C40079D8FC /* test.jpg */,
 				8748B72E150F6E0D00A2DE88 /* CUAppDelegate.h */,
 				8748B72F150F6E0D00A2DE88 /* CUAppDelegate.m */,
@@ -513,6 +519,7 @@
 				874F6EBA1512F074003A6618 /* CUShareOAuthView.m */,
 				87E86C5315179109002D6CD0 /* CUShareClient.h */,
 				87E86C5415179109002D6CD0 /* CUShareClient.m */,
+				87E416EC1527FD4800A0EED9 /* CUConfig.h */,
 			);
 			path = CUBase;
 			sourceTree = "<group>";
@@ -942,6 +949,15 @@
 			path = image;
 			sourceTree = "<group>";
 		};
+		87E4185E1527FF1300A0EED9 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				87E4185F1527FF1300A0EED9 /* NavBar_ios5.png */,
+				87E418601527FF1300A0EED9 /* NavBar_ios5@2x.png */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1007,6 +1023,8 @@
 				874D5D0115254E68006DD576 /* CellBackground.png in Resources */,
 				874D5D0215254E68006DD576 /* DefaultCover.png in Resources */,
 				874D5D0315254E68006DD576 /* SubtitleBackground.png in Resources */,
+				87E418611527FF1300A0EED9 /* NavBar_ios5.png in Resources */,
+				87E418621527FF1300A0EED9 /* NavBar_ios5@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

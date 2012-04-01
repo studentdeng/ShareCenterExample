@@ -89,6 +89,36 @@
                                                andImageURLString:TEST_IMAGEURL_NICE_GIRL];
 }
 
+- (IBAction)showRENREN:(id)sender
+{
+    BOOL bBind = [[CUShareCenter sharedInstanceWithType:RENRENCLIENT] isBind];
+    if (!bBind) {
+        [[CUShareCenter sharedInstanceWithType:RENRENCLIENT] Bind];
+    }
+    else {
+        
+        CURenrenShareClient *renren = (CURenrenShareClient *)[[CUShareCenter sharedInstanceWithType:RENRENCLIENT] shareClient];
+        
+        NSString *shareUrl    = @"http://www.imiknow.com/details.aspx?id=7466851";
+        NSString *description = @"just do it";
+        NSString *caption     = @"why is here"; 
+        
+        NSString *imagePath = TEST_IMAGEURL_NICE_GIRL;
+        NSString *articleShort = @"same here";
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                       shareUrl, @"url",
+                                       articleShort, @"name",
+                                       @"iKnow英语", @"action_name",
+                                       @"http://www.imiknow.com/", @"action_link",
+                                       description, @"description",
+                                       caption, @"caption",
+                                       imagePath, @"image",
+                                       nil];
+        
+        [renren sendWithDictionary:params];
+    }
+}
+
 - (IBAction)logout:(id)sender
 {
     UIButton *btn = sender;
