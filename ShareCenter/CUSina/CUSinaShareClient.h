@@ -32,9 +32,9 @@
 - (BOOL)isCUAuth;
 - (void)CULogout;
 
-- (void)CUShowWithText:(NSString *)text;
-- (void)CUShowWithText:(NSString *)text andImage:(UIImage *)image;
-- (void)CUShowWithText:(NSString *)text andImageURLString:(NSString *)imageURLString;
+- (void)CUSendWithText:(NSString *)text;
+- (void)CUSendWithText:(NSString *)text andImage:(UIImage *)image;
+- (void)CUSendWithText:(NSString *)text andImageURLString:(NSString *)imageURLString;
 
 - (NSString *)requestToken;
 

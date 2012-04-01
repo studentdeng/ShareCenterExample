@@ -97,12 +97,12 @@
     return;
 }
 
-- (void)CUShowWithText:(NSString *)text
+- (void)CUSendWithText:(NSString *)text
 {
-    return [self CUShowWithText:text andImage:nil];
+    return [self CUSendWithText:text andImage:nil];
 }
 
-- (void)CUShowWithText:(NSString *)text andImage:(UIImage *)image
+- (void)CUSendWithText:(NSString *)text andImage:(UIImage *)image
 {
     if ([text length] == 0) {
         return;
@@ -111,8 +111,8 @@
     return [self post:text andImage:image];
 }
 
-//需要告急授权
-- (void)CUShowWithText:(NSString *)text andImageURLString:(NSString *)imageURLString
+//需要高级授权
+- (void)CUSendWithText:(NSString *)text andImageURLString:(NSString *)imageURLString
 {
     return [self post:text andImageURLString:imageURLString];
 }

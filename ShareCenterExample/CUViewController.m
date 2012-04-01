@@ -39,19 +39,16 @@
                                                                      appSecret:kOAuthConsumerSecret_sina] autorelease];
     sinaClient.delegate = self;
     [CUShareCenter setupClient:sinaClient withType:SINACLIENT];
-    [CUShareCenter setupContainer:self withType:SINACLIENT];
     
     CURenrenShareClient *renrenClient = [[[CURenrenShareClient alloc] initWithAppKey:kAPP_ID_renren
                                                                            appSecret:kAPI_Key_renren] autorelease];
     renrenClient.delegate = self;
     [CUShareCenter setupClient:renrenClient withType:RENRENCLIENT];
-    [CUShareCenter setupContainer:self withType:RENRENCLIENT];
     
     CUTencentShareClient *tencentClient = [[[CUTencentShareClient alloc] initWithAppKey:kOAuthConsumerKey_tencent
                                                                               appSecret:kOAuthConsumerSecret_tencent] autorelease];
     tencentClient.delegate = self;
     [CUShareCenter setupClient:tencentClient withType:TTWEIBOCLIENT];
-    [CUShareCenter setupContainer:self withType:TTWEIBOCLIENT];
     
     BOOL bBind = [[CUShareCenter sharedInstanceWithType:SINACLIENT] isBind];
     sinaBindLabel.text = bBind ? @"sina bind" : @"sina unbind";
@@ -80,12 +77,12 @@
     
     if (btn.tag == SINACLIENT) {
     
-        [[CUShareCenter sharedInstanceWithType:SINACLIENT] showWithText:@"hi" 
+        [[CUShareCenter sharedInstanceWithType:SINACLIENT] sendWithText:@"hi" 
                                                                andImage:[UIImage imageNamed:@"test.jpg"]];
         return;
     }
     
-    [[CUShareCenter sharedInstanceWithType:btn.tag] showWithText:@"tencent的sdk还是挺给力的，尽管啥都没有，不过总比人人的好使"
+    [[CUShareCenter sharedInstanceWithType:btn.tag] sendWithText:@"tencent的sdk还是挺给力的，尽管啥都没有，不过总比人人的好使"
                                                andImageURLString:TEST_IMAGEURL_NICE_GIRL];
 }
 
@@ -93,7 +90,7 @@
 {
     BOOL bBind = [[CUShareCenter sharedInstanceWithType:RENRENCLIENT] isBind];
     if (!bBind) {
-        [[CUShareCenter sharedInstanceWithType:RENRENCLIENT] Bind];
+        [[CUShareCenter sharedInstanceWithType:RENRENCLIENT] Bind:self];
     }
     else {
         
@@ -136,7 +133,7 @@
     //NSString *token = @"123123123";
     if ([token length] == 0) {
         
-        [[CUShareCenter sharedInstanceWithType:SINACLIENT] Bind];
+        [[CUShareCenter sharedInstanceWithType:SINACLIENT] Bind:self];
         
         return;
     }

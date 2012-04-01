@@ -16,7 +16,6 @@ static CUShareCenter *s_instance3 = nil;
 
 @synthesize type;
 @synthesize shareClient;
-@synthesize clientContainerVC;
 
 #pragma mark - life
 
@@ -41,7 +40,6 @@ static CUShareCenter *s_instance3 = nil;
 - (void)dealloc
 {
     [shareClient release];
-    [clientContainerVC release];
     
     [super dealloc];
 }
@@ -103,37 +101,21 @@ static CUShareCenter *s_instance3 = nil;
     [CUShareCenter sharedInstanceWithType:aType].shareClient = client;
 }
 
-+ (void)setupContainer:(UIViewController *)containerVC
-              withType:(CUShareClientType)type
-{
-    [CUShareCenter sharedInstanceWithType:type].clientContainerVC = containerVC;
-}
-
 #pragma mark - common method
 
-- (void)showWithText:(NSString *)text
+- (void)sendWithText:(NSString *)text
 {
-    return [self showWithText:text andImage:nil];
+    return [self sendWithText:text andImage:nil];
 }
 
-- (void)showWithText:(NSString *)text andImage:(UIImage *)image
+- (void)sendWithText:(NSString *)text andImage:(UIImage *)image
 {
-    if (![self isBind]) {
-        [shareClient CUOpenAuthViewInViewController:clientContainerVC];
-    }
-    else {
-        [shareClient CUShowWithText:text andImage:image];
-    }
+    [shareClient CUSendWithText:text andImage:image];
 }
 
-- (void)showWithText:(NSString *)text andImageURLString:(NSString *)imageURLString
+- (void)sendWithText:(NSString *)text andImageURLString:(NSString *)imageURLString
 {
-    if (![self isBind]) {
-        [shareClient CUOpenAuthViewInViewController:clientContainerVC];
-    }
-    else {
-        [shareClient CUShowWithText:text andImageURLString:imageURLString];
-    }
+    [shareClient CUSendWithText:text andImageURLString:imageURLString];
 }
 
 - (BOOL)isBind
@@ -146,10 +128,9 @@ static CUShareCenter *s_instance3 = nil;
     return [shareClient CULogout];
 }
 
-- (void)Bind;
+- (void)Bind:(UIViewController *)vc
 {    
-    [shareClient CUOpenAuthViewInViewController:clientContainerVC];
-   // [clientContainerVC presentModalViewController:[shareClient CUGetAuthViewController] animated:YES];
+    [shareClient CUOpenAuthViewInViewController:vc];
     
     return;
 }

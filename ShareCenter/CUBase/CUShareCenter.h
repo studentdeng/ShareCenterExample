@@ -13,8 +13,6 @@
 {
     CUShareClientType type;
     id<CUShareClientData> shareClient;
-    
-    UIViewController *clientContainerVC;
 }
 
 + (CUShareCenter *)sharedInstanceWithType:(CUShareClientType)type;
@@ -24,19 +22,15 @@
 + (void)setupClient:(id<CUShareClientData>)client 
            withType:(CUShareClientType)type;
 
-+ (void)setupContainer:(UIViewController *)containerVC
-              withType:(CUShareClientType)type;
-
-- (void)showWithText:(NSString *)text;
-- (void)showWithText:(NSString *)text andImage:(UIImage *)image;
-- (void)showWithText:(NSString *)text andImageURLString:(NSString *)imageURLString;
+- (void)sendWithText:(NSString *)text;
+- (void)sendWithText:(NSString *)text andImage:(UIImage *)image;
+- (void)sendWithText:(NSString *)text andImageURLString:(NSString *)imageURLString;
 
 - (BOOL)isBind;
 - (void)unBind;
-- (void)Bind;
+- (void)Bind:(UIViewController *)vc;
 
 @property (nonatomic, assign) CUShareClientType type;
-@property (nonatomic, retain) UIViewController *clientContainerVC;
 
 //it really should be retain!
 @property (nonatomic, retain) id<CUShareClientData> shareClient;

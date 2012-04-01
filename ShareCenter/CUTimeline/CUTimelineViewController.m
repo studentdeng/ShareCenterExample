@@ -81,7 +81,6 @@
                                                                      appSecret:kOAuthConsumerSecret_sina] autorelease];
     sinaClient.delegate = self;
     [CUShareCenter setupClient:sinaClient withType:SINACLIENT];
-    [CUShareCenter setupContainer:self withType:SINACLIENT];
 }
 
 - (void)viewDidUnload
@@ -145,7 +144,7 @@
     else {
         //
         //这里为sina 服务器返回错误，要不sina server crash,要不就是参数错误 要不就是认证失败，认证失败概率最大，这里简单处理了
-        [[CUShareCenter sharedInstanceWithType:SINACLIENT] Bind];
+        [[CUShareCenter sharedInstanceWithType:SINACLIENT] Bind:self];
         
         [super performSelector:@selector(dataSourceDidFinishLoadingNewData:) withObject:[NSNumber numberWithInt:1]  afterDelay:0.1];
     }

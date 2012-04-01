@@ -76,9 +76,9 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
     CGRect rc = ApplicationFrame(self.orientation);
     
     self.view = [[[UIView alloc] initWithFrame: rc] autorelease];
-	self.navBar = [[[UINavigationBar alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 44)] autorelease];
+    self.navBar = [[[UINavigationBar alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 44)] autorelease];
 	
-	self.navBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+    self.navBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 #ifdef NAV_BAR_ITEM_COLOR
     self.navBar.tintColor = NAV_BAR_ITEM_COLOR;
 #endif
@@ -90,13 +90,13 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
     }
 #endif
     
-	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	
-	CGRect frame = ApplicationFrame(self.orientation);
-	frame.origin.y = 44;
-	frame.size.height -= 44;
+    CGRect frame = ApplicationFrame(self.orientation);
+    frame.origin.y = 44;
+    frame.size.height -= 44;
     
-	[self.view addSubview: navBar];
+    [self.view addSubview: navBar];
     
     UIActivityIndicatorView *activeIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activeIndicator.autoresizingMask = UIViewAutoresizingFlexibleTopMargin 

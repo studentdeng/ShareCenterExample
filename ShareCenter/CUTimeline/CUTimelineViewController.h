@@ -18,8 +18,6 @@
 <CUTimelineDataSourceDelegate, UITableViewDataSource, UITableViewDelegate, CUShareClientDelegate>
 {
     CUTimelineDataSource *timelineDataSource;
-    
-    //UITableView *tableView;
     LoadMoreCell *loadMoreCell;
     UINavigationBar *navBar;
 }
