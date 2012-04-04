@@ -32,9 +32,10 @@
     NSString *requestTokenKey;
     NSString *requestTokenSecret;
     
-    QWeiboRequest *request;
-    
     id<CUTencentEngineDelegate> delegate;
+    
+    NSURLConnection *connection;
+    NSMutableData *responseData;
 }
 
 @property (nonatomic, copy) NSString *appKey;

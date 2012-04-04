@@ -12,6 +12,10 @@
 #import "SFHFKeychainUtils.h"
 #import "NSString+SBJSON.h"
 
+#import "QOauthKey.h"
+#import "QWeiboRequest.h"
+#import "QWeiboAsyncApi.h"
+
 #define kWBURLSchemePrefix              @"WB_Tencent_"
 
 #define kWBKeychainServiceNameSuffix    @"_WeiBoServiceName_Tencent"
@@ -21,6 +25,15 @@
 #define kWBKeychainAccessTokenSecret    @"WeiBoAccessTokenSecret_Tencent"
 
 #define kWBAPI_ADD                      @"http://open.t.qq.com/api/t/add"
+
+#define TEST_IP     @"202.10.10.21"
+
+@interface CUTencentEngine ()
+
+@property (nonatomic, retain) NSURLConnection *connection;
+@property (nonatomic, retain) NSMutableData *responseData;
+
+@end
 
 
 @implementation CUTencentEngine
@@ -33,6 +46,9 @@
 @synthesize delegate;
 @synthesize requestTokenKey;
 @synthesize requestTokenSecret;
+
+@synthesize connection;
+@synthesize responseData;
 
 - (id)initWithAppKey:(NSString *)theAppKey appSecret:(NSString *)theAppSecret
 {
@@ -56,10 +72,30 @@
     [requestTokenKey release];
     [requestTokenSecret release];
     
+    [self.connection cancel];
+    [connection release];
+    [responseData release];
+    
     [super dealloc];
 }
 
 #pragma mark - common method
+
+- (void)logOut
+{
+    [self deleteAuthorizeDataInKeychain];
+}
+
+- (BOOL)isLoggedIn
+{
+    return (appKey && self.tokenSecret && self.tokenKey && appSecret);
+}
+
+- (BOOL)isAuthorizeExpired
+{
+    return NO;
+}
+
 
 - (BOOL)authorizeResponse:(NSString *)aResponse
 {
@@ -116,54 +152,26 @@
     return [self.tokenKey length] && [self.tokenSecret length];
 }
 
-- (void)logOut
+- (void)sendWeiBoWithText:(NSString *)aContent imageURL:(NSString *)aImageURL
 {
-    [self deleteAuthorizeDataInKeychain];
-}
-
-- (BOOL)isLoggedIn
-{
-    return (appKey && self.tokenSecret && self.tokenKey && appSecret);
-}
-
-- (BOOL)isAuthorizeExpired
-{
-    return NO;
-}
-
-- (void)sendWeiBoWithText:(NSString *)text imageURL:(NSString *)url
-{
-    QWeiboSyncApi *api = [[[QWeiboSyncApi alloc] init] autorelease];
+	if ([aContent length] == 0) {
+		return;
+	}
     
-    NSString *resString = 
-    [api publishMsgWithConsumerKey:self.appKey 
-                    consumerSecret:self.appSecret 
-                    accessTokenKey:self.tokenKey 
-                 accessTokenSecret:self.tokenSecret 
-                           content:text 
-                          imageURL:url
-                        resultType:RESULTTYPE_JSON];
+    QWeiboAsyncApi *api = [[[QWeiboAsyncApi alloc] init] autorelease];
     
-    NSLog(@"%@", resString);
-    
-    id jsonObject = [resString JSONValue];
-    
-    if ([jsonObject isKindOfClass:[NSDictionary class]]) {
-        
-        int ret = [[jsonObject objectForKey:@"ret"] intValue];
-        
-        if (ret == 0) {
-            if ([delegate respondsToSelector:@selector(engine:requestDidSucceedWithResult:)])
-            {
-                [delegate engine:self requestDidSucceedWithResult:jsonObject];
-            }
-            
-            return;
+    BOOL hasImage = [aImageURL length] > 0;	
+    self.connection = [api publishMsgWithConsumerKey:self.appKey 
+                                      consumerSecret:self.appSecret 
+                                      accessTokenKey:self.tokenKey 
+                                   accessTokenSecret:self.tokenSecret 
+                                             content:aContent 
+                                            imageURL:hasImage ? aImageURL : nil 
+                                            delegate:self];
+    if (self.connection == nil) {
+        if ([delegate respondsToSelector:@selector(engine:requestDidFailWithError:)]) {
+            [delegate engine:self requestDidFailWithError:nil];
         }
-    }
-    
-    if ([delegate respondsToSelector:@selector(engine:requestDidFailWithError:)]) {
-        [delegate engine:self requestDidFailWithError:nil];
     }
 }
 
@@ -241,5 +249,61 @@
 	[SFHFKeychainUtils deleteItemForUsername:kWBKeychainAccessToken andServiceName:serviceName error:nil];
 	[SFHFKeychainUtils deleteItemForUsername:kWBKeychainAccessTokenSecret andServiceName:serviceName error:nil];
 }
+
+#pragma mark -
+#pragma mark NSURLConnection delegate
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+	
+	[responseData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+	
+	self.responseData = [NSMutableData data];
+}
+
+- (void) connectionDidFinishLoading:(NSURLConnection *)connection {
+	
+    NSString *resString = [[[NSString alloc] initWithData:self.responseData 
+                                                encoding:NSUTF8StringEncoding] autorelease];
+    
+    id jsonObject = [resString JSONValue];
+    
+    if ([jsonObject isKindOfClass:[NSDictionary class]]) {
+        
+        int ret = [[jsonObject objectForKey:@"ret"] intValue];
+        
+        if (ret == 0) {
+            if ([delegate respondsToSelector:@selector(engine:requestDidSucceedWithResult:)])
+            {
+                [delegate engine:self requestDidSucceedWithResult:jsonObject];
+            }
+            
+            [self.connection cancel];
+            self.connection = nil;
+            
+            return;
+        }
+    }
+    
+    if ([delegate respondsToSelector:@selector(engine:requestDidFailWithError:)]) {
+        [delegate engine:self requestDidFailWithError:nil];
+    }
+    
+    [self.connection cancel];
+    self.connection = nil;
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    
+    if ([delegate respondsToSelector:@selector(engine:requestDidFailWithError:)]) {
+        [delegate engine:self requestDidFailWithError:error];
+    }
+    
+    [self.connection cancel];
+    self.connection = nil;
+}
+
 
 @end

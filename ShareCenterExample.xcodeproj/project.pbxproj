@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		872060D0152C8DB800FBAECD /* QWeiboAsyncApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 872060CF152C8DB700FBAECD /* QWeiboAsyncApi.m */; };
 		8727F3981521AAF5006A0EE8 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 8727F3951521AAF5006A0EE8 /* Status.m */; };
 		8727F3991521AAF5006A0EE8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8727F3971521AAF5006A0EE8 /* User.m */; };
 		8727F39E1521AB8C006A0EE8 /* CUTimelineDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8727F39D1521AB8C006A0EE8 /* CUTimelineDataSource.m */; };
@@ -137,6 +138,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		872060CE152C8DB700FBAECD /* QWeiboAsyncApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWeiboAsyncApi.h; sourceTree = "<group>"; };
+		872060CF152C8DB700FBAECD /* QWeiboAsyncApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWeiboAsyncApi.m; sourceTree = "<group>"; };
 		8727F3941521AAF5006A0EE8 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
 		8727F3951521AAF5006A0EE8 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
 		8727F3961521AAF5006A0EE8 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -853,6 +856,8 @@
 		874F6F631512F074003A6618 /* tencent */ = {
 			isa = PBXGroup;
 			children = (
+				872060CE152C8DB700FBAECD /* QWeiboAsyncApi.h */,
+				872060CF152C8DB700FBAECD /* QWeiboAsyncApi.m */,
 				874F6FD515130B66003A6618 /* QWeiboSyncApi.h */,
 				874F6FD615130B66003A6618 /* QWeiboSyncApi.m */,
 				874F6F641512F074003A6618 /* NSData+QBase64.h */,
@@ -1137,6 +1142,7 @@
 				877A214315233CB800991257 /* SDWebImagePrefetcher.m in Sources */,
 				877A214415233CB800991257 /* UIButton+WebCache.m in Sources */,
 				877A214515233CB800991257 /* UIImageView+WebCache.m in Sources */,
+				872060D0152C8DB800FBAECD /* QWeiboAsyncApi.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
