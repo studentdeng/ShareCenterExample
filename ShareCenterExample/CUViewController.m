@@ -75,6 +75,10 @@
 {
     UIButton *btn = sender;
     
+    if (![[CUShareCenter sharedInstanceWithType:btn.tag] isBind]) {
+        return [[CUShareCenter sharedInstanceWithType:btn.tag] Bind:self];
+    }
+    
     if (btn.tag == SINACLIENT) {
     
         [[CUShareCenter sharedInstanceWithType:SINACLIENT] sendWithText:@"hi" 

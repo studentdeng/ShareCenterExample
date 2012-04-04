@@ -97,7 +97,7 @@
     
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]
                                             cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                        timeoutInterval:60.0];
+                                        timeoutInterval:5];
     
     return request;
 }

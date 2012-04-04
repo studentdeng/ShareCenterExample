@@ -59,6 +59,8 @@
     [super dealloc];
 }
 
+#pragma mark - common method
+
 - (BOOL)authorizeResponse:(NSString *)aResponse
 {
     NSString *aVerifier = [self valueForKey:@"oauth_verifier" ofQuery:aResponse];
