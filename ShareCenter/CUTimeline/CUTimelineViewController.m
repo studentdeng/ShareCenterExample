@@ -46,6 +46,8 @@
 
 - (void)dealloc
 {
+    [[[CUShareCenter sharedInstanceWithType:SINACLIENT] shareClient] removeDelegate:self];
+    
     self.timelineDataSource.delegate = nil;
     self.timelineDataSource = nil;
     self.tableView = nil;
@@ -71,20 +73,25 @@
                           forBarMetrics:UIBarMetricsDefault];
     }
 #endif
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
+    
+    bTimelineRefresh = TRUE;
+    
+    NSString *key = NSStringFromClass([self class]);
+    NSDate *date = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    
+    [self.refreshHeaderView setLastRefreshDate:date];
     
     [[[CUShareCenter sharedInstanceWithType:SINACLIENT] shareClient] addDelegate:self];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
+    [super viewDidAppear:animated];
     
-    [[[CUShareCenter sharedInstanceWithType:SINACLIENT] shareClient] removeDelegate:self];
+    if ([self.timelineDataSource.timelineDataKey count] == 0 && bTimelineRefresh) {
+        bTimelineRefresh = FALSE;
+        [self enforceRefresh:self.tableView];
+    }
 }
 
 - (void)viewDidUnload
@@ -103,14 +110,8 @@
 #pragma mark -
 #pragma mark action
 
-- (IBAction)close:(id)sender
+- (void)refreshData
 {
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-- (IBAction)refresh:(id)sender
-{
-    //[self.timelineDataSource loadTimelineBySinceId:0];
     NSNumber *newKey = nil;
     
     for (int i =  0; i < [self.timelineDataSource.timelineDataKey count]; ++i) {
@@ -123,6 +124,16 @@
     }
     
     [self.timelineDataSource loadTimelineBySinceId:[newKey longLongValue]];
+}
+
+- (IBAction)close:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)refresh:(id)sender
+{
+    [self enforceRefresh:self.tableView];
 }
 
 #pragma mark -
@@ -247,7 +258,7 @@
         [self.timelineDataSource loadTimelineByMaxId:[lastKey longLongValue] - 1];
     }
     else {
-        [self refresh:nil];
+        [self refreshData];
     }
 }
 
@@ -284,6 +295,8 @@
         timelineDataSource.delegate = self;
         
         [ds release];
+        
+        bTimelineRefresh = YES;
     }
 }
 
@@ -291,7 +304,7 @@
 
 - (void)reloadTableViewDataSource
 {
-    [self refresh:nil];
+    [self refreshData];
 }
 
 - (void)dataSourceDidFinishLoadingNewData:(NSNumber *)loadedData
@@ -301,6 +314,11 @@
         [refreshHeaderView setCurrentDate];
         [super dataSourceDidFinishLoadingNewData:nil];
         [self.tableView reloadData];
+        
+        NSString *key = NSStringFromClass([self class]);
+        NSDate *date = [NSDate date];
+        [[NSUserDefaults standardUserDefaults] setObject:date forKey:key];
+        
     } else {
         [super dataSourceDidFinishLoadingNewData:nil];
         // Present an informative UIAlertView

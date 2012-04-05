@@ -67,8 +67,7 @@
     self.viewClient.webView.delegate = self;
     [self.viewClient.webView loadRequest:[self CULoginURLRequest]];
     
-    [self show:vc];
-    //[self performSelector:@selector(show:) withObject:vc afterDelay:0.1];
+    [self performSelector:@selector(show:) withObject:vc afterDelay:0.1];
 }
 
 - (void)CUNotifyShareFailed:(CUShareClient *)client withError:(NSError *)error

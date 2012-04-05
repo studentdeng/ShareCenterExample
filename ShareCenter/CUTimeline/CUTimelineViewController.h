@@ -20,6 +20,8 @@
     CUTimelineDataSource *timelineDataSource;
     LoadMoreCell *loadMoreCell;
     UINavigationBar *navBar;
+    
+    BOOL bTimelineRefresh;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationBar *navBar;

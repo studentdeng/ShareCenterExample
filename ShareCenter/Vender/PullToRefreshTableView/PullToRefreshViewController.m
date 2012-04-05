@@ -140,11 +140,16 @@
 
 - (void)enforceRefresh:(UIScrollView *)scrollView
 {
-    CGPoint point = scrollView.contentOffset;
-    point.y = -(RefreshViewHight + 20);
-    scrollView.contentOffset = point;
+    [UIView beginAnimations:@"pullAnimation" context:nil];
     
-    [self scrollViewDidEndDragging:scrollView willDecelerate:YES];
+    [UIView animateWithDuration:1.0f 
+                     animations:^{
+                         CGPoint point = scrollView.contentOffset;
+                         point.y = -(RefreshViewHight + 20);
+                         scrollView.contentOffset = point;
+                     } completion:^(BOOL finished) {
+                         [self scrollViewDidEndDragging:scrollView willDecelerate:YES];
+                     }];
 }
 
 - (void)reloadTableViewDataSource
