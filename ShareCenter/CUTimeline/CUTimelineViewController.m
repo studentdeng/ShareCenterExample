@@ -77,10 +77,14 @@
 {
     [super viewWillAppear:animated];
     
-    CUSinaShareClient *sinaClient = [[[CUSinaShareClient alloc] initWithAppKey:kOAuthConsumerKey_sina 
-                                                                     appSecret:kOAuthConsumerSecret_sina] autorelease];
-    sinaClient.delegate = self;
-    [CUShareCenter setupClient:sinaClient withType:SINACLIENT];
+    [[[CUShareCenter sharedInstanceWithType:SINACLIENT] shareClient] addDelegate:self];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[[CUShareCenter sharedInstanceWithType:SINACLIENT] shareClient] removeDelegate:self];
 }
 
 - (void)viewDidUnload

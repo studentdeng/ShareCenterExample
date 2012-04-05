@@ -33,6 +33,9 @@ CUShareClientType;
 @optional
 - (NSString *)requestToken;
 
+- (void)addDelegate:(id)aDelegate;
+- (void)removeDelegate:(id)aDelegate;
+
 @end
 
 @class CUShareClient;
@@ -41,24 +44,29 @@ CUShareClientType;
 @optional
 - (void)CUShareFailed:(CUShareClient *)client withError:(NSError *)error;
 - (void)CUShareSucceed:(CUShareClient *)client;
-- (void)CUSHareCancel:(CUShareClient *)client;
+- (void)CUShareCancel:(CUShareClient *)client;
 
 - (void)CUAuthSucceed:(CUShareClient *)client;
 - (void)CUAuthFailed:(CUShareClient *)client withError:(NSError *)error;
 
 @end
 
-
+@class GCDMulticastDelegate;
 @interface CUShareClient : NSObject
 <UIWebViewDelegate>
 {
     id<CUShareClientDelegate> delegate;
     
     CUShareOAuthView *viewClient;
+    
+    GCDMulticastDelegate <CUShareClientDelegate> *multicastMessageDelegate;
 }
 
 @property (nonatomic, assign) id<CUShareClientDelegate> delegate;
 @property (nonatomic, retain) CUShareOAuthView *viewClient;
+
+- (void)addDelegate:(id)aDelegate;
+- (void)removeDelegate:(id)aDelegate;
 
 - (void)CUOpenAuthViewInViewController:(UIViewController *)vc;
 

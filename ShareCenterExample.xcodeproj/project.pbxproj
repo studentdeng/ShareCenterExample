@@ -119,6 +119,7 @@
 		877A214315233CB800991257 /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 877A213A15233CB800991257 /* SDWebImagePrefetcher.m */; };
 		877A214415233CB800991257 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 877A213C15233CB800991257 /* UIButton+WebCache.m */; };
 		877A214515233CB800991257 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 877A213E15233CB800991257 /* UIImageView+WebCache.m */; };
+		87852EF9152D423B009376DE /* GCDMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87852EF8152D423B009376DE /* GCDMulticastDelegate.m */; };
 		87869A70151080C40079D8FC /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87869A6F151080C40079D8FC /* test.jpg */; };
 		87896A6815118BC300D6189C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87896A6715118BC300D6189C /* Security.framework */; };
 		87D880721522B63800CFC90D /* CUTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D880711522B63800CFC90D /* CUTimelineViewController.m */; };
@@ -364,6 +365,8 @@
 		877A213D15233CB800991257 /* UIImageView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+WebCache.h"; sourceTree = "<group>"; };
 		877A213E15233CB800991257 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		877A214715233FA200991257 /* GlobalDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalDef.h; sourceTree = "<group>"; };
+		87852EF7152D423B009376DE /* GCDMulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDMulticastDelegate.h; sourceTree = "<group>"; };
+		87852EF8152D423B009376DE /* GCDMulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDMulticastDelegate.m; sourceTree = "<group>"; };
 		87869A6F151080C40079D8FC /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
 		87896A6715118BC300D6189C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		87D880701522B63800CFC90D /* CUTimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUTimelineViewController.h; sourceTree = "<group>"; };
@@ -559,6 +562,7 @@
 		874F6EC41512F074003A6618 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				87852EF6152D423B009376DE /* GCDMulticastDelegate */,
 				877A214615233FA100991257 /* zhubu */,
 				877A212C15233CB700991257 /* SDWebImage */,
 				877A212715233C5D00991257 /* Cell */,
@@ -929,6 +933,15 @@
 			path = zhubu;
 			sourceTree = "<group>";
 		};
+		87852EF6152D423B009376DE /* GCDMulticastDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				87852EF7152D423B009376DE /* GCDMulticastDelegate.h */,
+				87852EF8152D423B009376DE /* GCDMulticastDelegate.m */,
+			);
+			path = GCDMulticastDelegate;
+			sourceTree = "<group>";
+		};
 		87D9B7D615232B2600D780E8 /* PullToRefreshTableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1143,6 +1156,7 @@
 				877A214415233CB800991257 /* UIButton+WebCache.m in Sources */,
 				877A214515233CB800991257 /* UIImageView+WebCache.m in Sources */,
 				872060D0152C8DB800FBAECD /* QWeiboAsyncApi.m in Sources */,
+				87852EF9152D423B009376DE /* GCDMulticastDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

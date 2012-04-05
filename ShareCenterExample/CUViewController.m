@@ -29,26 +29,31 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.    
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
     
     CUSinaShareClient *sinaClient = [[[CUSinaShareClient alloc] initWithAppKey:kOAuthConsumerKey_sina 
-                                                                     appSecret:kOAuthConsumerSecret_sina] autorelease];
-    sinaClient.delegate = self;
+                                                                     appSecret:kOAuthConsumerSecret_sina] 
+                                     autorelease];
     [CUShareCenter setupClient:sinaClient withType:SINACLIENT];
     
     CURenrenShareClient *renrenClient = [[[CURenrenShareClient alloc] initWithAppKey:kAPP_ID_renren
-                                                                           appSecret:kAPI_Key_renren] autorelease];
-    renrenClient.delegate = self;
+                                                                           appSecret:kAPI_Key_renren] 
+                                         autorelease];
     [CUShareCenter setupClient:renrenClient withType:RENRENCLIENT];
     
     CUTencentShareClient *tencentClient = [[[CUTencentShareClient alloc] initWithAppKey:kOAuthConsumerKey_tencent
-                                                                              appSecret:kOAuthConsumerSecret_tencent] autorelease];
-    tencentClient.delegate = self;
+                                                                              appSecret:kOAuthConsumerSecret_tencent] 
+                                           autorelease];
     [CUShareCenter setupClient:tencentClient withType:TTWEIBOCLIENT];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [[[CUShareCenter sharedInstanceWithType:SINACLIENT] shareClient] addDelegate:self];
+    [[[CUShareCenter sharedInstanceWithType:RENRENCLIENT] shareClient] addDelegate:self];
+    [[[CUShareCenter sharedInstanceWithType:TTWEIBOCLIENT] shareClient] addDelegate:self];
+
     
     BOOL bBind = [[CUShareCenter sharedInstanceWithType:SINACLIENT] isBind];
     sinaBindLabel.text = bBind ? @"sina bind" : @"sina unbind";
@@ -58,7 +63,16 @@
     
     bBind = [[CUShareCenter sharedInstanceWithType:TTWEIBOCLIENT] isBind];
     tencentBindLabel.text = bBind ? @"tencent bind" : @"tencent unbind";
-}    
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [[[CUShareCenter sharedInstanceWithType:SINACLIENT] shareClient] removeDelegate:self];
+    [[[CUShareCenter sharedInstanceWithType:RENRENCLIENT] shareClient] removeDelegate:self];
+    [[[CUShareCenter sharedInstanceWithType:TTWEIBOCLIENT] shareClient] removeDelegate:self];
+}
 
 - (void)viewDidUnload
 {
@@ -161,9 +175,9 @@
     NSLog(@"CUShareSucceed");
 }
 
-- (void)CUSHareCancel:(CUShareClient *)client
+- (void)CUShareCancel:(CUShareClient *)client
 {
-    NSLog(@"CUSHareCancel");
+    NSLog(@"CUShareCancel");
 }
 
 - (void)CUAuthSucceed:(CUShareClient *)client

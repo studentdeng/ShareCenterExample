@@ -8,6 +8,11 @@
 
 #import "CUShareClient.h"
 #import "CUShareOAuthView.h"
+#import "GCDMulticastDelegate.h"
+
+@interface CUShareClient ()
+
+@end
 
 @implementation CUShareClient
 
@@ -16,15 +21,44 @@
 
 #pragma mark - life
 
+- (id)init
+{
+    if (self = [super init]) {
+        multicastMessageDelegate = (GCDMulticastDelegate <CUShareClientDelegate> *)[[GCDMulticastDelegate alloc] init];
+    }
+    
+    return self;
+}
+
 - (void)dealloc
 {
     self.viewClient = nil;
     self.delegate = nil;
     
+    [multicastMessageDelegate removeAllDelegates];
+    
+    [multicastMessageDelegate release];
+    
     [super dealloc];
 }
 
 #pragma mark - common method
+
+- (void)addDelegate:(id)aDelegate {
+    NSAssert(dispatch_get_current_queue() == dispatch_get_main_queue(), 
+             @"Invoked on incorrect queue");
+    
+    [multicastMessageDelegate addDelegate:aDelegate 
+                            delegateQueue:dispatch_get_main_queue()];
+}
+
+- (void)removeDelegate:(id)aDelegate {
+    NSAssert(dispatch_get_current_queue() == dispatch_get_main_queue(), 
+             @"Invoked on incorrect queue");
+    
+    [multicastMessageDelegate removeDelegate:aDelegate];
+}
+
 
 - (void)CUOpenAuthViewInViewController:(UIViewController *)vc;
 {
@@ -38,45 +72,35 @@
 
 - (void)CUNotifyShareFailed:(CUShareClient *)client withError:(NSError *)error
 {
-    if ([delegate respondsToSelector:@selector(CUShareFailed:withError:)]) {
-        [delegate CUShareFailed:client withError:error];
-    }
+    [multicastMessageDelegate CUShareFailed:client withError:error];
     
     [self.viewClient performSelector:@selector(close:) withObject:nil afterDelay:.2f];
 }
 
 - (void)CUNotifyShareSucceed:(CUShareClient *)client
 {
-    if ([delegate respondsToSelector:@selector(CUShareSucceed:)]) {
-        [delegate CUShareSucceed:client];
-    }
+    [multicastMessageDelegate CUShareSucceed:client];
     
     [self.viewClient performSelector:@selector(close:) withObject:nil afterDelay:.2f];
 }
 
 - (void)CUNotifyShareCancel:(CUShareClient *)client
 {
-    if ([delegate respondsToSelector:@selector(CUSHareCancel:)]) {
-        [delegate CUSHareCancel:client];
-    }
+    [multicastMessageDelegate CUShareCancel:client];
     
     [self.viewClient performSelector:@selector(close:) withObject:nil afterDelay:.20f];
 }
 
 - (void)CUNotifyAuthSucceed:(CUShareClient *)client
 {
-    if ([delegate respondsToSelector:@selector(CUAuthSucceed:)]) {
-        [delegate CUAuthSucceed:client];
-    }
+    [multicastMessageDelegate CUAuthSucceed:client];
     
     [self.viewClient performSelector:@selector(close:) withObject:nil afterDelay:.2f];
 }
 
 - (void)CUNotifyAuthFailed:(CUShareClient *)client withError:(NSError *)error
 {
-    if ([delegate respondsToSelector:@selector(CUShareFailed:withError:)]) {
-        [delegate CUShareFailed:client withError:error];
-    }
+    [multicastMessageDelegate CUAuthFailed:client withError:error];
     
     [self.viewClient performSelector:@selector(close:) withObject:nil afterDelay:.2f];
 }
