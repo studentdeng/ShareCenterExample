@@ -29,21 +29,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.    
-    
-    CUSinaShareClient *sinaClient = [[[CUSinaShareClient alloc] initWithAppKey:kOAuthConsumerKey_sina 
-                                                                     appSecret:kOAuthConsumerSecret_sina] 
-                                     autorelease];
-    [CUShareCenter setupClient:sinaClient withType:SINACLIENT];
-    
-    CURenrenShareClient *renrenClient = [[[CURenrenShareClient alloc] initWithAppKey:kAPP_ID_renren
-                                                                           appSecret:kAPI_Key_renren] 
-                                         autorelease];
-    [CUShareCenter setupClient:renrenClient withType:RENRENCLIENT];
-    
-    CUTencentShareClient *tencentClient = [[[CUTencentShareClient alloc] initWithAppKey:kOAuthConsumerKey_tencent
-                                                                              appSecret:kOAuthConsumerSecret_tencent] 
-                                           autorelease];
-    [CUShareCenter setupClient:tencentClient withType:TTWEIBOCLIENT];
 }
 
 - (void)viewWillAppear:(BOOL)animated

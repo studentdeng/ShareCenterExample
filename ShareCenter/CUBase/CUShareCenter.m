@@ -7,6 +7,10 @@
 //
 
 #import "CUShareCenter.h"
+#import "CUSinaShareClient.h"
+#import "CUTencentShareClient.h"
+#import "CURenrenShareClient.h"
+#import "CUConfig.h"
 
 @implementation CUShareCenter
 
@@ -60,20 +64,52 @@ static CUShareCenter *s_instance3 = nil;
     
     switch (type) {
         case SINACLIENT:
+        {
+            if (s_instance1 == nil) {
+                s_instance1 = [CUShareCenter sharedInstance:s_instance1];
+                
+                CUSinaShareClient *sinaClient = [[CUSinaShareClient alloc] initWithAppKey:kOAuthConsumerKey_sina 
+                                                                                appSecret:kOAuthConsumerSecret_sina];
+                s_instance1.shareClient = sinaClient;
+                s_instance1.type = SINACLIENT;
+                
+                [sinaClient release];
+            }
             
-            center = [CUShareCenter sharedInstance:s_instance1];
-            s_instance1 = center;
-            
+            center = s_instance1;
+        }
             break;
         case TTWEIBOCLIENT:
-            center = [CUShareCenter sharedInstance:s_instance2];
-            s_instance2 = center;
+        {
+            if (s_instance2 == nil) {
+                s_instance2 = [CUShareCenter sharedInstance:s_instance2];
+                
+                CUTencentShareClient *tencentClient = [[CUTencentShareClient alloc] initWithAppKey:kOAuthConsumerKey_tencent
+                                                                                         appSecret:kOAuthConsumerSecret_tencent];
+                s_instance2.shareClient = tencentClient;
+                s_instance2.type = TTWEIBOCLIENT;
+                
+                [tencentClient release];
+            }
             
+            center = s_instance2;
+        }
             break;    
         case RENRENCLIENT:
-            center = [CUShareCenter sharedInstance:s_instance3];
-            s_instance3 = center;
+        {
+            if (s_instance3 == nil) {
+                s_instance3 = [CUShareCenter sharedInstance:s_instance3];
+                
+                CURenrenShareClient *renrenClient = [[CURenrenShareClient alloc] initWithAppKey:kAPP_ID_renren
+                                                                                      appSecret:kAPI_Key_renren];
+                s_instance3.shareClient = renrenClient;
+                s_instance3.type = RENRENCLIENT;
+                
+                [renrenClient release];
+            }
             
+            center = s_instance3;
+        }
             break;
             
         default:
@@ -92,13 +128,6 @@ static CUShareCenter *s_instance3 = nil;
     }
     
     return;
-}
-
-+ (void)setupClient:(id<CUShareClientData>)client 
-           withType:(CUShareClientType)aType
-{
-    [CUShareCenter sharedInstanceWithType:aType].type = aType;
-    [CUShareCenter sharedInstanceWithType:aType].shareClient = client;
 }
 
 #pragma mark - common method

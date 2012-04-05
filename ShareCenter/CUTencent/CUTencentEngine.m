@@ -154,9 +154,9 @@
 
 - (void)sendWeiBoWithText:(NSString *)aContent imageURL:(NSString *)aImageURL
 {
-	if ([aContent length] == 0) {
-		return;
-	}
+    if ([aContent length] == 0) {
+        return;
+    }
     
     QWeiboAsyncApi *api = [[[QWeiboAsyncApi alloc] init] autorelease];
     
@@ -255,18 +255,18 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
 	
-	[responseData appendData:data];
+    [responseData appendData:data];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
 	
-	self.responseData = [NSMutableData data];
+    self.responseData = [NSMutableData data];
 }
 
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection {
 	
     NSString *resString = [[[NSString alloc] initWithData:self.responseData 
-                                                encoding:NSUTF8StringEncoding] autorelease];
+                                                 encoding:NSUTF8StringEncoding] autorelease];
     
     id jsonObject = [resString JSONValue];
     

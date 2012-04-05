@@ -19,9 +19,6 @@
 
 + (void)destory:(CUShareCenter *)instance;
 
-+ (void)setupClient:(id<CUShareClientData>)client 
-           withType:(CUShareClientType)type;
-
 - (void)sendWithText:(NSString *)text;
 - (void)sendWithText:(NSString *)text andImage:(UIImage *)image;
 - (void)sendWithText:(NSString *)text andImageURLString:(NSString *)imageURLString;
