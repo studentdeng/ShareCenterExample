@@ -133,7 +133,9 @@
 
 - (IBAction)refresh:(id)sender
 {
-    [self enforceRefresh:self.tableView];
+    self.tableView.contentOffset = CGPointZero;
+    
+    [self performSelector:@selector(enforceRefresh:) withObject:self.tableView afterDelay:.1f];
 }
 
 #pragma mark -
