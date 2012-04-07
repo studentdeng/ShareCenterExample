@@ -35,6 +35,7 @@
 # pragma mark - Memory management
 - (void)dealloc
 {
+    [refreshHeaderView release];
     [_tableView release];
     [super dealloc];
 }
@@ -58,13 +59,15 @@
         refreshHeaderView.bottomBorderThickness = 1.0;
         [self.tableView addSubview:refreshHeaderView];
         self.tableView.showsVerticalScrollIndicator = YES;
-        [refreshHeaderView release];
     }
 }
 
 - (void)viewDidUnload
 {
+    [refreshHeaderView release];
+    refreshHeaderView = nil;
     [self setTableView:nil];
+    
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
