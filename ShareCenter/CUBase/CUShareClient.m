@@ -67,6 +67,7 @@
     self.viewClient.webView.delegate = self;
     [self.viewClient.webView loadRequest:[self CULoginURLRequest]];
     
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [self performSelector:@selector(show:) withObject:vc afterDelay:0.1];
 }
 
@@ -74,6 +75,7 @@
 {
     [multicastMessageDelegate CUShareFailed:client withError:error];
     
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [self.viewClient performSelector:@selector(close:) withObject:nil afterDelay:.2f];
 }
 
@@ -81,6 +83,7 @@
 {
     [multicastMessageDelegate CUShareSucceed:client];
     
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [self.viewClient performSelector:@selector(close:) withObject:nil afterDelay:.2f];
 }
 
@@ -88,6 +91,7 @@
 {
     [multicastMessageDelegate CUShareCancel:client];
     
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [self.viewClient performSelector:@selector(close:) withObject:nil afterDelay:.20f];
 }
 
@@ -95,6 +99,7 @@
 {
     [multicastMessageDelegate CUAuthSucceed:client];
     
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [self.viewClient performSelector:@selector(close:) withObject:nil afterDelay:.2f];
 }
 
@@ -102,6 +107,7 @@
 {
     [multicastMessageDelegate CUAuthFailed:client withError:error];
     
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [self.viewClient performSelector:@selector(close:) withObject:nil afterDelay:.2f];
 }
 
