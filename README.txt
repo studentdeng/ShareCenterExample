@@ -1,3 +1,13 @@
+install:
+import:
+ibxml, CFNetwork, libz, CoreGraphics, MobileCoreServices, SystemConfiguration libxml
+AudioToolbox, QuartzCore
+
+header search path add ${SDK_DIR}/usr/include/libxml2
+
+
+
+
 新浪微薄 分享  完成
 增加人人 feed 完成
 
