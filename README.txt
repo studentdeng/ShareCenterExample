@@ -1,6 +1,6 @@
 install:
 import:
-ibxml, CFNetwork, libz, CoreGraphics, MobileCoreServices, SystemConfiguration libxml
+libxml, CFNetwork, libz, CoreGraphics, MobileCoreServices, SystemConfiguration libxml
 AudioToolbox, QuartzCore
 
 header search path add ${SDK_DIR}/usr/include/libxml2
