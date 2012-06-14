@@ -138,6 +138,11 @@
     [self performSelector:@selector(enforceRefresh:) withObject:self.tableView afterDelay:.1f];
 }
 
+- (void)imageButtonClicked:(id)sender
+{
+    
+}
+
 #pragma mark -
 #pragma mark CUTimelineDataSourceDelegate
 
@@ -219,6 +224,9 @@
                                           tagId:2
                                          target:self 
                                          action:nil];
+        [articleTableViewCell.imageView_Button addTarget:self 
+                                                  action:@selector(imageButtonClicked:) 
+                                        forControlEvents:UIControlEventTouchUpInside];
     }
     
     return articleTableViewCell;
@@ -299,6 +307,15 @@
         [ds release];
         
         bTimelineRefresh = YES;
+    }
+}
+
+- (void)CUNotifyLoginout:(CUShareClient *)client
+{
+    if ([client isKindOfClass:[CUSinaShareClient class]]) {
+        self.timelineDataSource.delegate = nil;
+        self.timelineDataSource = nil;
+        [self.tableView reloadData];
     }
 }
 

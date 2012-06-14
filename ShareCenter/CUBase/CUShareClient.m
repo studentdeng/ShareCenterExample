@@ -111,6 +111,13 @@
     [self.viewClient performSelector:@selector(close:) withObject:nil afterDelay:.2f];
 }
 
+- (void)CUNotifyLoginout:(CUShareClient *)client
+{
+    [multicastMessageDelegate CUNotifyLoginout:client];
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+}
+
 #pragma mark - private
 
 - (void)show:(UIViewController *)vc

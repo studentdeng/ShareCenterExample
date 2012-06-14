@@ -48,6 +48,7 @@ CUShareClientType;
 
 - (void)CUAuthSucceed:(CUShareClient *)client;
 - (void)CUAuthFailed:(CUShareClient *)client withError:(NSError *)error;
+- (void)CUNotifyLoginout:(CUShareClient *)client;
 
 @end
 
@@ -75,5 +76,6 @@ CUShareClientType;
 - (void)CUNotifyShareCancel:(CUShareClient *)client;
 - (void)CUNotifyAuthSucceed:(CUShareClient *)client;
 - (void)CUNotifyAuthFailed:(CUShareClient *)client withError:(NSError *)error;
+- (void)CUNotifyLoginout:(CUShareClient *)client;
 
 @end

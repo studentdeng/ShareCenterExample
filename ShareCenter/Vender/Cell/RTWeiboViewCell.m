@@ -40,6 +40,7 @@ static UIImage* defaultTagImage;
 @synthesize favoriteCountLabel = _favoriteCountLabel;
 @synthesize commentCountLabel = _commentCountLabel;
 
+@synthesize imageView_Button;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)identifier {
 	if (self = [super initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identifier]) {
@@ -174,6 +175,13 @@ static NSDateFormatter *s_format = nil;
     [_coverImageView setImageWithURL:[NSURL URLWithString:url] 
                     placeholderImage:[RTWeiboViewCell getDefaultCoverImage]
                              options:0];//SDWebImageLowPriority];
+    
+    if (imageView_Button == nil) {
+        imageView_Button = [[UIButton alloc] init];
+        self.imageView_Button.frame = _coverImageView.frame;
+        
+        [self.contentView addSubview:self.imageView_Button];
+    }
 }
 
 - (void)setDescription:(NSString *)newDescription
@@ -623,6 +631,8 @@ static NSDateFormatter *s_format = nil;
         top += kTableCellSmallMargin;
     }
     
+    self.imageView_Button.frame = _coverImageView.frame;
+    
     //取得_descriptionLabe的宽度和高度
     CGSize descriptionLabelSize = [_descriptionLabel.text sizeWithFont:ZBSTYLE_font
                                           constrainedToSize:CGSizeMake(CELL_CONTENT_WIDTH, CGFLOAT_MAX)
@@ -718,6 +728,7 @@ static NSDateFormatter *s_format = nil;
     RELEASE_SAFELY(_tagImageView);
     RELEASE_SAFELY(_systemTagButton);
     RELEASE_SAFELY(_seriesTagButton);
+    RELEASE_SAFELY(imageView_Button);
     
     [super dealloc];
 }

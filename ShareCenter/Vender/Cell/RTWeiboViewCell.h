@@ -57,6 +57,7 @@
     
     BOOL _bRead;
     
+    UIButton *imageView_Button;
     //performance
     CGSize descriptionLabelSizeForPerformance;
 }
@@ -81,6 +82,8 @@
 @property (nonatomic, readonly) UIImageView *tagImageView;
 @property (nonatomic, readonly) UIButton *systemTagButton;
 @property (nonatomic, readonly) UIButton *seriesTagButton;
+
+@property (nonatomic, retain) UIButton *imageView_Button;
 
 - (void)setDataSource:(id)data;
 - (void)setAvatarImageUrl:(NSString*)url tagId:(NSInteger)tagId target:(id)target action:(SEL)selector;

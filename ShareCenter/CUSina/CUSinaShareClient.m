@@ -239,7 +239,7 @@
 // Log out successfully.
 - (void)engineDidLogOut:(WBEngine *)engine
 {
-    
+    [self CUNotifyLoginout:self];
 }
 
 // When you use the WBEngine's request methods,
