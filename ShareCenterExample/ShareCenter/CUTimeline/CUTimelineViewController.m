@@ -14,6 +14,7 @@
 #import "CUShareCenter.h"
 #import "RTWeiboViewCell.h"
 #import "EGORefreshTableHeaderView.h"
+#import "CUConfig.h"
 
 #import "GlobalDef.h"
 
@@ -28,6 +29,7 @@
 
 @synthesize timelineDataSource;
 @synthesize tableView;
+@synthesize navBar;
 
 - (id)initWithToken:(NSString *)token
 {
@@ -44,10 +46,13 @@
 
 - (void)dealloc
 {
+    [[[CUShareCenter sharedInstanceWithType:SINACLIENT] shareClient] removeDelegate:self];
+    
     self.timelineDataSource.delegate = nil;
     self.timelineDataSource = nil;
     self.tableView = nil;
     [loadMoreCell release];
+    self.navBar = nil;
     
     [super dealloc];
 }
@@ -57,17 +62,36 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     timelineDataSource.delegate = self;
+    
+#ifdef NAV_BAR_ITEM_COLOR
+    self.navBar.tintColor = NAV_BAR_ITEM_COLOR;
+#endif
+    
+#ifdef NAVBAR_TOOLBAR_IMAGE_NAME
+    if ([self.navBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]){
+        [self.navBar setBackgroundImage:[UIImage imageNamed:NAVBAR_TOOLBAR_IMAGE_NAME] 
+                          forBarMetrics:UIBarMetricsDefault];
+    }
+#endif
+    
+    bTimelineRefresh = TRUE;
+    
+    NSString *key = NSStringFromClass([self class]);
+    NSDate *date = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    
+    [self.refreshHeaderView setLastRefreshDate:date];
+    
+    [[[CUShareCenter sharedInstanceWithType:SINACLIENT] shareClient] addDelegate:self];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
     
-    CUSinaShareClient *sinaClient = [[[CUSinaShareClient alloc] initWithAppKey:kOAuthConsumerKey_sina 
-                                                                     appSecret:kOAuthConsumerSecret_sina] autorelease];
-    sinaClient.delegate = self;
-    [CUShareCenter setupClient:sinaClient withType:SINACLIENT];
-    [CUShareCenter setupContainer:self withType:SINACLIENT];
+    if ([self.timelineDataSource.timelineDataKey count] == 0 && bTimelineRefresh) {
+        bTimelineRefresh = FALSE;
+        [self enforceRefresh:self.tableView];
+    }
 }
 
 - (void)viewDidUnload
@@ -86,14 +110,8 @@
 #pragma mark -
 #pragma mark action
 
-- (IBAction)close:(id)sender
+- (void)refreshData
 {
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-- (IBAction)refresh:(id)sender
-{
-    //[self.timelineDataSource loadTimelineBySinceId:0];
     NSNumber *newKey = nil;
     
     for (int i =  0; i < [self.timelineDataSource.timelineDataKey count]; ++i) {
@@ -106,6 +124,23 @@
     }
     
     [self.timelineDataSource loadTimelineBySinceId:[newKey longLongValue]];
+}
+
+- (IBAction)close:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)refresh:(id)sender
+{
+    self.tableView.contentOffset = CGPointZero;
+    
+    [self performSelector:@selector(enforceRefresh:) withObject:self.tableView afterDelay:.1f];
+}
+
+- (void)imageButtonClicked:(id)sender
+{
+    
 }
 
 #pragma mark -
@@ -131,7 +166,7 @@
     else {
         //
         //这里为sina 服务器返回错误，要不sina server crash,要不就是参数错误 要不就是认证失败，认证失败概率最大，这里简单处理了
-        [[CUShareCenter sharedInstanceWithType:SINACLIENT] Bind];
+        [[CUShareCenter sharedInstanceWithType:SINACLIENT] Bind:self];
         
         [super performSelector:@selector(dataSourceDidFinishLoadingNewData:) withObject:[NSNumber numberWithInt:1]  afterDelay:0.1];
     }
@@ -189,6 +224,9 @@
                                           tagId:2
                                          target:self 
                                          action:nil];
+        [articleTableViewCell.imageView_Button addTarget:self 
+                                                  action:@selector(imageButtonClicked:) 
+                                        forControlEvents:UIControlEventTouchUpInside];
     }
     
     return articleTableViewCell;
@@ -230,7 +268,7 @@
         [self.timelineDataSource loadTimelineByMaxId:[lastKey longLongValue] - 1];
     }
     else {
-        [self refresh:nil];
+        [self refreshData];
     }
 }
 
@@ -267,6 +305,17 @@
         timelineDataSource.delegate = self;
         
         [ds release];
+        
+        bTimelineRefresh = YES;
+    }
+}
+
+- (void)CUNotifyLoginout:(CUShareClient *)client
+{
+    if ([client isKindOfClass:[CUSinaShareClient class]]) {
+        self.timelineDataSource.delegate = nil;
+        self.timelineDataSource = nil;
+        [self.tableView reloadData];
     }
 }
 
@@ -274,7 +323,7 @@
 
 - (void)reloadTableViewDataSource
 {
-    [self refresh:nil];
+    [self refreshData];
 }
 
 - (void)dataSourceDidFinishLoadingNewData:(NSNumber *)loadedData
@@ -284,6 +333,11 @@
         [refreshHeaderView setCurrentDate];
         [super dataSourceDidFinishLoadingNewData:nil];
         [self.tableView reloadData];
+        
+        NSString *key = NSStringFromClass([self class]);
+        NSDate *date = [NSDate date];
+        [[NSUserDefaults standardUserDefaults] setObject:date forKey:key];
+        
     } else {
         [super dataSourceDidFinishLoadingNewData:nil];
         // Present an informative UIAlertView

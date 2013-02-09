@@ -223,9 +223,7 @@
     }
     
     NSString *filePath = [[CUTimelineDataSource getPath] stringByAppendingPathComponent:@"friendsWeiboCache.db"];
-    BOOL b = [NSKeyedArchiver archiveRootObject:statuses toFile:filePath];
-    
-    b++;
+    [NSKeyedArchiver archiveRootObject:statuses toFile:filePath];
 }
 
 #pragma mark - private

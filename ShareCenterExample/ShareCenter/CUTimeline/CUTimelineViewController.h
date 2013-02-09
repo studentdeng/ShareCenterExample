@@ -18,10 +18,13 @@
 <CUTimelineDataSourceDelegate, UITableViewDataSource, UITableViewDelegate, CUShareClientDelegate>
 {
     CUTimelineDataSource *timelineDataSource;
-    
-    //UITableView *tableView;
     LoadMoreCell *loadMoreCell;
+    UINavigationBar *navBar;
+    
+    BOOL bTimelineRefresh;
 }
+
+@property (nonatomic, retain) IBOutlet UINavigationBar *navBar;
 
 - (id)initWithToken:(NSString *)token;
 
