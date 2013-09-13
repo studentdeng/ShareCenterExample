@@ -12,8 +12,7 @@ Pod::Spec.new do |s|
   s.author       = { "curer" => "studentdeng@hotmail.com" }
   s.platform     = :ios, '5.0'
 
-  #s.source       = { :git => "https://github.com/studentdeng/ShareCenterExample.git", :tag => s.version.to_s }
-  s.source       = { :git => "/Users/curer/myGitHub/ShareCenterExample"}
+  s.source       = { :git => "https://github.com/studentdeng/ShareCenterExample.git", :tag => s.version.to_s }
   s.source_files  = 'ShareCenter', 'ShareCenter/**/*.{h,m}'
 
   s.frameworks   = 'QuartzCore', 'Security', 'CoreGraphics', 'AudioToolbox'
