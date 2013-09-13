@@ -32,7 +32,7 @@
 
 @end
 
-@interface WBAuthorize : NSObject <WBAuthorizeWebViewDelegate, WBRequestDelegate> 
+@interface WBAuthorize : NSObject <WBWBAuthorizeWebViewDelegate, WBRequestDelegate> 
 {
     
     NSString    *appKey;

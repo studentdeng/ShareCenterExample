@@ -1,5 +1,5 @@
 //
-//  WBAuthorizeWebView.m
+//  WBWBAuthorizeWebView.m
 //  SinaWeiBoSDK
 //  Based on OAuth 2.0
 //
@@ -18,7 +18,7 @@
 #import "WBAuthorizeWebView.h"
 #import <QuartzCore/QuartzCore.h> 
 
-@interface WBAuthorizeWebView (Private)
+@interface WBWBAuthorizeWebView (Private)
 
 - (void)bounceOutAnimationStopped;
 - (void)bounceInAnimationStopped;
@@ -35,11 +35,11 @@
 
 @end
 
-@implementation WBAuthorizeWebView
+@implementation WBWBAuthorizeWebView
 
 @synthesize delegate;
 
-#pragma mark - WBAuthorizeWebView Life Circle
+#pragma mark - WBWBAuthorizeWebView Life Circle
 
 - (id)init
 {
@@ -222,7 +222,7 @@
 	[self removeFromSuperview];
 }
 
-#pragma mark - WBAuthorizeWebView Public Methods
+#pragma mark - WBWBAuthorizeWebView Public Methods
 
 - (void)loadRequestWithURL:(NSURL *)url
 {

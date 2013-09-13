@@ -1,5 +1,5 @@
 //
-//  WBAuthorizeWebView.h
+//  WBWBAuthorizeWebView.h
 //  SinaWeiBoSDK
 //  Based on OAuth 2.0
 //
@@ -17,15 +17,15 @@
 
 #import <Foundation/Foundation.h>
 
-@class WBAuthorizeWebView;
+@class WBWBAuthorizeWebView;
 
-@protocol WBAuthorizeWebViewDelegate <NSObject>
+@protocol WBWBAuthorizeWebViewDelegate <NSObject>
 
-- (void)authorizeWebView:(WBAuthorizeWebView *)webView didReceiveAuthorizeCode:(NSString *)code;
+- (void)authorizeWebView:(WBWBAuthorizeWebView *)webView didReceiveAuthorizeCode:(NSString *)code;
 
 @end
 
-@interface WBAuthorizeWebView : UIView <UIWebViewDelegate> 
+@interface WBWBAuthorizeWebView : UIView <UIWebViewDelegate> 
 {
     UIView *panelView;
     UIView *containerView;
@@ -34,10 +34,10 @@
     
     UIInterfaceOrientation previousOrientation;
     
-    id<WBAuthorizeWebViewDelegate> delegate;
+    id<WBWBAuthorizeWebViewDelegate> delegate;
 }
 
-@property (nonatomic, assign) id<WBAuthorizeWebViewDelegate> delegate;
+@property (nonatomic, assign) id<WBWBAuthorizeWebViewDelegate> delegate;
 
 - (void)loadRequestWithURL:(NSURL *)url;
 
