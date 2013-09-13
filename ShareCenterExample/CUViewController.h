@@ -24,7 +24,6 @@
 
 - (IBAction)share:(id)sender;
 - (IBAction)logout:(id)sender;
-- (IBAction)showTimeline:(id)sender;
 
 - (IBAction)showRENREN:(id)sender;
 

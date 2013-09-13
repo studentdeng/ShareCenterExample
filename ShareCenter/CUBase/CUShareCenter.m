@@ -11,6 +11,7 @@
 #import "CUTencentShareClient.h"
 #import "CURenrenShareClient.h"
 #import "CUConfig.h"
+#import "WeiboSDK.h"
 
 @implementation CUShareCenter
 
@@ -158,7 +159,13 @@ static CUShareCenter *s_instance3 = nil;
 }
 
 - (void)Bind:(UIViewController *)vc
-{    
+{
+    if ([shareClient isKindOfClass:[CUSinaShareClient class]]) {
+        BOOL b = [WeiboSDK isWeiboAppInstalled];
+        
+        NSLog(@"%d", b);
+    }
+    
     [shareClient CUOpenAuthViewInViewController:vc];
     
     return;

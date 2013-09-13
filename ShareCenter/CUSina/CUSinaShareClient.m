@@ -7,10 +7,9 @@
 //
 
 #import "CUSinaShareClient.h"
-#import "ASIFormDataRequest.h"
-
+#import "CUConfig.h"
 #import "CUShareOAuthView.h"
-
+#import "WeiboSDK.h"
 #import "WBAuthorize.h"
 #import "WBRequest.h"
 #import "WBSDKGlobal.h"
@@ -42,7 +41,7 @@
             engine = [[WBEngine alloc] initWithAppKey:theAppKey appSecret:theAppSecret];
             [engine setRootViewController:nil];
             [engine setDelegate:self];
-            [engine setRedirectURI:@"http://"];
+            [engine setRedirectURI:kOAuthCallbackURL_sina];
             [engine setIsUserExclusive:NO];            
             
             WBAuthorize *auth = [[WBAuthorize alloc] initWithAppKey:theAppKey 
