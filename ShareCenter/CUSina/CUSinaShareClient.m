@@ -263,4 +263,29 @@
     [self CUNotifyShareSucceed:self];
 }
 
+- (void)didReceiveWeiboResponse:(WBBaseResponse *)response
+{
+    if ([response isKindOfClass:WBSendMessageToWeiboResponse.class])
+    {
+        NSString *title = @"发送结果";
+        NSString *message = [NSString stringWithFormat:@"响应状态: %d\n响应UserInfo数据: %@\n原请求UserInfo数据: %@",
+                             response.statusCode, response.userInfo, response.requestUserInfo];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+    else if ([response isKindOfClass:WBAuthorizeResponse.class])
+    {
+        WBAuthorizeResponse *wbResponse = (WBAuthorizeResponse *)response;
+        
+        [engine saveOAuthSucceedWithAccessToken:wbResponse.accessToken
+                                         userID:wbResponse.userID
+                                      expiresIn:[[response.userInfo objectForKey:@"expires_in"] intValue]];
+    }
+}
+
 @end

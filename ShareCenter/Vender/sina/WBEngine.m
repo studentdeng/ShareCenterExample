@@ -296,7 +296,7 @@
 
 #pragma mark - WBAuthorizeDelegate Methods
 
-- (void)authorize:(WBAuthorize *)authorize didSucceedWithAccessToken:(NSString *)theAccessToken userID:(NSString *)theUserID expiresIn:(NSInteger)seconds
+- (void)saveOAuthSucceedWithAccessToken:(NSString *)theAccessToken userID:(NSString *)theUserID expiresIn:(NSInteger)seconds
 {
     self.accessToken = theAccessToken;
     self.userID = theUserID;
@@ -308,6 +308,13 @@
     {
         [delegate engineDidLogIn:self];
     }
+}
+
+- (void)authorize:(WBAuthorize *)authorize didSucceedWithAccessToken:(NSString *)theAccessToken userID:(NSString *)theUserID expiresIn:(NSInteger)seconds
+{
+    [self saveOAuthSucceedWithAccessToken:theAccessToken
+                                   userID:theUserID
+                                expiresIn:seconds];
 }
 
 - (void)authorize:(WBAuthorize *)authorize didFailWithError:(NSError *)error

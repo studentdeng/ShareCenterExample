@@ -107,6 +107,9 @@
 // Check if user has logged in, or the authorization is expired.
 - (BOOL)isLoggedIn;
 - (BOOL)isAuthorizeExpired;
+- (void)saveOAuthSucceedWithAccessToken:(NSString *)theAccessToken
+                                 userID:(NSString *)theUserID
+                              expiresIn:(NSInteger)seconds;
 
 // @methodName: The interface you are trying to visit, exp, "statuses/public_timeline.json" for the newest timeline.
 // See 
