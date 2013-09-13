@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "CUShareClient.h"
 #import "WBEngine.h"
-
+#import "WeiboSDK.h"
 #import "CUShareOAuthView.h"
 
 @interface CUSinaShareClient : CUShareClient
-<CUShareClientData, WBEngineDelegate>
+<CUShareClientData, WBEngineDelegate, WeiboSDKDelegate>
 {
     WBEngine *engine;
     

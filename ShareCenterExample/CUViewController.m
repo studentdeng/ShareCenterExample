@@ -12,7 +12,7 @@
 #import "CURenrenShareClient.h"
 #import "CUTencentShareClient.h"
 
-#define TEST_IMAGEURL_NICE_GIRL     @"http://www.imiknow.com/iks/res/MGMxMDA5NzUyNTQ4ZWU4ZmUyMWZiNGRlM2Y1NDM1ZGE/YXBwbGljYXRpb24vb2N0ZXQtc3RyZWFt/bf980271-5f1e-458c-a513-4a49457e0268.jpg"
+#define TEST_IMAGEURL_NICE_GIRL     @"http://e.hiphotos.baidu.com/album/w%3D2048/sign=d7543108f636afc30e0c38658721eac4/e824b899a9014c08ba1d546d0b7b02087af4f4d0.jpg"
 
 @interface CUViewController ()
 
@@ -79,7 +79,7 @@
     
     if (btn.tag == SINACLIENT) {
     
-        [[CUShareCenter sharedInstanceWithType:SINACLIENT] sendWithText:@"hi" 
+        [[CUShareCenter sharedInstanceWithType:SINACLIENT] sendWithText:@"test" 
                                                                andImage:[UIImage imageNamed:@"test.jpg"]];
         return;
     }

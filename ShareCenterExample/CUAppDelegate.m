@@ -11,6 +11,7 @@
 #import "CUViewController.h"
 #import "CUConfig.h"
 #import "CUShareCenter.h"
+#import "CUSinaShareClient.h"
 
 @implementation CUAppDelegate
 
@@ -27,7 +28,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [WeiboSDK enableDebugMode:YES];
-    BOOL bRes = [WeiboSDK registerApp:kOAuthConsumerKey_sina];
+    [WeiboSDK registerApp:kOAuthConsumerKey_sina];
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
@@ -38,19 +39,11 @@
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return [ WeiboSDK handleOpenURL:url delegate:[CUShareCenter sharedInstanceWithType:SINACLIENT].shareClient ];
+    
+    CUSinaShareClient *sinaClient =
+        (CUSinaShareClient *)[CUShareCenter sharedInstanceWithType:SINACLIENT].shareClient;
+    
+    return [ WeiboSDK handleOpenURL:url delegate:sinaClient ];
 }
-
-
-//- (void)didReceiveWeiboRequest:(WBBaseRequest *)request
-//{
-//    if ([request isKindOfClass:WBProvideMessageForWeiboRequest.class])
-//    {
-//        NSLog(@"didReceiveWeiboRequest");
-//        /*
-//        ProvideMessageForWeiboViewController *controller = [[[ProvideMessageForWeiboViewController alloc] init] autorelease];
-//        [self.viewController presentModalViewController:controller animated:YES];*/
-//    }
-//}
 
 @end

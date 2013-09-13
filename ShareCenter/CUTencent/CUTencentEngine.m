@@ -10,7 +10,6 @@
 #import "NSURL+QAdditions.h"
 #import "QWeiboSyncApi.h"
 #import "SFHFKeychainUtils.h"
-#import "NSString+SBJSON.h"
 
 #import "QOauthKey.h"
 #import "QWeiboRequest.h"
@@ -264,11 +263,10 @@
 }
 
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection {
-	
-    NSString *resString = [[[NSString alloc] initWithData:self.responseData 
-                                                 encoding:NSUTF8StringEncoding] autorelease];
-    
-    id jsonObject = [resString JSONValue];
+    NSError *error = nil;
+    id jsonObject = [NSJSONSerialization JSONObjectWithData:self.responseData
+                                                    options:kNilOptions
+                                                      error:&error];
     
     if ([jsonObject isKindOfClass:[NSDictionary class]]) {
         

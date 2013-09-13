@@ -18,7 +18,6 @@
 
 #import "WBRequest.h"
 #import "WBUtil.h"
-#import "JSON.h"
 
 #import "WBSDKGlobal.h"
 
@@ -129,13 +128,13 @@
 				{
 					NSData* imageData = UIImagePNGRepresentation((UIImage *)dataParam);
 					[WBRequest appendUTF8Body:body dataString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"file.png\"\r\n", key]];
-					[WBRequest appendUTF8Body:body dataString:[NSString stringWithString:@"Content-Type: image/png\r\nContent-Transfer-Encoding: binary\r\n\r\n"]];
+					[WBRequest appendUTF8Body:body dataString:@"Content-Type: image/png\r\nContent-Transfer-Encoding: binary\r\n\r\n"];
 					[body appendData:imageData];
 				} 
 				else if ([dataParam isKindOfClass:[NSData class]]) 
 				{
 					[WBRequest appendUTF8Body:body dataString:[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n", key]];
-					[WBRequest appendUTF8Body:body dataString:[NSString stringWithString:@"Content-Type: content/unknown\r\nContent-Transfer-Encoding: binary\r\n\r\n"]];
+					[WBRequest appendUTF8Body:body dataString:@"Content-Type: content/unknown\r\nContent-Transfer-Encoding: binary\r\n\r\n"];
 					[body appendData:(NSData*)dataParam];
 				}
 				[WBRequest appendUTF8Body:body dataString:bodySuffixString];
@@ -171,12 +170,10 @@
 
 - (id)parseJSONData:(NSData *)data error:(NSError **)error
 {
-	
-	NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-	SBJSON *jsonParser = [[SBJSON alloc]init];
-	
-	NSError *parseError = nil;
-	id result = [jsonParser objectWithString:dataString error:&parseError];
+    NSError *parseError = nil;
+    id result = [NSJSONSerialization JSONObjectWithData:data
+                                                options:kNilOptions
+                                                  error:&parseError];
 	
 	if (parseError)
     {
@@ -187,10 +184,6 @@
                                                                      forKey:kWBSDKErrorCodeKey]];
         }
 	}
-        
-	[dataString release];
-	[jsonParser release];
-	
     
 	if ([result isKindOfClass:[NSDictionary class]])
 	{
