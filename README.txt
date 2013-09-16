@@ -1,8 +1,12 @@
-install:
-import:
-libxml, CFNetwork, libz, CoreGraphics, MobileCoreServices, SystemConfiguration libxml
-AudioToolbox, QuartzCore, Security
+include sina微博， tencent 微博，renren 认证。
 
-header search path add ${SDK_DIR}/usr/include/libxml2
+#why ShareCenter
 
-新浪微薄，人人， 腾讯微博 
+keep it sample。we don't wannna import lots of library which we don't have the source code.
+
+#install 
+
+Installation is made simple with [Cocoapods](http://cocoapods.org)
+
+	platform :ios, '5.0'
+	pod 'ShareCenter', :git => 'https://github.com/studentdeng/ShareCenterExample'
