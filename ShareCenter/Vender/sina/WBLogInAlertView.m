@@ -38,7 +38,7 @@
 		[userIDLabel setFont:[UIFont systemFontOfSize:16]];
 		[userIDLabel setBackgroundColor:[UIColor clearColor]];
         [userIDLabel setTextColor:[UIColor whiteColor]];
-        [userIDLabel setTextAlignment:UITextAlignmentLeft];
+        [userIDLabel setTextAlignment:NSTextAlignmentLeft];
         [userIDLabel setText:NSLocalizedString(@"用户名", nil)];
 		[self addSubview:userIDLabel];
 		[userIDLabel release];
@@ -58,7 +58,7 @@
 		[passwordLabel setFont:[UIFont systemFontOfSize:16]];
 		[passwordLabel setBackgroundColor:[UIColor clearColor]];
         [passwordLabel setTextColor:[UIColor whiteColor]];
-        [passwordLabel setTextAlignment:UITextAlignmentLeft];
+        [passwordLabel setTextAlignment:NSTextAlignmentLeft];
         [passwordLabel setText:NSLocalizedString(@"密码", nil)];
 		[self addSubview:passwordLabel];
 		[passwordLabel release];

@@ -98,7 +98,7 @@ static BOOL WBIsDeviceIPad()
         [titleLabel setText:NSLocalizedString(@"新浪微博", nil)];
         [titleLabel setTextColor:[UIColor blackColor]];
         [titleLabel setBackgroundColor:[UIColor clearColor]];
-        [titleLabel setTextAlignment:UITextAlignmentCenter];
+        [titleLabel setTextAlignment:NSTextAlignmentCenter];
         [titleLabel setCenter:CGPointMake(144, 27)];
         [titleLabel setShadowOffset:CGSizeMake(0, 1)];
 		[titleLabel setShadowColor:[UIColor whiteColor]];
@@ -127,7 +127,7 @@ static BOOL WBIsDeviceIPad()
 		[wordCountLabel setBackgroundColor:[UIColor clearColor]];
 		[wordCountLabel setTextColor:[UIColor darkGrayColor]];
 		[wordCountLabel setFont:[UIFont systemFontOfSize:16]];
-		[wordCountLabel setTextAlignment:UITextAlignmentCenter];
+        [wordCountLabel setTextAlignment:NSTextAlignmentCenter];
 		[panelView addSubview:wordCountLabel];
         
         clearTextButton = [UIButton buttonWithType:UIButtonTypeCustom];
