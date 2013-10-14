@@ -47,11 +47,25 @@
     [super dealloc];
 }
 
+- (NSString *)getToken
+{
+    return engine.tokenKey;
+}
+- (NSString *)getTokenSecert
+{
+    return engine.tokenSecret;
+}
+
 #pragma mark -  CUShareClientData
 
 - (BOOL)isCUAuth
 {
     return [engine isLoggedIn] && ![engine isAuthorizeExpired];
+}
+
+- (NSString *)getUserInfo
+{
+    return [engine getUserInfo];
 }
 
 - (void)CULogout
@@ -62,7 +76,7 @@
 
 - (void)CUSendWithText:(NSString *)text
 {
-    return [self CUSendWithText:text andImage:nil];
+    return [self CUSendWithText:text andImageURLString:nil];
 }
 
 - (void)CUSendWithText:(NSString *)text andImage:(UIImage *)image

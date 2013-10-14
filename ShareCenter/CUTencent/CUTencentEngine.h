@@ -65,4 +65,6 @@
                            params:(NSDictionary *)params
                  httpHeaderFields:(NSDictionary *)httpHeaderFields;
 
+- (NSString *)getUserInfo;
+
 @end

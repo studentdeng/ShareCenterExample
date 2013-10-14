@@ -64,10 +64,10 @@
 - (void)dealloc
 {
     [appKey release];
-	[appSecret release];
-	[tokenKey release];
-	[tokenSecret release];
-	[verifier release];
+    [appSecret release];
+    [tokenKey release];
+    [tokenSecret release];
+    [verifier release];
     [requestTokenKey release];
     [requestTokenSecret release];
     
@@ -99,16 +99,16 @@
 - (BOOL)authorizeResponse:(NSString *)aResponse
 {
     NSString *aVerifier = [self valueForKey:@"oauth_verifier" ofQuery:aResponse];
-	
-	if (aVerifier && ![aVerifier isEqualToString:@""]) {
-		
-		QWeiboSyncApi *api = [[[QWeiboSyncApi alloc] init] autorelease];
-		NSString *result = [api getAccessTokenWithConsumerKey:self.appKey 
+    
+    if (aVerifier && ![aVerifier isEqualToString:@""]) {
+        
+        QWeiboSyncApi *api = [[[QWeiboSyncApi alloc] init] autorelease];
+        NSString *result = [api getAccessTokenWithConsumerKey:self.appKey 
                                                consumerSecret:self.appSecret 
                                               requestTokenKey:self.requestTokenKey 
                                            requestTokenSecret:self.requestTokenSecret
                                                        verify:aVerifier];
-		NSLog(@"\nget access token:%@", result);
+        NSLog(@"\nget access token:%@", result);
 
         BOOL bRes = [self parseTokenKeyWithResponse:result];
         if (bRes) {
@@ -126,29 +126,42 @@
                 [delegate engine:self didFailToLogInWithError:nil];
             }
         }
-       		
-		return YES;
-	}
+               
+        return YES;
+    }
 
     return NO;
 }    
 
 - (BOOL)parseTokenKeyWithResponse:(NSString *)aResponse {
     
-	NSDictionary *params = [NSURL parseURLQueryString:aResponse];
-	self.tokenKey = [params objectForKey:@"oauth_token"];
-	self.tokenSecret = [params objectForKey:@"oauth_token_secret"];
+    NSDictionary *params = [NSURL parseURLQueryString:aResponse];
+    self.tokenKey = [params objectForKey:@"oauth_token"];
+    self.tokenSecret = [params objectForKey:@"oauth_token_secret"];
     
     return [self.tokenKey length] && [self.tokenSecret length];
 }
 
 - (BOOL)parseRequestTokenKeyWithResponse:(NSString *)aResponse {
     
-	NSDictionary *params = [NSURL parseURLQueryString:aResponse];
-	self.requestTokenKey = [params objectForKey:@"oauth_token"];
-	self.requestTokenSecret = [params objectForKey:@"oauth_token_secret"];
+    NSDictionary *params = [NSURL parseURLQueryString:aResponse];
+    self.requestTokenKey = [params objectForKey:@"oauth_token"];
+    self.requestTokenSecret = [params objectForKey:@"oauth_token_secret"];
     
     return [self.tokenKey length] && [self.tokenSecret length];
+}
+
+- (NSString *)getUserInfo
+{
+    QWeiboAsyncApi *api = [[[QWeiboAsyncApi alloc] init] autorelease];
+    
+    NSString *userInfo = [api getUserInfo:self.appKey
+                           consumerSecret:self.appSecret
+                           accessTokenKey:self.tokenKey
+                        accessTokenSecret:self.tokenSecret
+                                 delegate:nil];
+    
+    return userInfo;
 }
 
 - (void)sendWeiBoWithText:(NSString *)aContent imageURL:(NSString *)aImageURL
@@ -159,7 +172,7 @@
     
     QWeiboAsyncApi *api = [[[QWeiboAsyncApi alloc] init] autorelease];
     
-    BOOL hasImage = [aImageURL length] > 0;	
+    BOOL hasImage = [aImageURL length] > 0;    
     self.connection = [api publishMsgWithConsumerKey:self.appKey 
                                       consumerSecret:self.appSecret 
                                       accessTokenKey:self.tokenKey 
@@ -186,22 +199,22 @@
 
 - (NSString *)valueForKey:(NSString *)key ofQuery:(NSString *)query
 {
-	NSArray *pairs = [query componentsSeparatedByString:@"&"];
-	for (NSString *aPair in pairs) 
+    NSArray *pairs = [query componentsSeparatedByString:@"&"];
+    for (NSString *aPair in pairs) 
     {
-		NSArray *keyAndValue = [aPair componentsSeparatedByString:@"="];
-		if([keyAndValue count] != 2) 
+        NSArray *keyAndValue = [aPair componentsSeparatedByString:@"="];
+        if([keyAndValue count] != 2) 
         {
             continue;
         }
-		
+        
         if([[keyAndValue objectAtIndex:0] isEqualToString:key])
         {
-			return [keyAndValue objectAtIndex:1];
-		}
-	}
+            return [keyAndValue objectAtIndex:1];
+        }
+    }
     
-	return nil;
+    return nil;
 }
 
 - (NSString *)urlSchemeString
@@ -245,20 +258,20 @@
     self.tokenSecret = nil;
     
     NSString *serviceName = [[self urlSchemeString] stringByAppendingString:kWBKeychainServiceNameSuffix];
-	[SFHFKeychainUtils deleteItemForUsername:kWBKeychainAccessToken andServiceName:serviceName error:nil];
-	[SFHFKeychainUtils deleteItemForUsername:kWBKeychainAccessTokenSecret andServiceName:serviceName error:nil];
+    [SFHFKeychainUtils deleteItemForUsername:kWBKeychainAccessToken andServiceName:serviceName error:nil];
+    [SFHFKeychainUtils deleteItemForUsername:kWBKeychainAccessTokenSecret andServiceName:serviceName error:nil];
 }
 
 #pragma mark -
 #pragma mark NSURLConnection delegate
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-	
+    
     [responseData appendData:data];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-	
+    
     self.responseData = [NSMutableData data];
 }
 

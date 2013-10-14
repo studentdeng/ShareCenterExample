@@ -41,4 +41,10 @@
                                       imageURL:(NSString *)aimageURL 
                                       delegate:(id)aDelegate;
 
+- (NSString *)getUserInfo:(NSString *)aConsumerKey
+           consumerSecret:(NSString *)aConsumerSecret
+           accessTokenKey:(NSString *)aAccessTokenKey
+        accessTokenSecret:(NSString *)aAccessTokenSecret
+                 delegate:(id)aDelegate;
+
 @end

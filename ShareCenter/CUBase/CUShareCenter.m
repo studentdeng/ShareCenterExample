@@ -143,6 +143,11 @@ static CUShareCenter *s_instance3 = nil;
     [shareClient CUSendWithText:text andImage:image];
 }
 
+- (void)sendWithText:(NSString *)text andImageData:(NSData *)data
+{
+    [shareClient CUSendWithText:text andImageData:data];
+}
+
 - (void)sendWithText:(NSString *)text andImageURLString:(NSString *)imageURLString
 {
     [shareClient CUSendWithText:text andImageURLString:imageURLString];

@@ -62,13 +62,17 @@
 
 - (void)CUOpenAuthViewInViewController:(UIViewController *)vc;
 {
-    self.viewClient = [[[CUShareOAuthView alloc] init] autorelease];
-    self.viewClient.loginRequest = [self CULoginURLRequest];
-    self.viewClient.webView.delegate = self;
-    [self.viewClient.webView loadRequest:[self CULoginURLRequest]];
-    
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    [self performSelector:@selector(show:) withObject:vc afterDelay:0.1];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.viewClient = [[[CUShareOAuthView alloc] init] autorelease];
+        self.viewClient.loginRequest = [self CULoginURLRequest];
+        self.viewClient.webView.delegate = self;
+        [self.viewClient.webView loadRequest:[self CULoginURLRequest]];
+        
+        [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                                 selector:@selector(show:)
+                                                   object:vc];
+        [self performSelector:@selector(show:) withObject:vc afterDelay:0.1];
+    });
 }
 
 - (void)CUNotifyShareFailed:(CUShareClient *)client withError:(NSError *)error
@@ -122,7 +126,11 @@
 
 - (void)show:(UIViewController *)vc
 {
-    [vc presentModalViewController:viewClient animated:YES];
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:viewClient];
+    [navVC.navigationBar setBackgroundImage:[UIImage imageNamed:@"CUShareCenter.bundle/titleBar_default"] forBarMetrics:UIBarMetricsDefault];
+    navVC.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor darkGrayColor]};
+    
+    [vc presentViewController:navVC animated:YES completion:nil];
 }
 
 #pragma mark - override me

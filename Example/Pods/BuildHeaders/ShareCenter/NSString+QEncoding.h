@@ -1,0 +1,1 @@
+../../ShareCenter/ShareCenter/Vender/tencent/NSString+QEncoding.h

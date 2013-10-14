@@ -28,7 +28,6 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 @interface  CUShareOAuthView()
 
 @property (nonatomic, readwrite) UIInterfaceOrientation orientation;
-@property (nonatomic, retain) UINavigationBar *navBar;
 @end
 
 @implementation CUShareOAuthView
@@ -36,7 +35,6 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 @synthesize webView;
 @synthesize orientation;
 @synthesize loginRequest;
-@synthesize navBar;
 @synthesize tintColor;
 
 #pragma mark -  life
@@ -45,13 +43,10 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 {
     if (self = [super init]) {
         CGRect rc = ApplicationFrame(self.orientation);
-
-        rc.size.height -= 44;
-        rc.origin.y = 44;
-        
         self.webView = [[[UIWebView alloc] initWithFrame:rc] autorelease];
-	        
+	     
         [self.view addSubview: self.webView];
+        [self.view setBackgroundColor:[UIColor whiteColor]];
     }
     
     return self;
@@ -61,7 +56,6 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
 {
     self.webView = nil;
     self.loginRequest = nil;
-    self.navBar = nil;
     self.tintColor = nil;
     
     [super dealloc];
@@ -76,27 +70,7 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
     CGRect rc = ApplicationFrame(self.orientation);
     
     self.view = [[[UIView alloc] initWithFrame: rc] autorelease];
-    self.navBar = [[[UINavigationBar alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 44)] autorelease];
-	
-    self.navBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
-#ifdef NAV_BAR_ITEM_COLOR
-    self.navBar.tintColor = NAV_BAR_ITEM_COLOR;
-#endif
-    
-#ifdef NAVBAR_TOOLBAR_IMAGE_NAME
-    if ([self.navBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]){
-        [self.navBar setBackgroundImage:[UIImage imageNamed:NAVBAR_TOOLBAR_IMAGE_NAME] 
-                          forBarMetrics:UIBarMetricsDefault];
-    }
-#endif
-    
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	
-    CGRect frame = ApplicationFrame(self.orientation);
-    frame.origin.y = 44;
-    frame.size.height -= 44;
-    
-    [self.view addSubview: navBar];
     
     UIActivityIndicatorView *activeIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activeIndicator.autoresizingMask = UIViewAutoresizingFlexibleTopMargin 
@@ -110,14 +84,13 @@ CGRect ApplicationFrame(UIInterfaceOrientation interfaceOrientation) {
                                        40.0f, 40.0f);
     [self.webView addSubview:activeIndicator];
     [activeIndicator release];
-	
-    UINavigationItem *navItem = [[[UINavigationItem alloc] initWithTitle:@"登陆"] autorelease];
     
-    navItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"返回" 
-                                                                  style:UIBarButtonItemStylePlain target:self 
-                                                                 action:@selector(cancel:)] autorelease];
-    
-    [navBar pushNavigationItem: navItem animated: NO];
+    self.title = @"登录";
+    UIButton *buttonLeft = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    [buttonLeft setImage:[UIImage imageNamed:@"CUShareCenter.bundle/back"] forState:UIControlStateNormal];
+    [buttonLeft addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *itemLeft = [[UIBarButtonItem alloc] initWithCustomView:buttonLeft];
+    self.navigationItem.leftBarButtonItem = itemLeft;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation

@@ -75,7 +75,7 @@
     if ([text length] == 0) {
         return;
     }
-
+        
     return [self post:text andImage:image];
 }
 

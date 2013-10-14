@@ -1,0 +1,1 @@
+../../ShareCenter/ShareCenter/CUBase/CUShareClient.h

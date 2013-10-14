@@ -35,8 +35,11 @@
 - (void)CUSendWithText:(NSString *)text;
 - (void)CUSendWithText:(NSString *)text andImage:(UIImage *)image;
 - (void)CUSendWithText:(NSString *)text andImageURLString:(NSString *)imageURLString;
+- (void)CUSendWithText:(NSString *)text andImageData:(NSData *)data;
 
 - (NSString *)requestToken;
+- (NSString *)requestTokenSecert;
+- (NSString *)userid;
 
 - (NSURLRequest *)CULoginURLRequest;
 

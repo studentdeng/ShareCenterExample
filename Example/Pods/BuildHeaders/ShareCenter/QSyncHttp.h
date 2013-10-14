@@ -1,0 +1,1 @@
+../../ShareCenter/ShareCenter/Vender/tencent/QSyncHttp.h

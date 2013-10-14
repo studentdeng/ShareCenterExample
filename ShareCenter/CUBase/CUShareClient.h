@@ -34,6 +34,7 @@ CUShareClientType;
 - (NSString *)requestToken;
 
 - (void)addDelegate:(id)aDelegate;
+- (void)CUSendWithText:(NSString *)text andImageData:(NSData *)data;
 - (void)removeDelegate:(id)aDelegate;
 
 @end

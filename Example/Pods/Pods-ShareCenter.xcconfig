@@ -1,0 +1,2 @@
+PODS_SHARECENTER_LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/ShareCenter/ShareCenter/Vender/sina/libWeiboSDK"
+PODS_SHARECENTER_OTHER_LDFLAGS = -lWeiboSDK -lsqlite3.0 -framework AudioToolbox -framework CoreGraphics -framework QuartzCore -framework Security

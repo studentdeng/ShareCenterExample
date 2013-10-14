@@ -25,4 +25,8 @@
      ***************************************/
 }
 
+- (NSString *)getToken;
+- (NSString *)getTokenSecert;
+- (NSString *)getUserInfo;
+
 @end

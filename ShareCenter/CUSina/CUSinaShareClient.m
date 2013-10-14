@@ -7,6 +7,7 @@
 //
 
 #import "CUSinaShareClient.h"
+#import "ASIFormDataRequest.h"
 #import "CUConfig.h"
 #import "CUShareOAuthView.h"
 #import "WeiboSDK.h"
@@ -83,6 +84,24 @@
     return engine.accessToken;
 }
 
+- (NSString *)requestTokenSecert
+{
+    if (![self isCUAuth]) {
+        return nil;
+    }
+    
+    return engine.appSecret;
+}
+
+- (NSString *)userid
+{
+    if (![self isCUAuth]) {
+        return nil;
+    }
+    
+    return engine.userID;
+}
+
 - (void)CULogout
 {
     NSHTTPCookie *cookie;
@@ -108,6 +127,15 @@
     }
     
     return [self post:text andImage:image];
+}
+
+- (void)CUSendWithText:(NSString *)text andImageData:(NSData *)data
+{
+    if ([text length] == 0) {
+        return;
+    }
+    
+    [engine sendWeiBoWithText:text imageData:data];
 }
 
 //需要高级授权

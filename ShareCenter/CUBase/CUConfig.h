@@ -4,13 +4,6 @@
 //
 //  Created by curer yg on 12-4-1.
 //  Copyright (c) 2012年 zhubu. All rights reserved.
-//
-
-#define NAVBAR_TOOLBAR_IMAGE_NAME   @"NavBar_ios5.png"
-
-#ifndef NAV_BAR_ITEM_COLOR
-    #define NAV_BAR_ITEM_COLOR          ([UIColor lightGrayColor])
-#endif
 
 #define kOAuthConsumerKey_sina				@"1128481868"
 #define kOAuthConsumerSecret_sina			@"024e9c1c0aca2d28c03f182e5924de67"

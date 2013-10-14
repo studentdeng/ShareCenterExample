@@ -1,0 +1,1 @@
+../../ShareCenter/ShareCenter/Vender/Renren/Renren/RODialogViewController/ROCheckDialogViewController.h

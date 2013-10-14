@@ -127,5 +127,7 @@
 
 // Send a Weibo, to which you can attach an image.
 - (void)sendWeiBoWithText:(NSString *)text image:(UIImage *)image;
+// send imageData such for gif data
+- (void)sendWeiBoWithText:(NSString *)text imageData:(NSData *)data;
 
 @end

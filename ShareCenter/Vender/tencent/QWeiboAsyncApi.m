@@ -98,8 +98,40 @@
     return connection;
 }
 
+- (NSString *)getUserInfo:(NSString *)aConsumerKey
+                  consumerSecret:(NSString *)aConsumerSecret
+                  accessTokenKey:(NSString *)aAccessTokenKey
+               accessTokenSecret:(NSString *)aAccessTokenSecret
+                        delegate:(id)aDelegate
+{
+    QOauthKey *oauthKey = [[QOauthKey alloc] init];
+    oauthKey.consumerKey = aConsumerKey;
+    oauthKey.consumerSecret = aConsumerSecret;
+    oauthKey.tokenKey = aAccessTokenKey;
+    oauthKey.tokenSecret= aAccessTokenSecret;
+    
+    QWeiboRequest *request = [[QWeiboRequest alloc] init];
+    /*
+    NSURLConnection *connection = [request asyncRequestWithUrl:@"http://open.t.qq.com/api/user/info"
+                                                    httpMethod:@"GET"
+                                                      oauthKey:oauthKey
+                                                    parameters:nil
+                                                         files:nil
+                                                      delegate:self];*/
+    NSString *result = [request syncRequestWithUrl:@"http://open.t.qq.com/api/user/info"
+                                        httpMethod:@"GET"
+                                          oauthKey:oauthKey
+                                        parameters:nil
+                                             files:nil];
+    
+    [request release];
+    [oauthKey release];
+    
+    return result;
+}
+
 //curer add
-- (NSURLConnection *)publishMsgWithConsumerKey:(NSString *)aConsumerKey 
+- (NSURLConnection *)publishMsgWithConsumerKey:(NSString *)aConsumerKey
                                 consumerSecret:(NSString *)aConsumerSecret 
                                 accessTokenKey:(NSString *)aAccessTokenKey 
                              accessTokenSecret:(NSString *)aAccessTokenSecret 
