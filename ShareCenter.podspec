@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ShareCenter"
-  s.version      = "2.0"
+  s.version      = "2.1"
   s.summary      = "share client include sina weibo ,tencent weibo, renren"
 
   s.description  = <<-DESC
@@ -18,6 +18,7 @@ Pod::Spec.new do |s|
   s.frameworks   = 'QuartzCore', 'Security', 'CoreGraphics', 'AudioToolbox'
   s.library = 'sqlite3.0'
   s.vendored_libraries = 'ShareCenter/Vender/sina/libWeiboSDK/libWeiboSDK.a'
+  s.resource = 'ShareCenter/CUShareCenter.bundle'
 
   s.prefix_header_contents = <<-EOS
 #ifdef __OBJC__
