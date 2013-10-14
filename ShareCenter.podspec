@@ -20,6 +20,8 @@ Pod::Spec.new do |s|
   s.vendored_libraries = 'ShareCenter/Vender/sina/libWeiboSDK/libWeiboSDK.a'
   s.resource = 'ShareCenter/CUShareCenter.bundle'
 
+  s.dependency 'ASIHTTPRequest'
+
   s.prefix_header_contents = <<-EOS
 #ifdef __OBJC__
 #import "ROConnect.h"
