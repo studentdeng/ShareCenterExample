@@ -28,6 +28,9 @@
 - (void)unBind;
 - (void)Bind:(UIViewController *)vc;
 
+- (void)applicationDidBecomeActive;
+- (BOOL)handleOpenURL:(NSURL *)url;
+
 @property (nonatomic, assign) CUShareClientType type;
 
 //it really should be retain!

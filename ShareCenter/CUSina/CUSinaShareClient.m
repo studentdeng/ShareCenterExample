@@ -8,12 +8,13 @@
 
 #import "CUSinaShareClient.h"
 #import "ASIFormDataRequest.h"
-#import "CUConfig.h"
+
 #import "CUShareOAuthView.h"
-#import "WeiboSDK.h"
+
 #import "WBAuthorize.h"
 #import "WBRequest.h"
 #import "WBSDKGlobal.h"
+#import "SinaWeibo.h"
 
 #define kWBAuthorizeURL     @"https://api.weibo.com/oauth2/authorize"
 #define kWBAccessTokenURL   @"https://api.weibo.com/oauth2/access_token"
@@ -53,6 +54,12 @@
             
             engine.authorize = auth;
             
+            self.sinaWeiboSSO = [[SinaWeibo alloc] initWithAppKey:theAppKey
+                                                        appSecret:theAppSecret
+                                                   appRedirectURI:engine.redirectURI
+                                                ssoCallbackScheme:nil
+                                                      andDelegate:self];
+            
             [auth release];
         }
     }
@@ -69,6 +76,17 @@
 }
 
 #pragma mark -  CUShareClientData
+
+- (BOOL)SSOLogin
+{
+    if (![self.sinaWeiboSSO isInstalled]) {
+        return FALSE;
+    }
+    
+    [self.sinaWeiboSSO logIn];
+    
+    return YES;
+}
 
 - (BOOL)isCUAuth
 {
@@ -112,6 +130,9 @@
     }
     
     [engine logOut];
+    
+    [self.sinaWeiboSSO logOut];
+    
     return;
 }
 
@@ -199,6 +220,44 @@
                              postDataType:kWBRequestPostDataTypeMultipart
                          httpHeaderFields:nil];
     }
+}
+
+- (void)applicationDidBecomeActive
+{
+    return [self.sinaWeiboSSO applicationDidBecomeActive];
+}
+
+- (BOOL)handleOpenURL:(NSURL *)url
+{
+    return [self.sinaWeiboSSO handleOpenURL:url];
+}
+
+#pragma mark - SinaWeiboDelegate
+
+- (void)sinaweiboDidLogIn:(SinaWeibo *)sinaweibo
+{
+    [engine saveOAuthSucceedWithAccessToken:sinaweibo.accessToken
+                                     userID:sinaweibo.userID
+                                  expiresIn:[sinaweibo.expirationDate timeIntervalSinceNow]];
+}
+
+- (void)sinaweiboDidLogOut:(SinaWeibo *)sinaweibo
+{
+    [self CUNotifyLoginout:self];
+}
+
+- (void)sinaweiboLogInDidCancel:(SinaWeibo *)sinaweibo
+{
+}
+
+- (void)sinaweibo:(SinaWeibo *)sinaweibo logInDidFailWithError:(NSError *)error
+{
+    [self CUNotifyAuthFailed:self withError:error];
+}
+
+- (void)sinaweibo:(SinaWeibo *)sinaweibo accessTokenInvalidOrExpired:(NSError *)error
+{
+    
 }
 
 #pragma mark - UIWebViewDelegate Methods
@@ -289,36 +348,6 @@
 - (void)engine:(WBEngine *)engine requestDidSucceedWithResult:(id)result
 {
     [self CUNotifyShareSucceed:self];
-}
-
-- (void)didReceiveWeiboResponse:(WBBaseResponse *)response
-{
-    if ([response isKindOfClass:WBSendMessageToWeiboResponse.class])
-    {
-        NSString *title = @"发送结果";
-        NSString *message = [NSString stringWithFormat:@"响应状态: %d\n响应UserInfo数据: %@\n原请求UserInfo数据: %@",
-                             response.statusCode, response.userInfo, response.requestUserInfo];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                        message:message
-                                                       delegate:nil
-                                              cancelButtonTitle:@"确定"
-                                              otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-    }
-    else if ([response isKindOfClass:WBAuthorizeResponse.class])
-    {
-        WBAuthorizeResponse *wbResponse = (WBAuthorizeResponse *)response;
-        
-        [engine saveOAuthSucceedWithAccessToken:wbResponse.accessToken
-                                         userID:wbResponse.userID
-                                      expiresIn:[[response.userInfo objectForKey:@"expires_in"] intValue]];
-    }
-}
-
-- (void)didReceiveWeiboRequest:(WBBaseRequest *)request
-{
-    
 }
 
 @end

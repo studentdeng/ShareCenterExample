@@ -11,7 +11,6 @@
 #import "CUTencentShareClient.h"
 #import "CURenrenShareClient.h"
 #import "CUConfig.h"
-#import "WeiboSDK.h"
 
 @implementation CUShareCenter
 
@@ -165,24 +164,35 @@ static CUShareCenter *s_instance3 = nil;
 
 - (void)Bind:(UIViewController *)vc
 {
-    if ([shareClient isKindOfClass:[CUSinaShareClient class]]) {
-        if ([WeiboSDK isWeiboAppInstalled]) {
-            WBAuthorizeRequest *request = [WBAuthorizeRequest request];
-            request.redirectURI = kOAuthCallbackURL_sina;
-            request.scope = @"all";
-            request.userInfo = @{@"SSO_From": @"SendMessageToWeiboViewController",
-                                 @"Other_Info_1": [NSNumber numberWithInt:123],
-                                 @"Other_Info_2": @[@"obj1", @"obj2"],
-                                 @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
-            [WeiboSDK sendRequest:request];
-            
-            return;
+    if ([shareClient respondsToSelector:@selector(SSOLogin)]) {
+        BOOL bSSOLogin =  (BOOL)[shareClient performSelector:@selector(SSOLogin) withObject:nil];
+        
+        if (!bSSOLogin) {
+            [shareClient CUOpenAuthViewInViewController:vc];
         }
     }
-    
-    [shareClient CUOpenAuthViewInViewController:vc];
+    else
+    {
+        [shareClient CUOpenAuthViewInViewController:vc];
+    }
     
     return;
+}
+
+- (void)applicationDidBecomeActive
+{
+    if ([shareClient respondsToSelector:@selector(applicationDidBecomeActive)]) {
+        [shareClient performSelector:@selector(applicationDidBecomeActive) withObject:nil];
+    }
+}
+
+- (BOOL)handleOpenURL:(NSURL *)url
+{
+    if ([shareClient respondsToSelector:@selector(handleOpenURL:)]) {
+        return (BOOL)[shareClient performSelector:@selector(handleOpenURL:) withObject:url];
+    }
+    
+    return FALSE;
 }
 
 @end

@@ -13,8 +13,6 @@ extern int kActiveIndicatorTag;
 @interface CUShareOAuthView : UIViewController <UIWebViewDelegate>
 {
     UIWebView *webView;
-	UINavigationBar *navBar;
-	
 	UIInterfaceOrientation orientation;
 	UIToolbar *pinCopyPromptBar;    
     UIColor *tintColor;
