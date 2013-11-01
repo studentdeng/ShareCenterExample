@@ -1,3 +1,6 @@
+这个项目有一点老了，新版本移动到这里
+[CUShareCenter](https://github.com/studentdeng/CUShareCenter)
+
 include sina微博， tencent 微博，renren 认证。
 
 #why ShareCenter
